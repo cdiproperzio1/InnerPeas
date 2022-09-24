@@ -1,2 +1,2 @@
 # InnerPeas
-An app for you to share your personal recipes and bring your inner peace, and maybe some peas.
+An app for you to share your personal recipes and bring you inner peace, and maybe some peas.
