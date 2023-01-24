@@ -1,7 +1,7 @@
 {
 	"folders": {},
 	"connections": {
-		"sqlite_jdbc-185e503beb3-3e8b51f8eb51fbe9": {
+		"sqlite_jdbc-185e51c2141-269e6fc2680dc128": {
 			"provider": "sqlite",
 			"driver": "sqlite_jdbc",
 			"name": "InnerPeas-Database",
