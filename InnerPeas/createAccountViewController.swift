@@ -22,6 +22,7 @@ class createAccountViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+
     @IBAction func createAccountClicked(_ sender: UIButton) {
         guard let email =  emailTextField.text else {return}
         guard let fname =  fnameTextField.text else {return}
@@ -29,18 +30,27 @@ class createAccountViewController: UIViewController {
         guard let password =  passwordTextField.text else {return}
         guard let confirmpassword = confirmPasswordTextField.text else {return}
         
-        
-        Auth.auth().createUser(withEmail: email, password: confirmpassword) { firebaseResult, error in
-            if let e = error {
-                print("error")
+        if password.passwordValidator(){
+            Auth.auth().createUser(withEmail: email, password: confirmpassword)
+            { firebaseResult, error in
+                if let e = error {
+                    print("error")
+                }
+                else
+                {
+                    //Go to home screen
+                    self.performSegue(withIdentifier: "goToNext", sender: self)
+                }
+                
             }
-            else
-            {
-                //Go to home screen
-                self.performSegue(withIdentifier: "goToNext", sender: self)
-            }
-            
         }
+        else
+        {
+            let alert = UIAlertController(title: "Error", message: "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        present(alert, animated: true, completion: nil)
+        }
+
     
     }
     
