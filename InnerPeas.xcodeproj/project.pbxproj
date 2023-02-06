@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F72122990A6B9000A3F6C /* LoginViewController.swift */; };
+		AB6F72152990AF98000A3F6C /* createAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F72142990AF98000A3F6C /* createAccountViewController.swift */; };
 		AB70D17F298B4F71000C79D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB70D17E298B4F71000C79D6 /* AppDelegate.swift */; };
 		AB70D181298B4F71000C79D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB70D180298B4F71000C79D6 /* SceneDelegate.swift */; };
 		AB70D183298B4F71000C79D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB70D182298B4F71000C79D6 /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB6F72122990A6B9000A3F6C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AB6F72142990AF98000A3F6C /* createAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountViewController.swift; sourceTree = "<group>"; };
 		AB70D17B298B4F71000C79D6 /* InnerPeas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InnerPeas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB70D17E298B4F71000C79D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB70D180298B4F71000C79D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 				AB70D182298B4F71000C79D6 /* ViewController.swift */,
 				AB70D192298B4F9D000C79D6 /* GoogleService-Info.plist */,
 				AB70D184298B4F71000C79D6 /* Main.storyboard */,
+				AB6F72142990AF98000A3F6C /* createAccountViewController.swift */,
+				AB6F72122990A6B9000A3F6C /* LoginViewController.swift */,
 				AB70D187298B4F72000C79D6 /* Assets.xcassets */,
 				AB70D189298B4F72000C79D6 /* LaunchScreen.storyboard */,
 				AB70D18C298B4F72000C79D6 /* Info.plist */,
@@ -228,6 +234,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */,
+				AB6F72152990AF98000A3F6C /* createAccountViewController.swift in Sources */,
 				AB70D183298B4F71000C79D6 /* ViewController.swift in Sources */,
 				AB70D17F298B4F71000C79D6 /* AppDelegate.swift in Sources */,
 				AB70D181298B4F71000C79D6 /* SceneDelegate.swift in Sources */,
