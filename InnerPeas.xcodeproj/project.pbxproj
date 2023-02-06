@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB3A47A1299190A1003C1F99 /* passwordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A47A0299190A1003C1F99 /* passwordExtension.swift */; };
 		AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F72122990A6B9000A3F6C /* LoginViewController.swift */; };
 		AB6F72152990AF98000A3F6C /* createAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F72142990AF98000A3F6C /* createAccountViewController.swift */; };
 		AB70D17F298B4F71000C79D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB70D17E298B4F71000C79D6 /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB3A47A0299190A1003C1F99 /* passwordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = passwordExtension.swift; sourceTree = "<group>"; };
 		AB6F72122990A6B9000A3F6C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB6F72142990AF98000A3F6C /* createAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountViewController.swift; sourceTree = "<group>"; };
 		AB70D17B298B4F71000C79D6 /* InnerPeas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InnerPeas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 				AB70D187298B4F72000C79D6 /* Assets.xcassets */,
 				AB70D189298B4F72000C79D6 /* LaunchScreen.storyboard */,
 				AB70D18C298B4F72000C79D6 /* Info.plist */,
+				AB3A47A0299190A1003C1F99 /* passwordExtension.swift */,
 			);
 			path = InnerPeas;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				AB6F72152990AF98000A3F6C /* createAccountViewController.swift in Sources */,
 				AB70D183298B4F71000C79D6 /* ViewController.swift in Sources */,
 				AB70D17F298B4F71000C79D6 /* AppDelegate.swift in Sources */,
+				AB3A47A1299190A1003C1F99 /* passwordExtension.swift in Sources */,
 				AB70D181298B4F71000C79D6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
