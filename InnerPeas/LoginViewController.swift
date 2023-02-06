@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
                 print("error")
             }
             else{
-                //got to home
+                //go to home
                 self.performSegue(withIdentifier: "goToNext", sender: self)
             }
         }
