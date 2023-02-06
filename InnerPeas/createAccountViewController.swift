@@ -7,9 +7,12 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class createAccountViewController: UIViewController {
 
+    private let database=Database.database().reference()
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -30,14 +33,21 @@ class createAccountViewController: UIViewController {
         //guard let uname =  uNameTextField.text else {return}
         //guard let password =  passwordTextField.text else {return}
         guard let confirmpassword = confirmPasswordTextField.text else {return}
-        
+        let fname = fnameTextField.text!
+        let lname = lNameTextField.text!
         Auth.auth().createUser(withEmail: email, password: confirmpassword) { firebaseResult, error in
-            if let e = error {
+            if let _ = error {
                 print("error")
             }
             else
             {
-                //Go to home screen
+                //Go to home screen and add user to database
+                let newUser: [String: Any] = [
+                    "fname" : fname,
+                    "lname" : lname
+                ]
+                print(newUser)
+                self.database.child("Users").child("test_user2").setValue(newUser)
                 self.performSegue(withIdentifier: "goToNext", sender: self)
             }
             
