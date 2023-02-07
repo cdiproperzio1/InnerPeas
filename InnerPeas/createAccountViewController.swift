@@ -30,7 +30,7 @@ class createAccountViewController: UIViewController {
         guard let email =  emailTextField.text else {return}
         guard let fname =  fnameTextField.text else {return}
         guard let lname =  lNameTextField.text else {return}
-//        guard let password =  passwordTextField.text else {return}
+        guard let password =  passwordTextField.text else {return}
         guard let confirmpassword = confirmPasswordTextField.text else {return}
        
         Auth.auth().createUser(withEmail: email, password: confirmpassword) { firebaseResult, error in
