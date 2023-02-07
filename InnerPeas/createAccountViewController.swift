@@ -45,7 +45,7 @@ class createAccountViewController: UIViewController {
                     "lname" : lname
                 ]
                 print(newUser)
-                self.database.child("Users").child("0").setValue(newUser)
+                self.database.child("Users").child("1").setValue(newUser)
                 self.performSegue(withIdentifier: "goToNext", sender: self)
             }
             
