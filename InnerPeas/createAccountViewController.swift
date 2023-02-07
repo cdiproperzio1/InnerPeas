@@ -32,9 +32,12 @@ class createAccountViewController: UIViewController {
         
         if password.passwordValidator(){
             Auth.auth().createUser(withEmail: email, password: confirmpassword)
-            { firebaseResult, error in
+            { [weak self] firebaseResult, error in
+                guard let self = self else {return}
                 if let e = error {
-                    print("error")
+                    let alert = UIAlertController(title: "Error", message: "Account already created try and sign in using your email.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
                 else
                 {
