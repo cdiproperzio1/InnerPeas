@@ -51,27 +51,29 @@ class createAccountViewController: UIViewController {
             
         }
         
-//        if password.passwordValidator(){
-//            Auth.auth().createUser(withEmail: email, password: confirmpassword)
-//            { firebaseResult, error in
-//                if let
-//                    _ = error {
-//                    print("error")
-//                }
-//                else
-//                {
-//                    //Go to home screen
-//                    self.performSegue(withIdentifier: "goToNext", sender: self)
-//                }
-//
-//            }
-//        }
-//        else
-//        {
-//            let alert = UIAlertController(title: "Error", message: "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.", preferredStyle: .alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                        present(alert, animated: true, completion: nil)
-//        }
+        if password.passwordValidator(){
+            Auth.auth().createUser(withEmail: email, password: confirmpassword)
+            { [weak self] firebaseResult, error in
+                guard let self = self else {return}
+                if let e = error {
+                    let alert = UIAlertController(title: "Error", message: "Account already created try and sign in using your email.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else
+                {
+                    //Go to home screen
+                    self.performSegue(withIdentifier: "goToNext", sender: self)
+                }
+                
+            }
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Error", message: "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        present(alert, animated: true, completion: nil)
+        }
 
     
     }
