@@ -30,7 +30,7 @@ class createAccountViewController: UIViewController {
         guard let email =  emailTextField.text else {return}
         guard let fname =  fnameTextField.text else {return}
         guard let lname =  lNameTextField.text else {return}
-        guard let password =  passwordTextField.text else {return}
+//        guard let password =  passwordTextField.text else {return}
         guard let confirmpassword = confirmPasswordTextField.text else {return}
        
         Auth.auth().createUser(withEmail: email, password: confirmpassword) { firebaseResult, error in
@@ -45,32 +45,33 @@ class createAccountViewController: UIViewController {
                     "lname" : lname
                 ]
                 print(newUser)
-                self.database.child("Users").child("test_user2").setValue(newUser)
+                self.database.child("Users").child("0").setValue(newUser)
                 self.performSegue(withIdentifier: "goToNext", sender: self)
             }
             
         }
         
-        if password.passwordValidator(){
-            Auth.auth().createUser(withEmail: email, password: confirmpassword)
-            { firebaseResult, error in
-                if let e = error {
-                    print("error")
-                }
-                else
-                {
-                    //Go to home screen
-                    self.performSegue(withIdentifier: "goToNext", sender: self)
-                }
-                
-            }
-        }
-        else
-        {
-            let alert = UIAlertController(title: "Error", message: "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        present(alert, animated: true, completion: nil)
-        }
+//        if password.passwordValidator(){
+//            Auth.auth().createUser(withEmail: email, password: confirmpassword)
+//            { firebaseResult, error in
+//                if let
+//                    _ = error {
+//                    print("error")
+//                }
+//                else
+//                {
+//                    //Go to home screen
+//                    self.performSegue(withIdentifier: "goToNext", sender: self)
+//                }
+//
+//            }
+//        }
+//        else
+//        {
+//            let alert = UIAlertController(title: "Error", message: "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.", preferredStyle: .alert)
+//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                        present(alert, animated: true, completion: nil)
+//        }
 
     
     }
