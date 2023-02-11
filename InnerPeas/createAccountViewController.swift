@@ -33,37 +33,29 @@ class createAccountViewController: UIViewController {
         guard let password =  passwordTextField.text else {return}
         guard let confirmpassword = confirmPasswordTextField.text else {return}
        
-        Auth.auth().createUser(withEmail: email, password: confirmpassword) { firebaseResult, error in
-            if let _ = error {
-                print("error")
-            }
-            else
-            {
-                //Go to home screen and add user to database
-                let newUser: [String: Any] = [
-                    "fname" : fname,
-                    "lname" : lname
-                ]
-                print(newUser)
-                self.database.child("Users").child("1").setValue(newUser)
-                self.performSegue(withIdentifier: "goToNext", sender: self)
-            }
-            
-        }
         
-        if password.passwordValidator(){
+        if password.passwordValidator()
+        {
             Auth.auth().createUser(withEmail: email, password: confirmpassword)
-            { firebaseResult, error in
-                if let
-                    _ = error {
-                    print("error")
+            { [weak self] firebaseResult, error in
+                guard let self = self else {return}
+                if let e = error {
+                    let alert = UIAlertController(title: "Error", message: "Account already created try and sign in using your email.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
                 else
                 {
-                    //Go to home screen
+                    //Go to home screen and add user to database
+                    let newUser: [String: Any] = [
+                        "fname" : fname,
+                        "lname" : lname
+                    ]
+                    print(newUser)
+                    self.database.child("Users").child("0").setValue(newUser)
                     self.performSegue(withIdentifier: "goToNext", sender: self)
                 }
-
+                
             }
         }
         else
