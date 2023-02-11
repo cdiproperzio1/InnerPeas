@@ -39,7 +39,7 @@ class createAccountViewController: UIViewController {
             Auth.auth().createUser(withEmail: email, password: confirmpassword)
             { [weak self] firebaseResult, error in
                 guard let self = self else {return}
-                if let e = error {
+                if let _ = error {
                     let alert = UIAlertController(title: "Error", message: "Account already created try and sign in using your email.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
@@ -51,11 +51,10 @@ class createAccountViewController: UIViewController {
                         "fname" : fname,
                         "lname" : lname
                     ]
-                    print(newUser)
-                    self.database.child("Users").child("0").setValue(newUser)
+                    let UID = String((Auth.auth().currentUser?.uid)!)
+                    self.database.child("Users").child(UID).setValue(newUser)
                     self.performSegue(withIdentifier: "goToNext", sender: self)
                 }
-                
             }
         }
         else
