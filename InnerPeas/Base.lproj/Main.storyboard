@@ -115,23 +115,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Customize Your Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Anz-PW-iYs">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Customize Your Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Anz-PW-iYs">
                                 <rect key="frame" x="103" y="145" width="187" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QaC-Kk-hd6">
-                                <rect key="frame" x="126" y="197" width="140" height="140"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="6ns-UH-H3l"/>
-                                    <constraint firstAttribute="height" constant="140" id="cQN-P2-xpY"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNM-if-4Xa">
-                                <rect key="frame" x="133" y="346" width="128" height="35"/>
+                                <rect key="frame" x="132" y="341" width="128" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Uplaod Photo"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Upload Photo"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="n9e-CX-WHd" eventType="touchUpInside" id="pK5-jY-lt0"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XiU-gY-i1A">
                                 <rect key="frame" x="64" y="405" width="266" height="110"/>
@@ -149,19 +146,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QaC-Kk-hd6">
+                                <rect key="frame" x="118" y="191.66666666666697" width="158" height="140"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XCe-Bn-BQ8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="QaC-Kk-hd6" firstAttribute="top" secondItem="Anz-PW-iYs" secondAttribute="bottom" constant="30" id="7SW-SC-6tL"/>
-                            <constraint firstItem="QaC-Kk-hd6" firstAttribute="leading" secondItem="XCe-Bn-BQ8" secondAttribute="leading" constant="126" id="bSj-hj-P0n"/>
-                            <constraint firstItem="XCe-Bn-BQ8" firstAttribute="trailing" secondItem="QaC-Kk-hd6" secondAttribute="trailing" constant="127" id="njY-7Z-B7n"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Gio-uN-6wC"/>
                     <connections>
-                        <outlet property="profileImage" destination="QaC-Kk-hd6" id="Mxp-Vh-6sY"/>
-                        <outlet property="textView" destination="XiU-gY-i1A" id="vtF-fM-kTw"/>
+                        <outlet property="profileImage" destination="QaC-Kk-hd6" id="p1K-gd-sg3"/>
+                        <outlet property="textView" destination="XiU-gY-i1A" id="8X6-Jh-kPO"/>
                         <segue destination="Lm3-wy-0Y1" kind="show" identifier="goToNext" id="fbZ-Ie-sHa"/>
                     </connections>
                 </viewController>

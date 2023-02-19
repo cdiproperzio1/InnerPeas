@@ -8,31 +8,54 @@
 import UIKit
 
 
-class CustomizeAccountViewController: UIViewController {
-    @IBOutlet weak var textView: UITextView!
+class CustomizeAccountViewController: UIViewController, UITextViewDelegate, ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        guard let image = image else {
+            return
+        }
+        self.profileImage.image = image
+    }
+
     @IBOutlet weak var profileImage: UIImageView!
+    
+  
+    var imagePicker: ImagePicker!
+    
+    @IBOutlet weak var textView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let image = UIImage(named: "generic")
         profileImage.layer.borderWidth = 1.0
         profileImage.layer.masksToBounds = false
         profileImage.layer.borderColor = UIColor.white.cgColor
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         profileImage.clipsToBounds = true
-        textView.text = "Bio (150 Characters)"
+        textView.text = "What food do you like to make? (150 Characters)"
         textView.textColor = UIColor.lightGray
-
-        // Do any additional setup after loading the view.
+        textView.delegate=self
+        
+    }
+    
+    func textViewDidBeginEditing(_ textView : UITextView ) {
+        if self.textView.textColor == UIColor.lightGray {
+            self.textView.text = nil
+            self.textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if self.textView.text.isEmpty {
+            self.textView.text = "What food do you like to make? (150 Characters)"
+            self.textView.textColor = UIColor.lightGray
+        }
+    }
+    
+    @IBAction func selectImage(_ sender: UIButton) {
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        self.imagePicker.present(from: sender)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
 
-}
+
+
