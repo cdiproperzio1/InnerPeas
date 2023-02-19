@@ -6,21 +6,25 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseStorage
 
-
-class CustomizeAccountViewController: UIViewController, UITextViewDelegate, ImagePickerDelegate {
+class CustomizeAccountViewController: UIViewController, UITextViewDelegate, ImagePickerDelegate{
+    
+    
     func didSelect(image: UIImage?) {
         guard let image = image else {
             return
         }
         self.profileImage.image = image
     }
-
+    
+    @IBOutlet weak var location: UITextField!
+    private let storage = Storage.storage().reference()
+    private let database=Database.database().reference()
     @IBOutlet weak var profileImage: UIImageView!
-    
-  
     var imagePicker: ImagePicker!
-    
     @IBOutlet weak var textView: UITextView!
     
     override func viewDidLoad() {
@@ -54,7 +58,34 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         self.imagePicker.present(from: sender)
     }
-
+    func saveAndContinue(){
+      
+    }
+    @IBAction func `continue`(_ sender: Any) {
+        let UID = String((Auth.auth().currentUser?.uid)!)
+        if(self.textView.text == "What food do you like to make? (150 Characters)"){
+            self.textView.text=" "
+        }
+        guard let imageData = profileImage.image?.pngData() else {
+            return
+        }
+       
+        storage.child("image/\(UID).png").putData(imageData) { error in
+            guard error == nil else {
+                print("failed to upload")
+                return
+            }
+                self.storage.child("images/file.png").downloadURL(completion: {url, error in
+                    guard let url = url, error == nil else {
+                        return
+                    }
+                    let urlString = url.absoluteString
+                })
+            }
+        self.database.child("Users").child(UID).child("bio").setValue(self.textView.text!)
+        self.database.child("Users").child(UID).child("location").setValue(self.location.text!)
+        self.performSegue(withIdentifier: "goToHome", sender: self)
+    }
     }
 
 

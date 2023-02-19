@@ -150,15 +150,25 @@
                                 <rect key="frame" x="118" y="191.66666666666697" width="158" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3r-cI-oem">
+                                <rect key="frame" x="151" y="583" width="93" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Continue"/>
+                                <connections>
+                                    <action selector="continue:" destination="n9e-CX-WHd" eventType="touchUpInside" id="qfo-Ye-ekC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XCe-Bn-BQ8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Gio-uN-6wC"/>
                     <connections>
+                        <outlet property="location" destination="wUP-cI-mwX" id="8Tp-E5-huY"/>
                         <outlet property="profileImage" destination="QaC-Kk-hd6" id="p1K-gd-sg3"/>
                         <outlet property="textView" destination="XiU-gY-i1A" id="8X6-Jh-kPO"/>
-                        <segue destination="Lm3-wy-0Y1" kind="show" identifier="goToNext" id="fbZ-Ie-sHa"/>
+                        <segue destination="Lm3-wy-0Y1" kind="show" identifier="goToHome" id="fbZ-Ie-sHa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uSu-GN-azE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
