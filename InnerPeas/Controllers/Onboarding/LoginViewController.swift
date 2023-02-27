@@ -19,16 +19,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginClicked(_ sender: UIButton) {
-        guard let email = emailTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
+        let vc = TabBarViewController()
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text,
+              !email.isEmpty,
+              !password.isEmpty else {
+            return
+        }
         
         Auth.auth().signIn(withEmail: email, password: password) {firebaseResult, error in
             if let _ = error {
                 print("error")
             }
             else{
-                //go to home
-                self.performSegue(withIdentifier: "goToNext", sender: self)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
         

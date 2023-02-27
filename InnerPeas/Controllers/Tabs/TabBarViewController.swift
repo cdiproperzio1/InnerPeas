@@ -11,6 +11,7 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
 
         //create the views
         let home = HomeViewController()
@@ -29,6 +30,8 @@ class TabBarViewController: UITabBarController {
         
         //set controllers
         self.setViewControllers([nav1, nav2, nav3], animated: false)
+        
+        
         
     }
     

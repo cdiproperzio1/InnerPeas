@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "InnerPeas"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemPurple
         configureCollectionView()
         fetchPost()
     }
