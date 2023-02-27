@@ -11,6 +11,7 @@
 		AB16083E299B47E300693DB8 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083D299B47E300693DB8 /* LoginHeaderView.swift */; };
 		AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083F299B575400693DB8 /* createAccountViewController.swift */; };
 		AB38B34B29AC53DF007A4F45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB38B34A29AC53DF007A4F45 /* Main.storyboard */; };
+		AB38B34F29AC5855007A4F45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB38B34E29AC5855007A4F45 /* LaunchScreen.storyboard */; };
 		AB3A47A1299190A1003C1F99 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A47A0299190A1003C1F99 /* Extensions.swift */; };
 		AB4486AC29A2C334001345E8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4486AB29A2C334001345E8 /* PostViewController.swift */; };
 		AB69964C299AE41E0022345E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB69964B299AE41E0022345E /* Storage.swift */; };
@@ -73,6 +74,7 @@
 		AB16083D299B47E300693DB8 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		AB16083F299B575400693DB8 /* createAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountViewController.swift; sourceTree = "<group>"; };
 		AB38B34A29AC53DF007A4F45 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		AB38B34E29AC5855007A4F45 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB3A47A0299190A1003C1F99 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AB4486AB29A2C334001345E8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		AB69964B299AE41E0022345E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				ABE49A9E299C6B7400B23DAE /* Home Cells */,
 				AB38B34A29AC53DF007A4F45 /* Main.storyboard */,
+				AB38B34E29AC5855007A4F45 /* LaunchScreen.storyboard */,
 				AB16083B299B43BD00693DB8 /* TextField.swift */,
 				AB16083D299B47E300693DB8 /* LoginHeaderView.swift */,
 				ABE49A92299C05ED00B23DAE /* PosterCollectionViewCell.swift */,
@@ -363,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB70D193298B4F9D000C79D6 /* GoogleService-Info.plist in Resources */,
+				AB38B34F29AC5855007A4F45 /* LaunchScreen.storyboard in Resources */,
 				AB70D188298B4F72000C79D6 /* Assets.xcassets in Resources */,
 				AB38B34B29AC53DF007A4F45 /* Main.storyboard in Resources */,
 			);
