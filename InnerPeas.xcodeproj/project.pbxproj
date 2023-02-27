@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB16083A299B3DDE00693DB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB160839299B3DDE00693DB8 /* LaunchScreen.storyboard */; };
 		AB16083C299B43BD00693DB8 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083B299B43BD00693DB8 /* TextField.swift */; };
 		AB16083E299B47E300693DB8 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083D299B47E300693DB8 /* LoginHeaderView.swift */; };
 		AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083F299B575400693DB8 /* createAccountViewController.swift */; };
@@ -70,7 +69,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AB160839299B3DDE00693DB8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB16083B299B43BD00693DB8 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		AB16083D299B47E300693DB8 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		AB16083F299B575400693DB8 /* createAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountViewController.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				ABE49A9E299C6B7400B23DAE /* Home Cells */,
-				AB160839299B3DDE00693DB8 /* LaunchScreen.storyboard */,
 				AB38B34A29AC53DF007A4F45 /* Main.storyboard */,
 				AB16083B299B43BD00693DB8 /* TextField.swift */,
 				AB16083D299B47E300693DB8 /* LoginHeaderView.swift */,
@@ -365,7 +362,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB16083A299B3DDE00693DB8 /* LaunchScreen.storyboard in Resources */,
 				AB70D193298B4F9D000C79D6 /* GoogleService-Info.plist in Resources */,
 				AB70D188298B4F72000C79D6 /* Assets.xcassets in Resources */,
 				AB38B34B29AC53DF007A4F45 /* Main.storyboard in Resources */,
