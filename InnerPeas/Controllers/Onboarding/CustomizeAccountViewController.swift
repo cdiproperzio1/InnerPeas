@@ -70,7 +70,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         }
        
         storage.child("image/\(UID).png").putData(imageData) { error in
-            guard error == nil else {
+            guard error != nil else {
                 print("failed to upload")
                 return
             }
@@ -83,7 +83,8 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
             }
         self.database.child("Users").child(UID).child("bio").setValue(self.textView.text!)
         self.database.child("Users").child(UID).child("location").setValue(self.location.text!)
-        self.performSegue(withIdentifier: "goToHome", sender: self)
+        let vc = TabBarViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     }
 
