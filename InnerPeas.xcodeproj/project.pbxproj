@@ -67,6 +67,8 @@
 		ABE49AA8299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE49AA7299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift */; };
 		ABE49AAC299C765E00B23DAE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = ABE49AAB299C765E00B23DAE /* Kingfisher */; };
 		BE164D5429AD79550018044D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE164D5329AD79550018044D /* Main.storyboard */; };
+		BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */; };
+		BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,8 @@
 		ABE49AA5299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRatingCollectionViewCelltype.swift; sourceTree = "<group>"; };
 		ABE49AA7299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsCollectionViewCellType.swift; sourceTree = "<group>"; };
 		BE164D5329AD79550018044D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeAccountViewController.swift; sourceTree = "<group>"; };
+		BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +253,8 @@
 			isa = PBXGroup;
 			children = (
 				AB6F72122990A6B9000A3F6C /* LoginViewController.swift */,
+				BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */,
+				BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */,
 				AB16083F299B575400693DB8 /* createAccountViewController.swift */,
 			);
 			path = Onboarding;
@@ -385,6 +391,7 @@
 				AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */,
 				AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */,
 				AB16083C299B43BD00693DB8 /* TextField.swift in Sources */,
+				BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */,
 				AB69964C299AE41E0022345E /* Storage.swift in Sources */,
 				AB699663299B361F0022345E /* Post.swift in Sources */,
 				ABE49A97299C06FC00B23DAE /* PostDescriptionCollectionViewCell.swift in Sources */,
@@ -402,6 +409,7 @@
 				AB699657299B33170022345E /* SearchViewController.swift in Sources */,
 				AB3A47A1299190A1003C1F99 /* Extensions.swift in Sources */,
 				ABE49A9B299C137A00B23DAE /* HomeFeedCellType.swift in Sources */,
+				BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */,
 				ABE49A93299C05ED00B23DAE /* PosterCollectionViewCell.swift in Sources */,
 				ABE49AA2299C6CE100B23DAE /* PostCollectionViewCellType.swift in Sources */,
 				ABC64B092998A0E700C1CE35 /* HomeViewController.swift in Sources */,
