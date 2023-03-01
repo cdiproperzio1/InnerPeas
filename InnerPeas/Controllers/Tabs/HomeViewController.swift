@@ -231,7 +231,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.configure(with:viewModel)
-            cell.contentView.backgroundColor = colors[indexPath.row]
+            //cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
         }
     }
