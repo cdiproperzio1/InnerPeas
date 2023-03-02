@@ -57,9 +57,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         self.imagePicker.present(from: sender)
     }
-    func saveAndContinue(){
-      
-    }
+  
     @IBAction func `continue`(_ sender: Any) {
         let UID = String((Auth.auth().currentUser?.uid)!)
         if(self.textView.text == "What food do you like to make? (150 Characters)"){
