@@ -7,10 +7,18 @@
 
 import UIKit
 
+protocol ThumbnailsCollectionViewCellTypeDelegate: AnyObject{
+    func
+    ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType)
+    
+}
 final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
     static let identifier = "ThumbnailsCollectionViewCellType"
     
-    private let recipe: UILabel = {
+    weak var delegate:
+        ThumbnailsCollectionViewCellTypeDelegate?
+    
+    private let recipeLabel: UILabel = {
         let label = UILabel()
         label.text = "Recipe"
         label.font = .systemFont(ofSize: 18, weight: .regular)
@@ -21,20 +29,28 @@ final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
         super.init(frame: frame)
         contentView.clipsToBounds = true
         contentView.backgroundColor = .systemBackground
-        contentView.addSubview(recipe)
+        contentView.addSubview(recipeLabel)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector (didTapRecipeLabel))
+        
+        recipeLabel.addGestureRecognizer(tap)
     }
     
     required init?(coder: NSCoder){
         fatalError()
     }
     
+    @objc func didTapRecipeLabel(){
+        delegate?.ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: self)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        recipe.sizeToFit()
-        recipe.frame = CGRect(
-            x: contentView.right + 20,
+        recipeLabel.sizeToFit()
+        recipeLabel.frame = CGRect(
+            x: (contentView.width/2),
             y: 0,
-            width: recipe.width,
+            width: recipeLabel.width,
             height: contentView.height
         )
 

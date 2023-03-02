@@ -8,6 +8,7 @@
 import UIKit
 
 protocol PostDescriptionCollectionViewCellTypeDelegate: AnyObject {
+    func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType)
     func PostDescriptionCollectionViewCellTypeDidTapisMade(_cell: PostDescriptionCollectionViewCellType, isMade: Bool)
     func PostDescriptionCollectionViewCellTypeDidTapisFav(_cell: PostDescriptionCollectionViewCellType, isFav: Bool)
     func PostDescriptionCollectionViewCellTypeDidTapComment(_cell: PostDescriptionCollectionViewCellType)
@@ -86,6 +87,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
     }
     
     @objc func didTapRecipeName() {
+        delegate?.PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: self)
         //going to make it so that large text can fit in the frame of the recipe name
         //allow for users to expand the truncated text
     }

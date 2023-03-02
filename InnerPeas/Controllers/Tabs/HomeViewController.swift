@@ -270,6 +270,10 @@ extension HomeViewController: PosterCollectionViewCellTypeDelegate{
 
 }
 extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
+    func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType) {
+        print("Tapped recipe")
+    }
+    
     func PostDescriptionCollectionViewCellTypeDidTapisMade(_cell: PostDescriptionCollectionViewCellType, isMade: Bool) {
         print("Tapped is made")
     }
@@ -283,6 +287,16 @@ extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
         vc.title = "Comments"
         navigationController?.pushViewController(vc, animated: true)
         print("Tapped comment")
+        }
+        
+    }
+extension HomeViewController: ThumbnailsCollectionViewCellTypeDelegate{
+    func
+    ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType){
+        let vc = RecipeViewController()
+        vc.title = "Recipe"
+        navigationController?.pushViewController(vc, animated: true)
+        print("Tapped Recipe Label")
     }
 }
 
