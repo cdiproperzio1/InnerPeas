@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
         title = "Profile"
         view.backgroundColor = .systemBackground
 
-
+        print("this is a test")
     }
     
 
