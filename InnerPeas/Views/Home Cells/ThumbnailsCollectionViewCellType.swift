@@ -48,8 +48,8 @@ final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
         super.layoutSubviews()
         recipeLabel.sizeToFit()
         recipeLabel.frame = CGRect(
-            x: (contentView.width/2),
-            y: 0,
+            x: (contentView.width-recipeLabel.width)/2,
+            y: (contentView.height - 50) / 2,
             width: recipeLabel.width,
             height: contentView.height
         )

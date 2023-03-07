@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "InnerPeas"
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .systemBackground
         configureCollectionView()
         fetchPost()
     }
@@ -246,6 +246,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 extension HomeViewController: PosterCollectionViewCellTypeDelegate{
     func PosterCollectionViewCellTypeDidTapUsername(_cell: PosterCollectionViewCellType){
         print("tapped username")
+        //let vc = ProfileViewController(
         
     }
     func PosterCollectionViewCellTypeDidTapMoreButton(_cell: PosterCollectionViewCellType){

@@ -6,24 +6,37 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        
+
+        let currentUser = Auth.auth().currentUser
+        if let currentUser = currentUser{
+            let email = currentUser.email
+        }
 
         //create the views
         let home = HomeViewController()
         let addPost =  AddPostViewController()
         let search = SearchViewController()
-        let profile = ProfileViewController()
+        let profile = ProfileViewController(user: currentUser!)
         
         //turn views into navigations
         let nav1 = UINavigationController(rootViewController: home)
         let nav2 = UINavigationController(rootViewController: addPost)
         let nav3 = UINavigationController(rootViewController: search)
         let nav4 = UINavigationController(rootViewController: profile)
+        
+        nav1.navigationBar.tintColor = .label
+        nav2.navigationBar.tintColor = .label
+        nav3.navigationBar.tintColor = .label
+        nav4.navigationBar.tintColor = .label
         
         //create tabs
         nav1.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 1)
