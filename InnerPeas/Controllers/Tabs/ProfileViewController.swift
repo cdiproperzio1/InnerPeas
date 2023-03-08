@@ -50,13 +50,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         super.viewDidAppear(animated)        
     }
     
-        private func configure() {
-        if isCurrentUser{
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                image: UIImage(systemName: "gear"),
-                style: .done,
-                target: self,
-                action: #selector(didTapSettings)
+    private func configure() {
+    if isCurrentUser{
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "gear"),
+            style: .done,
+            target: self,
+            action: #selector(didTapSettings)
             )
         }
     }
