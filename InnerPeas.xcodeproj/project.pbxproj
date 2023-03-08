@@ -149,6 +149,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E59FF1729B7F47C0044A4B0 /* Profile Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Profile Cells";
+			sourceTree = "<group>";
+		};
 		AB4486AA29A2C303001345E8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +227,7 @@
 		ABC64B062998A00600C1CE35 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0E59FF1729B7F47C0044A4B0 /* Profile Cells */,
 				ABE49A9E299C6B7400B23DAE /* Home Cells */,
 				AB38B35229AC59BF007A4F45 /* LaunchScreen.storyboard */,
 				AB16083B299B43BD00693DB8 /* TextField.swift */,
@@ -553,6 +561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7F6HC3VSY6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InnerPeas/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = InnerPeas;
@@ -583,6 +592,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7F6HC3VSY6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InnerPeas/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = InnerPeas;
