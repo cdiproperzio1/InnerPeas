@@ -108,7 +108,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = ingredients[indexPath.row]
+        //cell.textLabel?.text = ingredients[indexPath.row]
         return cell;
     }
 }
