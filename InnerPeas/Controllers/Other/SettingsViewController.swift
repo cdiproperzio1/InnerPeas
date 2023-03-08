@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,16 +42,22 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func didTapSignOut(){
+        
         let actionSheet = UIAlertController(title: "Sign Out",
                                             message: "Are you Sure?",
                                             preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { [weak self]_ in
-            AuthManager.shared.signOut{ success in
+            print("signout presed")
+            AuthManager.shared.signOut{success in
                 if success{
                     DispatchQueue.main.async{
-                        let vc = LoginViewController()
+                        self?.didTapClose()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        guard let vc = storyboard.instantiateViewController(withIdentifier: "FirstTimeViewController") as? FirstTimeViewController else {
+                            fatalError("Unable to instantiate view controller.")
+                        }
                         let navVC = UINavigationController(rootViewController: vc)
                         navVC.modalPresentationStyle = .fullScreen
                         self?.present(navVC, animated: true)
@@ -61,7 +68,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }))
         present(actionSheet, animated: true)
     }
-    
     
     private func createTableFooter(){
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: 50))

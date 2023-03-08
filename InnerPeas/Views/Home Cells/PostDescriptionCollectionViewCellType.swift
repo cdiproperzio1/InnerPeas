@@ -108,7 +108,10 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
         
         let tap = UITapGestureRecognizer(target: self,
                                          action: #selector(didTapRecipeName))
+        
+        recipeName.isUserInteractionEnabled = true
         recipeName.addGestureRecognizer(tap)
+
         //contentView.addSubview(ratingStackView)
         
 //        for _ in 0..<5 {

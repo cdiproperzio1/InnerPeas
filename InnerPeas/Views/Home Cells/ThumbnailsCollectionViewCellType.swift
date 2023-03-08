@@ -7,16 +7,14 @@
 
 import UIKit
 
-protocol ThumbnailsCollectionViewCellTypeDelegate: AnyObject{
-    func
-    ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType)
+protocol ThumbnailsCollectionViewCellTypeDelegate : AnyObject {
+    func ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType)
     
 }
 final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
     static let identifier = "ThumbnailsCollectionViewCellType"
     
-    weak var delegate:
-        ThumbnailsCollectionViewCellTypeDelegate?
+    weak var delegate: ThumbnailsCollectionViewCellTypeDelegate?
     
     private let recipeLabel: UILabel = {
         let label = UILabel()
@@ -31,8 +29,10 @@ final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
         contentView.backgroundColor = .systemBackground
         contentView.addSubview(recipeLabel)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector (didTapRecipeLabel))
+        let tap = UITapGestureRecognizer(target: self,
+                                         action: #selector(didTapRecipeLabel))
         
+        recipeLabel.isUserInteractionEnabled = true
         recipeLabel.addGestureRecognizer(tap)
     }
     
@@ -42,6 +42,7 @@ final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
     
     @objc func didTapRecipeLabel(){
         delegate?.ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: self)
+        print("lower recipe label tapped")
     }
     
     override func layoutSubviews() {
@@ -61,6 +62,7 @@ final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
     }
     
     func configure(with viewModel:ThumbnailsCollectionViewCell){
+        
         
     }
     

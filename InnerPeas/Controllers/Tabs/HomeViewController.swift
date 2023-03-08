@@ -186,7 +186,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             cell.delegate = self
             cell.configure(with:viewModel)
-            //cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         case .post(let viewModel):
@@ -209,7 +208,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             cell.delegate = self
             cell.configure(with:viewModel)
-            //cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         case .postRating(let viewModel):
@@ -243,10 +241,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
 }
 
+
 extension HomeViewController: PosterCollectionViewCellTypeDelegate{
     func PosterCollectionViewCellTypeDidTapUsername(_cell: PosterCollectionViewCellType){
         print("tapped username")
-        //let vc = ProfileViewController(
+        //let vc = ProfileViewController(user:)
         
     }
     func PosterCollectionViewCellTypeDidTapMoreButton(_cell: PosterCollectionViewCellType){
@@ -270,8 +269,21 @@ extension HomeViewController: PosterCollectionViewCellTypeDelegate{
     }
 
 }
+
+extension HomeViewController: ThumbnailsCollectionViewCellTypeDelegate{
+    func ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType) {
+        let vc = RecipeViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        print("Tapped Bottom recipe")
+        
+    }
+
+}
 extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
     func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType) {
+        let vc = RecipeViewController()
+        vc.title = "\"Recipe Name goes here\""
+        navigationController?.pushViewController(vc, animated: true)
         print("Tapped recipe")
     }
     
@@ -291,15 +303,6 @@ extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
         }
         
     }
-extension HomeViewController: ThumbnailsCollectionViewCellTypeDelegate{
-    func
-    ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType){
-        let vc = RecipeViewController()
-        vc.title = "Recipe"
-        navigationController?.pushViewController(vc, animated: true)
-        print("Tapped Recipe Label")
-    }
-}
 
 
     
