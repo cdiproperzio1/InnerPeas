@@ -83,7 +83,7 @@
                                     <constraint firstAttribute="height" constant="35" id="B7G-oQ-LFR"/>
                                 </constraints>
                                 <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Owr-1n-r4S"/>

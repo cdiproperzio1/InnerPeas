@@ -60,7 +60,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
         let button = UIButton()
         button.tintColor = .label
         let image = UIImage(
-            systemName: "hand.thumbsup",
+            systemName: "checkmark.circle",
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)
         )
         button.setImage(image, for: .normal)
@@ -129,7 +129,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
     @objc func didTapisMade(){
         if self.isMade{
             let image = UIImage(
-                systemName: "hand.thumbsup",
+                systemName: "checkmark.circle",
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)
             )
             isMadeButton.setImage(image, for: .normal)
@@ -138,7 +138,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
         }
         else {
             let image = UIImage(
-                systemName: "hand.thumbsup.fill",
+                systemName: "checkmark.circle.fill",
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)
             )
             isMadeButton.setImage(image, for: .normal)
