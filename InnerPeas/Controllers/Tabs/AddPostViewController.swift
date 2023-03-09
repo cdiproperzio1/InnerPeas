@@ -7,31 +7,41 @@
 
 import UIKit
 
-class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
+
+class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, ImagePickerDelegate{
     var images = [UIImage]()
     var dirList=UITextView()
-    
+    var imagePicker: ImagePicker!
     var tableView = UITableView()
-//    let ingredList=UILabel(frame: CGRect(x: 50, y: 500, width: 250, height: 250))
     let amountTextField=UITextField(frame: CGRect(x: 225, y: 450, width: 100, height: 40))
     let ingredTextField=UITextField(frame: CGRect(x: 50, y: 450, width: 125, height: 40))
     var ingredients = [[String:String]]()
-    
+    let image1 = UIImageView(frame: CGRect(x: 50, y: 400, width: 40, height: 40))
+    let image2 = UIImageView(frame: CGRect(x: 100, y: 400, width: 40, height: 40))
+    let image3 = UIImageView(frame: CGRect(x: 150, y: 400, width: 40, height: 40))
+    var okButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Add a Post"
         view.backgroundColor = .systemBackground
-        
-        dirList=UITextView(frame: CGRect(x: 50, y: 50, width: self.view.frame.width - 100, height: 250))
+        dirList=UITextView(frame: CGRect(x: 50, y: 100, width: self.view.frame.width - 100, height: 250))
+        okButton=UIButton(frame: CGRect(x: (self.view.width/2)-50, y: 720, width: 100, height: 40))
+        okButton.backgroundColor = .systemBlue
+        okButton.setTitle("Post!", for: .normal)
+        okButton.addTarget(self, action: #selector(postPost), for: .touchUpInside)
+        self.view.addSubview(okButton)
         
         dirList.textAlignment = NSTextAlignment.left
         dirList.text="Directions"
         dirList.font = UIFont.systemFont(ofSize: 18.0)
         dirList.textColor = UIColor.lightGray
         self.view.addSubview(dirList)
+        self.view.addSubview(image1)
+        self.view.addSubview(image2)
+        self.view.addSubview(image3)
         dirList.delegate=self
         
+                
         ingredTextField.placeholder = "Ingredient"
         self.view.addSubview(ingredTextField)
         
@@ -43,7 +53,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         addPhoto.setTitle("Upload Photo", for: .normal)
         addPhoto.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         self.view.addSubview(addPhoto)
-        
+       
         
         tableView = UITableView(frame: CGRect(x: 50, y: 500, width: self.view.width-100, height: 200))
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -85,8 +95,15 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
             self.dirList.textColor = UIColor.black
         }
     }
-    @objc func selectPhoto(){
-        print("selected a photo")
+    @objc func selectPhoto(_ sender: UIButton){
+        if(images.count<3){
+            self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+            self.imagePicker.present(from: sender)
+        }
+        else{
+            print("error")
+            //error handling
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("you tapped me")
@@ -106,10 +123,46 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredients.count
     }
+    @objc func postPost(){
+        //store items in DB
+        self.images=[UIImage]()
+        image1.image=nil
+        image2.image=nil
+        image3.image=nil
+        dirList.text=""
+        ingredients=[[String:String]]()
+        tableView.reloadData()
+        let vc = HomeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        //cell.textLabel?.text = ingredients[indexPath.row]
+        let val=ingredients[indexPath.row]
+        var prettyJ=(String(val.description)).replacingOccurrences(of: "\"", with: "")
+        prettyJ=prettyJ.replacingOccurrences(of: "[", with: "")
+        prettyJ=prettyJ.replacingOccurrences(of: "]", with: "")
+        cell.textLabel?.text = (prettyJ)
         return cell;
+    }
+    func didSelect(image: UIImage?) {
+        guard let image = image else {
+            return
+        }
+        if(images.count==0){
+            images.append(image)
+            self.image1.image=image
+        }
+        else if(images.count==1){
+            images.append(image)
+            self.image2.image=image
+        }
+        else if(images.count==2){
+            images.append(image)
+            self.image3.image=image
+        }
+        else{
+            return;
+        }
     }
 }
     /*
