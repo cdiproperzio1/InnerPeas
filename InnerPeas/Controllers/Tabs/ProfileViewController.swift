@@ -5,7 +5,7 @@ import FirebaseAuth
 class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     
     private var collectionView: UICollectionView? = nil
-    private var viewModels = [[HomeFeedCellType]()]
+    
     
     let User = Auth.auth().currentUser
     
@@ -24,16 +24,22 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         fatalError("init(coder:) has not been implemented")
     }
         
-    let containerView: UIView = {
+    lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGreen
+        
+        view.addSubview(profileImageView)
+        profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
         return view
     }()
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .green
+        imageView.image = Image
         return imageView
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = user.email
@@ -103,7 +109,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         collectionView?.reloadData()
     }
 }
-
+    
 extension UIView {
     //reusable function to add constraints
     func anchor(top: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, paddingTop: CGFloat? = 0, paddingLeft: CGFloat? = 0, paddingBottom: CGFloat? = 0, paddingRight: CGFloat? = 0, width: CGFloat? = nil, height: CGFloat? = nil) {
@@ -137,3 +143,7 @@ extension UIView {
         }
     }
 }
+
+
+
+

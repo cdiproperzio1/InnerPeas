@@ -15,3 +15,5 @@ enum HomeFeedCellType{
     case thumbNails(viewModel: ThumbnailsCollectionViewCell)
     
 }
+
+
