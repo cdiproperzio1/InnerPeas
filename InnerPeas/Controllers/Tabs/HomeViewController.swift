@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "InnerPeas"
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .systemBackground
         configureCollectionView()
         fetchPost()
     }
@@ -45,13 +45,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             ),
             .post(
                 viewModel: PostCollectionViewCell(
-                    postUrl: URL(string: "https://www.foodandwine.com/thmb/Yt46CaGExGFVjruxJsNSFjNVMo0=/2000x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Super-Scoops-FT-2-MAG0622-00568f6534a44e0c8a422b66b25d6cf6.jpg")!
+                    postUrl: URL(string: "https://www.simplyrecipes.com/thmb/rngm-7eZfo-gsKuRWOceBMM9m_c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Homemade-Pizza-Dough-Lead-Shot-1b-ea13798d224048b3a28afb0936c9b645.jpg")!
                 )
             ),
             
             .postDescription(
                 viewModel: PostDescriptionCollectionViewCell(
-                    name: "Ice Cream with a long title to see how it holds in the frame",
+                    name: "Home-made Mushroom Pizza",
                     isMade: false,
                     isFav: false
                 )
@@ -186,7 +186,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             cell.delegate = self
             cell.configure(with:viewModel)
-            //cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         case .post(let viewModel):
@@ -209,7 +208,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             cell.delegate = self
             cell.configure(with:viewModel)
-            //cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         case .postRating(let viewModel):
@@ -231,7 +229,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.configure(with:viewModel)
-            cell.contentView.backgroundColor = colors[indexPath.row]
+            //cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
         }
     }
@@ -243,9 +241,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
 }
 
+
 extension HomeViewController: PosterCollectionViewCellTypeDelegate{
     func PosterCollectionViewCellTypeDidTapUsername(_cell: PosterCollectionViewCellType){
         print("tapped username")
+        //let vc = ProfileViewController(user:)
         
     }
     func PosterCollectionViewCellTypeDidTapMoreButton(_cell: PosterCollectionViewCellType){
@@ -265,11 +265,32 @@ extension HomeViewController: PosterCollectionViewCellTypeDelegate{
         sheet.addAction(UIAlertAction(title: "Block",
                                       style: .destructive,
                                       handler: {_ in} ))
+        
+        sheet.addAction(UIAlertAction(title: "Not Interested",
+                                      style: .destructive,
+                                      handler: {_ in} ))
         present(sheet, animated: true)
     }
 
 }
+
+extension HomeViewController: ThumbnailsCollectionViewCellTypeDelegate{
+    func ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType) {
+        let vc = RecipeViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        print("Tapped Bottom recipe")
+        
+    }
+
+}
 extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
+    func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType) {
+        let vc = RecipeViewController()
+        vc.title = "Home-made Mushroom Pizza"
+        navigationController?.pushViewController(vc, animated: true)
+        print("Tapped recipe")
+    }
+    
     func PostDescriptionCollectionViewCellTypeDidTapisMade(_cell: PostDescriptionCollectionViewCellType, isMade: Bool) {
         print("Tapped is made")
     }
@@ -283,8 +304,9 @@ extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
         vc.title = "Comments"
         navigationController?.pushViewController(vc, animated: true)
         print("Tapped comment")
+        }
+        
     }
-}
 
 
     

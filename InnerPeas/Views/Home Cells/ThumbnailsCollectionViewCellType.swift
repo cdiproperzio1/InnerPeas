@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol ThumbnailsCollectionViewCellTypeDelegate : AnyObject {
+    func ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: ThumbnailsCollectionViewCellType)
+    
+}
 final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
     static let identifier = "ThumbnailsCollectionViewCellType"
     
-    private let recipe: UILabel = {
+    weak var delegate: ThumbnailsCollectionViewCellTypeDelegate?
+    
+    private let recipeLabel: UILabel = {
         let label = UILabel()
         label.text = "Recipe"
         label.font = .systemFont(ofSize: 18, weight: .regular)
@@ -21,20 +27,31 @@ final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
         super.init(frame: frame)
         contentView.clipsToBounds = true
         contentView.backgroundColor = .systemBackground
-        contentView.addSubview(recipe)
+        contentView.addSubview(recipeLabel)
+        
+        let tap = UITapGestureRecognizer(target: self,
+                                         action: #selector(didTapRecipeLabel))
+        
+        recipeLabel.isUserInteractionEnabled = true
+        recipeLabel.addGestureRecognizer(tap)
     }
     
     required init?(coder: NSCoder){
         fatalError()
     }
     
+    @objc func didTapRecipeLabel(){
+        delegate?.ThumbnailsCollectionViewCellTypeDidTapRecipeLabel(_cell: self)
+        print("lower recipe label tapped")
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        recipe.sizeToFit()
-        recipe.frame = CGRect(
-            x: contentView.right + 20,
-            y: 0,
-            width: recipe.width,
+        recipeLabel.sizeToFit()
+        recipeLabel.frame = CGRect(
+            x: (contentView.width-recipeLabel.width)/2,
+            y: (contentView.height - 50) / 2,
+            width: recipeLabel.width,
             height: contentView.height
         )
 
@@ -45,6 +62,7 @@ final class ThumbnailsCollectionViewCellType: UICollectionViewCell {
     }
     
     func configure(with viewModel:ThumbnailsCollectionViewCell){
+        
         
     }
     

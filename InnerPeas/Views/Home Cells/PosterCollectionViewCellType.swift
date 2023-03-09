@@ -61,6 +61,8 @@ final class PosterCollectionViewCellType: UICollectionViewCell {
         
         let tap = UITapGestureRecognizer(target: self,
                                          action: #selector(didTapUsername))
+        
+        usernameLabel.isUserInteractionEnabled = true
         usernameLabel.addGestureRecognizer(tap)
     }
     

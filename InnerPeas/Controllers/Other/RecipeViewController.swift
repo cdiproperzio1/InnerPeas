@@ -1,13 +1,13 @@
 //
-//  PostViewController.swift
+//  RecipeViewController.swift
 //  InnerPeas
 //
-//  Created by Justin Hamilton on 2/19/23.
+//  Created by Justin Hamilton on 3/1/23.
 //
 
 import UIKit
 
-class PostViewController: UIViewController {
+class RecipeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

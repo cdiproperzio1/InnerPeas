@@ -25,24 +25,28 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginClicked(_ sender: UIButton) {
-        let vc = TabBarViewController()
         guard let email = emailTextField.text,
-              let password = passwordTextField.text,
-              !email.isEmpty,
-              !password.isEmpty else {
-            return
-        }
-        
-        Auth.auth().signIn(withEmail: email, password: password) {firebaseResult, error in
-            if let _ = error {
-                print("error")
+                let password = passwordTextField.text,
+                !email.isEmpty,
+                !password.isEmpty else {return}
+
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                print("Error signing in: \(error.localizedDescription)")
+                return
             }
-            else{
-                self.navigationController?.pushViewController(vc, animated: true)
+
+            guard let user = authResult?.user else {
+                print("No user found.")
+                return
+            }
+
+            let vc = TabBarViewController()
+            vc.currentUser = user
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true) {
+            print("User logged in successfully.")
             }
         }
-        
     }
-
-
 }

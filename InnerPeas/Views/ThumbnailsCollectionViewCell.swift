@@ -8,7 +8,6 @@
 import Foundation
 
 struct ThumbnailsCollectionViewCell{
-    //add thumbnails with link to recipe here
     //let recipe: String
     
 }

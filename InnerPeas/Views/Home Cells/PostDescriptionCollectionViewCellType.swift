@@ -8,6 +8,7 @@
 import UIKit
 
 protocol PostDescriptionCollectionViewCellTypeDelegate: AnyObject {
+    func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType)
     func PostDescriptionCollectionViewCellTypeDidTapisMade(_cell: PostDescriptionCollectionViewCellType, isMade: Bool)
     func PostDescriptionCollectionViewCellTypeDidTapisFav(_cell: PostDescriptionCollectionViewCellType, isFav: Bool)
     func PostDescriptionCollectionViewCellTypeDidTapComment(_cell: PostDescriptionCollectionViewCellType)
@@ -59,7 +60,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
         let button = UIButton()
         button.tintColor = .label
         let image = UIImage(
-            systemName: "hand.thumbsup",
+            systemName: "checkmark.circle",
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)
         )
         button.setImage(image, for: .normal)
@@ -86,6 +87,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
     }
     
     @objc func didTapRecipeName() {
+        delegate?.PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: self)
         //going to make it so that large text can fit in the frame of the recipe name
         //allow for users to expand the truncated text
     }
@@ -106,7 +108,10 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
         
         let tap = UITapGestureRecognizer(target: self,
                                          action: #selector(didTapRecipeName))
+        
+        recipeName.isUserInteractionEnabled = true
         recipeName.addGestureRecognizer(tap)
+
         //contentView.addSubview(ratingStackView)
         
 //        for _ in 0..<5 {
@@ -124,7 +129,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
     @objc func didTapisMade(){
         if self.isMade{
             let image = UIImage(
-                systemName: "hand.thumbsup",
+                systemName: "checkmark.circle",
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)
             )
             isMadeButton.setImage(image, for: .normal)
@@ -133,7 +138,7 @@ final class PostDescriptionCollectionViewCellType: UICollectionViewCell {
         }
         else {
             let image = UIImage(
-                systemName: "hand.thumbsup.fill",
+                systemName: "checkmark.circle.fill",
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)
             )
             isMadeButton.setImage(image, for: .normal)

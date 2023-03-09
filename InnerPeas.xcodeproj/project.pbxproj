@@ -13,6 +13,8 @@
 		AB38B35029AC59BF007A4F45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB38B35229AC59BF007A4F45 /* LaunchScreen.storyboard */; };
 		AB3A47A1299190A1003C1F99 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A47A0299190A1003C1F99 /* Extensions.swift */; };
 		AB4486AC29A2C334001345E8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4486AB29A2C334001345E8 /* PostViewController.swift */; };
+		AB4E366B29B6CF54007FCA8D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */; };
+		AB4E366D29B6DC64007FCA8D /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */; };
 		AB69964C299AE41E0022345E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB69964B299AE41E0022345E /* Storage.swift */; };
 		AB69964E299B1AF60022345E /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB69964D299B1AF60022345E /* AuthManager.swift */; };
 		AB699653299B1EBB0022345E /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB699652299B1EBB0022345E /* AnalyticsManager.swift */; };
@@ -66,6 +68,7 @@
 		ABE49AA6299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE49AA5299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift */; };
 		ABE49AA8299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE49AA7299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift */; };
 		ABE49AAC299C765E00B23DAE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = ABE49AAB299C765E00B23DAE /* Kingfisher */; };
+		ABF64FA029B038F3007B3CCF /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */; };
 		BE164D5429AD79550018044D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE164D5329AD79550018044D /* Main.storyboard */; };
 		BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */; };
 		BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */; };
@@ -79,6 +82,8 @@
 		AB38B35129AC59BF007A4F45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB3A47A0299190A1003C1F99 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AB4486AB29A2C334001345E8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
 		AB69964B299AE41E0022345E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		AB69964D299B1AF60022345E /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AB699652299B1EBB0022345E /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
@@ -106,6 +111,7 @@
 		ABE49AA3299C6D2A00B23DAE /* PostDescriptionCollectionViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDescriptionCollectionViewCellType.swift; sourceTree = "<group>"; };
 		ABE49AA5299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRatingCollectionViewCelltype.swift; sourceTree = "<group>"; };
 		ABE49AA7299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsCollectionViewCellType.swift; sourceTree = "<group>"; };
+		ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		BE164D5329AD79550018044D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeAccountViewController.swift; sourceTree = "<group>"; };
 		BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				AB4486AB29A2C334001345E8 /* PostViewController.swift */,
+				ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */,
+				AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -263,6 +271,7 @@
 		ABC64B0A2998A19C00C1CE35 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */,
 				AB6F72122990A6B9000A3F6C /* LoginViewController.swift */,
 				BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */,
 				BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */,
@@ -398,6 +407,7 @@
 			files = (
 				ABE49AA8299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift in Sources */,
 				AB699661299B36160022345E /* User.swift in Sources */,
+				AB4E366B29B6CF54007FCA8D /* SettingsViewController.swift in Sources */,
 				AB69964E299B1AF60022345E /* AuthManager.swift in Sources */,
 				AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */,
 				AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */,
@@ -415,12 +425,14 @@
 				AB699653299B1EBB0022345E /* AnalyticsManager.swift in Sources */,
 				ABE49A9D299C145900B23DAE /* ThumbnailsCollectionViewCell.swift in Sources */,
 				AB4486AC29A2C334001345E8 /* PostViewController.swift in Sources */,
+				AB4E366D29B6DC64007FCA8D /* FirstTimeViewController.swift in Sources */,
 				ABE49AA6299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift in Sources */,
 				AB70D17F298B4F71000C79D6 /* AppDelegate.swift in Sources */,
 				ABE49AA4299C6D2A00B23DAE /* PostDescriptionCollectionViewCellType.swift in Sources */,
 				AB699657299B33170022345E /* SearchViewController.swift in Sources */,
 				AB3A47A1299190A1003C1F99 /* Extensions.swift in Sources */,
 				ABE49A9B299C137A00B23DAE /* HomeFeedCellType.swift in Sources */,
+				ABF64FA029B038F3007B3CCF /* RecipeViewController.swift in Sources */,
 				BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */,
 				ABE49A93299C05ED00B23DAE /* PosterCollectionViewCell.swift in Sources */,
 				ABE49AA2299C6CE100B23DAE /* PostCollectionViewCellType.swift in Sources */,
