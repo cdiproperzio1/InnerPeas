@@ -21,11 +21,16 @@ class createAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     }
     
-
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
+    
     @IBAction func createAccountClicked(_ sender: UIButton) {
         guard let email =  emailTextField.text else {return}
         guard let fname =  fnameTextField.text else {return}
