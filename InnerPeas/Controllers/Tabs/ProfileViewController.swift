@@ -23,22 +23,43 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGreen
         
         view.addSubview(profileImageView)
-        profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileImageView.anchor(top: view.topAnchor, paddingTop: 88, width: 120, height: 120)
-        //profileImageView.layer.cornerRadius = 120 / 2
+        profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
+        profileImageView.layer.cornerRadius = 120 / 2
+        
+        view.addSubview(friendsButton)
+        friendsButton.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 90)
+        
+        view.addSubview(recipesLabel)
+        recipesLabel.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 120)
         return view
     }()
     
     let profileImageView: UIImageView = {
-        let imageView = UIImageView ()
+        let imageView = UIImageView()
         imageView.backgroundColor = .systemPink
+        imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    let friendsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Friends", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        return button
+    }()
+    
+    let recipesLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Recipes"
+        label.textColor = .blue
+        return label
     }()
     
     override func viewDidLoad() {
@@ -50,9 +71,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         view.addSubview(profileImageView)
         view.addSubview(containerView)
         containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
-        //configureCollectionView()
-        profileImageView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 44, paddingLeft: 32, width: 120, height: 120)
+        
+        
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
