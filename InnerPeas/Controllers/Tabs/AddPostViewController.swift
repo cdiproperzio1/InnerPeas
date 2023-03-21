@@ -75,7 +75,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
 //        ingredList.text=""
         ingredTextField.text=""
         amountTextField.text=""
-        name.text=""
+        postName.text=""
 //        ingredList.textAlignment=NSTextAlignment.left
 //        ingredList.textColor = .black
         //self.view.addSubview(ingredList)
