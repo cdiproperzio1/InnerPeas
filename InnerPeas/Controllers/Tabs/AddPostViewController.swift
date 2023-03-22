@@ -17,26 +17,24 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     var dirList=UITextView()
     var imagePicker: ImagePicker!
     var tableView = UITableView()
+    let postName=UITextField(frame: CGRect(x: 50, y: 100, width: 125, height: 40))
     let amountTextField=UITextField(frame: CGRect(x: 225, y: 450, width: 100, height: 40))
     let ingredTextField=UITextField(frame: CGRect(x: 50, y: 450, width: 125, height: 40))
     var ingredients = [[String:String]]()
     let image1 = UIImageView(frame: CGRect(x: 50, y: 400, width: 40, height: 40))
     let image2 = UIImageView(frame: CGRect(x: 100, y: 400, width: 40, height: 40))
     let image3 = UIImageView(frame: CGRect(x: 150, y: 400, width: 40, height: 40))
-    let postName=UITextField(frame: CGRect(x: 50 , y: 50, width: 200, height: 40))
     var okButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        dirList=UITextView(frame: CGRect(x: 50, y: 110, width: self.view.frame.width - 100, height: 200))
+        dirList=UITextView(frame: CGRect(x: 50, y: 150, width: self.view.frame.width - 100, height: 200))
         okButton=UIButton(frame: CGRect(x: (self.view.width/2)-50, y: 720, width: 100, height: 40))
         okButton.backgroundColor = .systemBlue
         okButton.setTitle("Post!", for: .normal)
         okButton.addTarget(self, action: #selector(postPost), for: .touchUpInside)
         self.view.addSubview(okButton)
-        postName.placeholder = "Name"
-        self.view.addSubview(postName)
         dirList.textAlignment = NSTextAlignment.left
         dirList.text="Directions"
         dirList.font = UIFont.systemFont(ofSize: 18.0)
@@ -50,6 +48,9 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
                 
         ingredTextField.placeholder = "Ingredient"
         self.view.addSubview(ingredTextField)
+        
+        postName.placeholder = "Name"
+        self.view.addSubview(postName)
         
         amountTextField.placeholder = "Amount"
         self.view.addSubview(amountTextField)
