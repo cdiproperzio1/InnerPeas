@@ -8,12 +8,24 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Profile"
-        view.backgroundColor = .systemBackground
-    }
+    
+  //  var ref: DatabaseReference!
+//    ref = Database.database().reference()
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        title = "Profile"
+//        view.backgroundColor = .systemBackground
+//
+//        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
+//          self.comments.append(snapshot)
+//          print(snapshot)
+//          print(comments)
+//          self.tableView.insertRows(
+//            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
+//            with: UITableView.RowAnimation.automatic
+//          )
+//        })
+//    }
     
 
     /*

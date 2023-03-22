@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class CustomizeAccountViewController: UIViewController, UITextViewDelegate, ImagePickerDelegate{
-    
+    var uname: String?
     
     func didSelect(image: UIImage?) {
         guard let image = image else {
@@ -59,7 +59,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
     }
   
     @IBAction func `continue`(_ sender: Any) {
-        let UID = String((Auth.auth().currentUser?.uid)!)
+//        let email = String((Auth.auth().currentUser?.email)!)
         if(self.textView.text == "What food do you like to make? (150 Characters)"){
             self.textView.text=" "
         }
@@ -67,7 +67,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
             return
         }
        
-        storage.child("image/\(UID).png").putData(imageData) { error in
+        storage.child("image/\(self.uname!).png").putData(imageData) { error in
             guard error != nil else {
                 print("failed to upload")
                 return
@@ -79,8 +79,8 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
                     let urlString = url.absoluteString
                 })
             }
-        self.database.child("Users").child(UID).child("bio").setValue(self.textView.text!)
-        self.database.child("Users").child(UID).child("location").setValue(self.location.text!)
+        self.database.child("Users").child(self.uname!).child("bio").setValue(self.textView.text!)
+        self.database.child("Users").child(self.uname!).child("location").setValue(self.location.text!)
         let vc = TabBarViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
