@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Image
+        //imageView.image = Image
         return imageView
     }()
     
@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         super.viewDidLoad()
         title = user.email
         view.backgroundColor = .systemBackground
-        configure()  
+        configure()
         view.addSubview(profileImageView)
         view.addSubview(containerView)
         containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
@@ -53,7 +53,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)        
+        super.viewDidAppear(animated)
     }
     
     private func configure() {
@@ -105,7 +105,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
             .thumbNails(viewModel: ThumbnailsCollectionViewCell())
             
         ]
-        viewModels.append(postData)
+        //viewModels.append(postData)
         collectionView?.reloadData()
     }
 }
