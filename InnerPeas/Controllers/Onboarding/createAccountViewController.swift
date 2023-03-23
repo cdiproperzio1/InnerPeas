@@ -18,6 +18,7 @@ class createAccountViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var lNameTextField: UITextField!
     @IBOutlet weak var fnameTextField: UITextField!
+    @IBOutlet weak var uname: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +55,11 @@ class createAccountViewController: UIViewController {
                     //Go to home screen and add user to database
                     let newUser: [String: Any] = [
                         "fname" : fname,
-                        "lname" : lname
+                        "lname" : lname,
+                        "email" : email
                     ]
-                    let UID = String((Auth.auth().currentUser?.uid)!)
-                    self.database.child("Users").child(UID).setValue(newUser)
+                    //let UID = String((Auth.auth().currentUser?.uid)!)
+                    self.database.child("Users").child(self.uname.text!).setValue(newUser)
                     self.performSegue(withIdentifier: "customizeAccount", sender: self)
                 }
             }
@@ -70,6 +72,13 @@ class createAccountViewController: UIViewController {
         }
 
     
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "customizeAccount" {
+            if let destinationVC = segue.destination as? CustomizeAccountViewController {
+                destinationVC.uname = uname.text!
+            }
+        }
     }
     
 

@@ -71,12 +71,23 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         label.textColor = .blue
         return label
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = user.email
-        view.backgroundColor = .systemBackground
-        configure()
+        
+  //  var ref: DatabaseReference!
+//    ref = Database.database().reference()
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        title = user.email
+//        view.backgroundColor = .systemBackground
+//
+//        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
+//          self.comments.append(snapshot)
+//          print(snapshot)
+//          print(comments)
+//          self.tableView.insertRows(
+//            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
+//            with: UITableView.RowAnimation.automatic
+//          )
+//            configure()
         //configureCollectionView()
         fetchPost()
         view.addSubview(profileImageView)
@@ -266,7 +277,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         )
         
         self.collectionView = collectionView
-    }
+    })
+//    }
     
    
     
