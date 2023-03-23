@@ -15,7 +15,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         super.viewDidLoad()
         title = "Search"
         view.backgroundColor = .systemBackground
-        searchVC.searchResultsController as? SearchResultsViewController
+        (searchVC.searchResultsController as? SearchResultsViewController)?.delegate = self
         searchVC.searchBar.placeholder = "Search..."
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
@@ -30,5 +30,12 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
             return
         }
         resultsVC.update(with: results)
+    }
+}
+
+extension SearchViewController: SearchResultsViewControllerDelegate{
+    func searchResultsViewController(_ vc: SearchViewController, didSelectResultWith user: User){
+        let vc = ProfileViewController(user: user)
+        navigationController?.pushViewController(vc, animated: true )
     }
 }
