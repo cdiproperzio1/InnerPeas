@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         let view = UIView()
         view.backgroundColor = .systemGreen
         
+        //add profile image, and buttons to the container view(the box at the top of the page)
         view.addSubview(profileImageView)
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
@@ -74,11 +75,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         
   //  var ref: DatabaseReference!
 //    ref = Database.database().reference()
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        title = user.email
-//        view.backgroundColor = .systemBackground
-//
+    
+   override func viewDidLoad() {
+       fetchPost()
+       view.addSubview(profileImageView)
+       view.addSubview(containerView)
+       containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
+
 //        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
 //          self.comments.append(snapshot)
 //          print(snapshot)
@@ -87,20 +90,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
 //            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
 //            with: UITableView.RowAnimation.automatic
 //          )
-//            configure()
-        //configureCollectionView()
-        fetchPost()
-        view.addSubview(profileImageView)
-        view.addSubview(containerView)
-        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
-        
         
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
     
     private func configure() {
         if isCurrentUser{
@@ -117,168 +109,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         let vc = SettingsViewController()
         present(UINavigationController(rootViewController: vc), animated: true)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModels[section].count
-    }
-    
-    let colors: [UIColor] = [.systemMint, .green, .blue, .systemGray, .orange,]
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        let cellType = viewModels[indexPath.section][indexPath.row]
-        
-        switch cellType{
-            
-        //WHERE INFO IS LOADED INTO THE CELL
-        case .poster(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PosterCollectionViewCellType.identifier,
-                for: indexPath
-            ) as? PosterCollectionViewCellType else{
-                fatalError()
-            }
-            cell.delegate = self
-            cell.configure(with:viewModel)
-            return cell
-            
-        case .post(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PostCollectionViewCellType.identifier,
-                for: indexPath
-            ) as? PostCollectionViewCellType else{
-                fatalError()
-            }
-            cell.configure(with:viewModel)
-            cell.contentView.backgroundColor = colors[indexPath.row]
-            return cell
-            
-        case .postDescription(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PostDescriptionCollectionViewCellType.identifier,
-                for: indexPath
-            ) as? PostDescriptionCollectionViewCellType else{
-                fatalError()
-            }
-            cell.delegate = self
-            cell.configure(with:viewModel)
-            return cell
-            
-        case .postRating(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PostRatingCollectionViewCellType.identifier,
-                for: indexPath
-            ) as? PostRatingCollectionViewCellType else{
-                fatalError()
-            }
-            cell.configure(with:viewModel)
-            //cell.contentView.backgroundColor = colors[indexPath.row]
-            return cell
-            
-        case .thumbNails(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ThumbnailsCollectionViewCellType.identifier,
-                for: indexPath
-            ) as? ThumbnailsCollectionViewCellType else{
-                fatalError()
-            }
-            cell.configure(with:viewModel)
-            //cell.contentView.backgroundColor = colors[indexPath.row]
-            return cell
-        }
-    }
-    
-    func configureCollectionView(){
-        //post+action+average ratings+commentItem
-        let height:CGFloat = 60 + 50 + 20 + 55 + view.width
-        let collectionView = UICollectionView(frame: .zero,
-                         collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { index, _ -> NSCollectionLayoutSection? in
-
-            //Items
-            //poster
-            let poster = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(60)
-                )
-            )
-            //post
-            let post = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalWidth(1)
-                )
-            )
-            //postDescription
-            let postDescription = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(50)
-                )
-            )
-            
-            //average ratings
-            let averageRating = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(20)
-                )
-            )
-            
-            //thumbNailImages
-            let thumbNailImages = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(55)
-                )
-            )
-
-
-            //Groups - poster, post, actions(favorite, created, comments, average rating)....
-            let group = NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1),
-                    heightDimension: .absolute(height)
-                ),
-                subitems: [
-                    poster,
-                    post,
-                    postDescription,
-                    averageRating,
-                    thumbNailImages,
-                ])
-
-            //Sections
-            let section =  NSCollectionLayoutSection(group: group)
-            
-            section.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 0, bottom: 20, trailing: 0)
-            return section
-        })
-       )
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.delegate = self
-        //collectionView.dataSource = self
-        
-        collectionView.register(
-            PosterCollectionViewCellType.self,
-            forCellWithReuseIdentifier: PosterCollectionViewCellType.identifier
-        )
-        collectionView.register(
-            PostCollectionViewCellType.self,
-            forCellWithReuseIdentifier: PostCollectionViewCellType.identifier
-        )
-        collectionView.register(
-            PostDescriptionCollectionViewCellType.self,
-            forCellWithReuseIdentifier: PostDescriptionCollectionViewCellType.identifier
-        )
-        collectionView.register(
-            PostRatingCollectionViewCellType.self,
-            forCellWithReuseIdentifier: PostRatingCollectionViewCellType.identifier
-        )
-        collectionView.register(
-            ThumbnailsCollectionViewCellType.self,
-            forCellWithReuseIdentifier: ThumbnailsCollectionViewCellType.identifier
-        )
-        
-        self.collectionView = collectionView
-    })
-//    }
     
    
     
