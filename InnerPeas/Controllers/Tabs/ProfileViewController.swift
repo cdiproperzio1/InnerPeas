@@ -1,9 +1,11 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
+
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate  {
-    
     private var collectionView: UICollectionView? = nil
     private var viewModels = [[HomeFeedCellType]()]
     
@@ -19,6 +21,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -36,7 +39,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         
         view.addSubview(friendsButton)
         friendsButton.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 90)
-        
         view.addSubview(followersButton)
         followersButton.anchor(right: view.rightAnchor, paddingRight: 28, width: 120, height: 90)
         
@@ -77,6 +79,34 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
 //    ref = Database.database().reference()
     
    override func viewDidLoad() {
+       let email = Auth.auth().currentUser?.email
+//       let ref = Database.database().reference(withPath: "Users")
+//       let userRef=ref.child(UID!)
+//
+//       userRef.observe(.value, with: { snapshot in
+//         // This is the snapshot of the data at the moment in the Firebase database
+//         // To get value from the snapshot, we user snapshot.value
+//         print(snapshot.value as Any)
+//       })
+       Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
+
+
+               guard let dictionary = snapshot.value as? [String:Any] else {return}
+
+               dictionary.forEach({ (key , value) in
+
+                   print("Key \(key), value \(value) ")
+
+
+               })
+
+
+
+           }) { (Error) in
+
+               print("Failed to fetch: ", Error)
+
+           }
        fetchPost()
        view.addSubview(profileImageView)
        view.addSubview(containerView)
@@ -106,8 +136,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     }
     
     @objc func didTapSettings(){
-        let vc = SettingsViewController()
-        present(UINavigationController(rootViewController: vc), animated: true)
+//        let vc = SettingsViewController()
+//        present(UINavigationController(rootViewController: vc), animated: true)
     }
     
    
