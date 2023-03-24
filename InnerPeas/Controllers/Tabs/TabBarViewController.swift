@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
@@ -14,10 +14,11 @@ class TabBarViewController: UITabBarController {
         navigationItem.hidesBackButton = true
 
         //create the views
+        let currentUser = Auth.auth().currentUser
         let home = HomeViewController()
         let addPost =  AddPostViewController()
         let search = SearchViewController()
-        let profile = ProfileViewController()
+        let profile = ProfileViewController(user: currentUser!)
         
         //turn views into navigations
         let nav1 = UINavigationController(rootViewController: home)

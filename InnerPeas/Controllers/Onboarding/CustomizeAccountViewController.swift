@@ -66,13 +66,12 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         guard let imageData = profileImage.image?.pngData() else {
             return
         }
-       
-        storage.child("image/\(self.uname!).png").putData(imageData) { error in
+        storage.child("image/\(uname!).png").putData(imageData) { error in
             guard error != nil else {
                 print("failed to upload")
                 return
             }
-                self.storage.child("images/file.png").downloadURL(completion: {url, error in
+            self.storage.child("images/\(self.uname!).png").downloadURL(completion: {url, error in
                     guard let url = url, error == nil else {
                         return
                     }

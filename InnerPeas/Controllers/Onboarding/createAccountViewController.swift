@@ -53,7 +53,6 @@ class createAccountViewController: UIViewController {
                         "lname" : lname,
                         "email" : email
                     ]
-                    //let UID = String((Auth.auth().currentUser?.uid)!)
                     self.database.child("Users").child(self.uname.text!).setValue(newUser)
                     self.performSegue(withIdentifier: "customizeAccount", sender: self)
                 }
