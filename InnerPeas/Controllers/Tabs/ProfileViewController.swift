@@ -9,7 +9,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     private var collectionView: UICollectionView? = nil
     private var viewModels = [[HomeFeedCellType]()]
     let User = Auth.auth().currentUser
-    var uname:String=" "
     
     private let user: User
     
@@ -34,8 +33,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         view.addSubview(profileImageView)
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
-        profileImageView.layer.cornerRadius = 120 / 2
+        //profileImageView.layer.cornerRadius = 120 / 2
         
+
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
+        profileImageView.clipsToBounds = true
         view.addSubview(friendsButton)
         friendsButton.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 90)
         view.addSubview(followersButton)
@@ -79,12 +85,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
        let email = Auth.auth().currentUser?.email
        let UID = String((Auth.auth().currentUser?.uid)!)
        print(UID)
+       var userName:String=""
        Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
                guard let dictionary = snapshot.value as? [String:Any] else {return}
            var i = 0;
                dictionary.forEach({ (key , value) in
                    if i == 0{
-                       self.uname=(key)
+                       userName=key
                        i=1
                    }
                    print("Key \(key), value \(value) ")
@@ -92,16 +99,20 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
            }) { (Error) in
                print("Failed to fetch: ", Error)
            }
-       
-       print("here")
-       print(uname)
-       let pathReference = Storage.storage().reference(withPath: "image/\(self.uname).png")
-       pathReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+       print("here for pic")
+       print(userName)
+       let uid = String((Auth.auth().currentUser?.uid)!)
+       print(uid)
+       let pathReference = Storage.storage().reference(withPath: "image/\(uid).png")
+       pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
          if let error = error {
+             print(error)
            // Uh-oh, an error occurred!
          } else {
            // Data for "images/island.jpg" is returned
-           let image = UIImage(data: data!)
+           let myImage = UIImage(data: data!)
+             self.profileImageView.image=myImage
+             
          }
        }
        

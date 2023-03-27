@@ -215,16 +215,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Customize Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCd-3s-NzD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Customize Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCd-3s-NzD">
                                 <rect key="frame" x="122" y="116" width="149" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVP-6s-IWh">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVP-6s-IWh">
                                 <rect key="frame" x="133" y="307" width="128" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Upload Photo"/>
                                 <connections>
@@ -256,13 +254,21 @@
                                     <action selector="continue:" destination="YD9-Lk-Unh" eventType="touchUpInside" id="vWP-t7-Alg"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-wg-SSf">
-                                <rect key="frame" x="108" y="160.99999999999955" width="176" height="121"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-wg-SSf">
+                                <rect key="frame" x="136.66666666666666" y="160.99999999999955" width="119.99999999999997" height="120.99999999999999"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="3pW-zt-Vaf"/>
+                                    <constraint firstAttribute="height" constant="120" id="yZP-DF-kx7"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hmb-lu-iHE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bHq-wg-SSf" firstAttribute="top" secondItem="WCd-3s-NzD" secondAttribute="bottom" constant="22" id="aFp-R2-Lha"/>
+                            <constraint firstItem="UVP-6s-IWh" firstAttribute="top" secondItem="bHq-wg-SSf" secondAttribute="bottom" constant="23.670000000000002" id="ieR-gR-BTC"/>
+                            <constraint firstItem="bHq-wg-SSf" firstAttribute="centerX" secondItem="6X5-mC-sWf" secondAttribute="centerX" id="vbv-e2-57R"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="elH-Qq-noJ"/>
                     <connections>
