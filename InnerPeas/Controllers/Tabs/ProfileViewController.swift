@@ -178,7 +178,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
                 .thumbNails(viewModel: ThumbnailsCollectionViewCell())
             
         ]
-        viewModels.append(postData)
+        //viewModels.append(postData)
         collectionView?.reloadData()
     }
     

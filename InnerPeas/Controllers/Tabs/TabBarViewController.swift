@@ -23,7 +23,7 @@ class TabBarViewController: UITabBarController {
             let search = SearchViewController()
             let profile = ProfileViewController(user: currentUser)
             
-            //turn views into navigations
+            //turn views into navigation
             let nav1 = UINavigationController(rootViewController: home)
             let nav2 = UINavigationController(rootViewController: addPost)
             let nav3 = UINavigationController(rootViewController: search)

@@ -69,6 +69,8 @@
 		ABE49AA6299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE49AA5299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift */; };
 		ABE49AA8299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE49AA7299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift */; };
 		ABE49AAC299C765E00B23DAE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = ABE49AAB299C765E00B23DAE /* Kingfisher */; };
+		ABE9112A29CB7C85006F7D9E /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE9112929CB7C85006F7D9E /* SearchResultsViewController.swift */; };
+		ABE9112C29CB7ED5006F7D9E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE9112B29CB7ED5006F7D9E /* DatabaseManager.swift */; };
 		ABF64FA029B038F3007B3CCF /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */; };
 		BE164D5429AD79550018044D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE164D5329AD79550018044D /* Main.storyboard */; };
 		BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */; };
@@ -113,6 +115,8 @@
 		ABE49AA3299C6D2A00B23DAE /* PostDescriptionCollectionViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDescriptionCollectionViewCellType.swift; sourceTree = "<group>"; };
 		ABE49AA5299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRatingCollectionViewCelltype.swift; sourceTree = "<group>"; };
 		ABE49AA7299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsCollectionViewCellType.swift; sourceTree = "<group>"; };
+		ABE9112929CB7C85006F7D9E /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		ABE9112B29CB7ED5006F7D9E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		BE164D5329AD79550018044D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeAccountViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				AB4486AB29A2C334001345E8 /* PostViewController.swift */,
 				ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */,
 				AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */,
+				ABE9112929CB7C85006F7D9E /* SearchResultsViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				AB69964B299AE41E0022345E /* Storage.swift */,
 				AB69964D299B1AF60022345E /* AuthManager.swift */,
 				AB699652299B1EBB0022345E /* AnalyticsManager.swift */,
+				ABE9112B29CB7ED5006F7D9E /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 				AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */,
 				AB16083C299B43BD00693DB8 /* TextField.swift in Sources */,
 				BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */,
+				ABE9112C29CB7ED5006F7D9E /* DatabaseManager.swift in Sources */,
 				AB69964C299AE41E0022345E /* Storage.swift in Sources */,
 				AB699663299B361F0022345E /* Post.swift in Sources */,
 				ABE49A97299C06FC00B23DAE /* PostDescriptionCollectionViewCell.swift in Sources */,
@@ -419,6 +426,7 @@
 				AB699659299B33410022345E /* ProfileViewController.swift in Sources */,
 				AB699653299B1EBB0022345E /* AnalyticsManager.swift in Sources */,
 				ABE49A9D299C145900B23DAE /* ThumbnailsCollectionViewCell.swift in Sources */,
+				ABE9112A29CB7C85006F7D9E /* SearchResultsViewController.swift in Sources */,
 				AB4486AC29A2C334001345E8 /* PostViewController.swift in Sources */,
 				AB4E366D29B6DC64007FCA8D /* FirstTimeViewController.swift in Sources */,
 				ABE49AA6299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift in Sources */,
