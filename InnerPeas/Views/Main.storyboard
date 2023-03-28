@@ -125,62 +125,59 @@
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N1g-M6-eQq">
                                 <rect key="frame" x="71.666666666666686" y="200" width="250" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="BG7-pl-S3f"/>
-                                </constraints>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" textContentType="given-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5MU-JM-QeU">
-                                <rect key="frame" x="71.666666666666686" y="370" width="250" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="oed-gk-g5B"/>
-                                </constraints>
+                                <rect key="frame" x="71.666666666666686" y="427" width="250" height="34"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KzL-iq-nwW">
-                                <rect key="frame" x="71.666666666666686" y="430" width="250" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="hug-xW-ElN"/>
-                                    <constraint firstAttribute="height" constant="34" id="vv8-bu-VzT"/>
-                                </constraints>
+                                <rect key="frame" x="71.666666666666686" y="487" width="250" height="34"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bkE-8R-GLe">
-                                <rect key="frame" x="71.666666666666686" y="310" width="250" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="TTx-T7-g4g"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T47-Rd-NKb">
+                                <rect key="frame" x="71.666666666666686" y="254" width="250" height="34"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Usernmae" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0LR-5A-71g">
+                                <rect key="frame" x="71.666666666666686" y="307" width="250" height="34"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" textContentType="nickname"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T47-Rd-NKb">
-                                <rect key="frame" x="71.666666666666686" y="254" width="250" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="Rym-ac-jh3"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bkE-8R-GLe">
+                                <rect key="frame" x="71.666666666666686" y="364" width="250" height="34"/>
                                 <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
+                                <textInputTraits key="textInputTraits" textContentType="nickname"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2og-rC-ltG"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
-                            <constraint firstItem="5MU-JM-QeU" firstAttribute="top" secondItem="bkE-8R-GLe" secondAttribute="bottom" constant="26" id="04i-tl-ZzM"/>
-                            <constraint firstItem="N1g-M6-eQq" firstAttribute="centerX" secondItem="ezJ-lI-odW" secondAttribute="centerX" id="5j2-eY-S1E"/>
+                            <constraint firstItem="T47-Rd-NKb" firstAttribute="leading" secondItem="0LR-5A-71g" secondAttribute="leading" id="1ZG-7t-NcG"/>
                             <constraint firstItem="2og-rC-ltG" firstAttribute="bottom" secondItem="4m6-fz-FMx" secondAttribute="bottom" constant="152" id="DO2-ka-Zzf"/>
-                            <constraint firstItem="N1g-M6-eQq" firstAttribute="top" secondItem="2og-rC-ltG" secondAttribute="top" constant="96.999999999994486" id="QY0-Qc-IXE"/>
-                            <constraint firstItem="5MU-JM-QeU" firstAttribute="centerX" secondItem="ezJ-lI-odW" secondAttribute="centerX" id="VlK-jv-QVN"/>
+                            <constraint firstItem="bkE-8R-GLe" firstAttribute="leading" secondItem="5MU-JM-QeU" secondAttribute="leading" id="Dwh-u5-c20"/>
+                            <constraint firstItem="bkE-8R-GLe" firstAttribute="top" secondItem="0LR-5A-71g" secondAttribute="bottom" constant="23" id="EDR-0W-mqD"/>
+                            <constraint firstItem="T47-Rd-NKb" firstAttribute="top" secondItem="N1g-M6-eQq" secondAttribute="bottom" constant="20" id="EVP-wg-VgI"/>
+                            <constraint firstItem="N1g-M6-eQq" firstAttribute="trailing" secondItem="T47-Rd-NKb" secondAttribute="trailing" id="GLf-gb-CZG"/>
+                            <constraint firstItem="bkE-8R-GLe" firstAttribute="trailing" secondItem="5MU-JM-QeU" secondAttribute="trailing" id="JNo-dq-WI0"/>
+                            <constraint firstItem="N1g-M6-eQq" firstAttribute="top" secondItem="2og-rC-ltG" secondAttribute="top" constant="97" id="Jvc-kB-4mv"/>
+                            <constraint firstItem="N1g-M6-eQq" firstAttribute="leading" secondItem="2og-rC-ltG" secondAttribute="leading" constant="71.666666666666686" id="Ycc-vd-ZCN"/>
+                            <constraint firstItem="5MU-JM-QeU" firstAttribute="trailing" secondItem="KzL-iq-nwW" secondAttribute="trailing" id="ZFm-AC-s2v"/>
+                            <constraint firstItem="0LR-5A-71g" firstAttribute="top" secondItem="T47-Rd-NKb" secondAttribute="bottom" constant="19" id="aBZ-9b-ICE"/>
                             <constraint firstItem="2og-rC-ltG" firstAttribute="trailing" secondItem="4m6-fz-FMx" secondAttribute="trailing" constant="120" id="b2v-2B-QgX"/>
-                            <constraint firstItem="bkE-8R-GLe" firstAttribute="centerX" secondItem="ezJ-lI-odW" secondAttribute="centerX" id="feR-Y5-lpQ"/>
-                            <constraint firstItem="5MU-JM-QeU" firstAttribute="top" secondItem="ezJ-lI-odW" secondAttribute="top" constant="370" id="ipv-W2-fmV"/>
+                            <constraint firstItem="N1g-M6-eQq" firstAttribute="leading" secondItem="T47-Rd-NKb" secondAttribute="leading" id="deG-DY-j4t"/>
+                            <constraint firstItem="KzL-iq-nwW" firstAttribute="top" secondItem="5MU-JM-QeU" secondAttribute="bottom" constant="26" id="eze-q7-qSf"/>
+                            <constraint firstItem="5MU-JM-QeU" firstAttribute="top" secondItem="bkE-8R-GLe" secondAttribute="bottom" constant="29" id="fAe-Nq-Rp8"/>
+                            <constraint firstItem="0LR-5A-71g" firstAttribute="trailing" secondItem="bkE-8R-GLe" secondAttribute="trailing" id="fTq-OM-2YW"/>
                             <constraint firstItem="4m6-fz-FMx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2og-rC-ltG" secondAttribute="leading" id="jeU-Dd-2Af"/>
-                            <constraint firstItem="KzL-iq-nwW" firstAttribute="centerX" secondItem="ezJ-lI-odW" secondAttribute="centerX" id="nha-ah-tQA"/>
-                            <constraint firstItem="bkE-8R-GLe" firstAttribute="top" secondItem="T47-Rd-NKb" secondAttribute="bottom" constant="22" id="q81-SK-nhb"/>
-                            <constraint firstItem="KzL-iq-nwW" firstAttribute="top" secondItem="5MU-JM-QeU" secondAttribute="bottom" constant="25.999999999987949" id="v4k-8n-f9n"/>
-                            <constraint firstItem="T47-Rd-NKb" firstAttribute="centerX" secondItem="ezJ-lI-odW" secondAttribute="centerX" id="zrg-Px-HUK"/>
+                            <constraint firstItem="0LR-5A-71g" firstAttribute="leading" secondItem="bkE-8R-GLe" secondAttribute="leading" id="ro0-JM-g4T"/>
+                            <constraint firstItem="N1g-M6-eQq" firstAttribute="centerX" secondItem="ezJ-lI-odW" secondAttribute="centerX" id="v5B-R5-wVC"/>
+                            <constraint firstItem="5MU-JM-QeU" firstAttribute="leading" secondItem="KzL-iq-nwW" secondAttribute="leading" id="wBY-HI-5Vg"/>
+                            <constraint firstItem="T47-Rd-NKb" firstAttribute="trailing" secondItem="0LR-5A-71g" secondAttribute="trailing" id="xNa-Th-79r"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cgb-eV-BW6"/>
@@ -190,6 +187,7 @@
                         <outlet property="fnameTextField" destination="N1g-M6-eQq" id="0fV-zV-4Lv"/>
                         <outlet property="lNameTextField" destination="T47-Rd-NKb" id="cul-M1-9Ku"/>
                         <outlet property="passwordTextField" destination="5MU-JM-QeU" id="40n-Da-bJH"/>
+                        <outlet property="usernameTextField" destination="0LR-5A-71g" id="t5E-d7-pxx"/>
                         <segue destination="YD9-Lk-Unh" kind="show" identifier="customizeAccount" id="wXm-69-lW5"/>
                     </connections>
                 </viewController>

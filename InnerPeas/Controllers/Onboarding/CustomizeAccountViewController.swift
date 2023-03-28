@@ -82,7 +82,8 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         self.database.child("Users").child(UID).child("bio").setValue(self.textView.text!)
         self.database.child("Users").child(UID).child("location").setValue(self.location.text!)
         let vc = TabBarViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
     }
 

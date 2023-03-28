@@ -42,7 +42,6 @@ class LoginViewController: UIViewController {
             }
 
             let vc = TabBarViewController()
-            vc.currentUser = user
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true) {
             print("User logged in successfully.")
