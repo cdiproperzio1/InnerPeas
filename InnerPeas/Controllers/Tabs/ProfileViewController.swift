@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
 
         profileImageView.layer.borderWidth = 1.0
         profileImageView.contentMode = .scaleAspectFit
-        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
         profileImageView.clipsToBounds = true
