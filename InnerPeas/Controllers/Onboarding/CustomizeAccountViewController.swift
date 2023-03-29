@@ -55,6 +55,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         textView.textColor = UIColor.lightGray
         textView.delegate=self
         
+        
     }
     
     func textViewDidBeginEditing(_ textView : UITextView ) {

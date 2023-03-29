@@ -9,7 +9,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     private var collectionView: UICollectionView? = nil
     private var viewModels = [[HomeFeedCellType]()]
     let User = Auth.auth().currentUser
-    
+    let userInfo=UILabel(frame: CGRect(x: 50, y: 130, width: 125, height: 200))
     private let user: User
     
     private var isCurrentUser: Bool{
@@ -27,28 +27,32 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .white
+        userInfo.font = UIFont.systemFont(ofSize: 14.0)
+        userInfo.textColor = .black
+        userInfo.text="HERE!!!!!!!!!"
+        view.addSubview(userInfo)
         
         //add profile image, and buttons to the container view(the box at the top of the page)
         view.addSubview(profileImageView)
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
-        //profileImageView.layer.cornerRadius = 120 / 2
-        
+        profileImageView.layer.cornerRadius = 120 / 2
 
         profileImageView.layer.borderWidth = 1.0
         profileImageView.contentMode = .scaleAspectFit
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
+       // profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
         profileImageView.clipsToBounds = true
         view.addSubview(friendsButton)
-        friendsButton.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 90)
+        
+        friendsButton.anchor(right: view.rightAnchor, paddingRight: 170, width: 70, height: 200)
         view.addSubview(followersButton)
-        followersButton.anchor(right: view.rightAnchor, paddingRight: 28, width: 120, height: 90)
+        followersButton.anchor(right: view.rightAnchor, paddingRight: 100, width: 70, height: 200)
         
         view.addSubview(recipesLabel)
-        recipesLabel.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 120)
+        recipesLabel.anchor(right: view.rightAnchor, paddingRight: 30, width: 70, height: 200)
         return view
     }()
     
@@ -63,6 +67,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         let button = UIButton(type: .system)
         button.setTitle("Friends", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
         return button
     }()
     
@@ -70,11 +75,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         let button = UIButton(type: .system)
         button.setTitle("Followers", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
         return button
     }()
     
     let recipesLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14.0)
         label.text = "Recipes"
         label.textColor = .blue
         return label
@@ -82,27 +89,26 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     
     
    override func viewDidLoad() {
-       let email = Auth.auth().currentUser?.email
+       let email = (Auth.auth().currentUser?.email)?.lowercased()
        let UID = String((Auth.auth().currentUser?.uid)!)
        print(UID)
-       var userName:String=""
+       
        Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
-               guard let dictionary = snapshot.value as? [String:Any] else {return}
+               guard let dictionary = snapshot.value as? [String:String] else {return}
+           
            var i = 0;
                dictionary.forEach({ (key , value) in
                    if i == 0{
-                       userName=key
+                       self.userInfo.text=key
                        i=1
                    }
-                   print("Key \(key), value \(value) ")
+                   self.userInfo.text="\(self.userInfo.text!) \(value)"
                })
            }) { (Error) in
                print("Failed to fetch: ", Error)
            }
-       print("here for pic")
-       print(userName)
        let uid = String((Auth.auth().currentUser?.uid)!)
-       print(uid)
+
        let pathReference = Storage.storage().reference(withPath: "image/\(uid).png")
        pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
          if let error = error {
