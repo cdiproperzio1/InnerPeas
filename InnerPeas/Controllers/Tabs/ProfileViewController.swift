@@ -90,54 +90,53 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     }()
     
     
-   override func viewDidLoad() {
-       userInfo.lineBreakMode = .byWordWrapping
-       userInfo.numberOfLines = 0
-       let email = (Auth.auth().currentUser?.email)?.lowercased()
-       let UID = String((Auth.auth().currentUser?.uid)!)
-       
-       Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email!).observeSingleEvent(of: .value, with: { (snapshot) in
-               guard let dictionary = snapshot.value as? [String: Any] else {return}
-
-           if let adonis = dictionary["Adonis"] as? [String: Any] {
-               if let fname = adonis["fname"] as? String { print("fname: \(fname)")
-                   if let lname = adonis["lname"] as? String { print("lname: \(lname)")
-                       if let bio = adonis["bio"] as? String { print("Bio: \(bio)")
-                           if let location = adonis["location"] as? String { print("Location: \(location)")
-                               self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)" }
-                       }
-                   }}}
-                }) { (Error) in
-                print("Failed to fetch: ", Error)
-                }
-       let uid = String((Auth.auth().currentUser?.uid)!)
-
-       let pathReference = Storage.storage().reference(withPath: "image/\(uid).png")
-       pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
-         if let error = error {
-             print(error)
-           // Uh-oh, an error occurred!
-         } else {
-           // Data for "images/island.jpg" is returned
-           let myImage = UIImage(data: data!)
-             self.profileImageView.image=myImage
-             
-         }
-       }
-       
-       view.addSubview(profileImageView)
-       view.addSubview(containerView)
-       containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
-
-//        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
-//          self.comments.append(snapshot)
-//          print(snapshot)
-//          print(comments)
-//          self.tableView.insertRows(
-//            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
-//            with: UITableView.RowAnimation.automatic
-//          )
+    override func viewDidLoad() {
+        userInfo.lineBreakMode = .byWordWrapping
+        userInfo.numberOfLines = 0
+        let email = (Auth.auth().currentUser?.email)?.lowercased()
+        let UID = String((Auth.auth().currentUser?.uid)!)
         
+        Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email!).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else {return}
+            
+            if let adonis = dictionary["Adonis"] as? [String: Any] {
+                if let fname = adonis["fname"] as? String { print("fname: \(fname)")
+                    if let lname = adonis["lname"] as? String { print("lname: \(lname)")
+                        if let bio = adonis["bio"] as? String { print("Bio: \(bio)")
+                            if let location = adonis["location"] as? String { print("Location: \(location)")
+                                self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)" }
+                        }
+                    }}}
+        }) { (Error) in
+            print("Failed to fetch: ", Error)
+        }
+        let uid = String((Auth.auth().currentUser?.uid)!)
+        
+        let pathReference = Storage.storage().reference(withPath: "image/\(uid).png")
+        pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            if let error = error {
+                print(error)
+                // Uh-oh, an error occurred!
+            } else {
+                // Data for "images/island.jpg" is returned
+                let myImage = UIImage(data: data!)
+                self.profileImageView.image=myImage
+                
+            }
+        }
+        
+        view.addSubview(profileImageView)
+        view.addSubview(containerView)
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
+        
+        //        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
+        //          self.comments.append(snapshot)
+        //          print(snapshot)
+        //          print(comments)
+        //          self.tableView.insertRows(
+        //            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
+        //            with: UITableView.RowAnimation.automatic
+        //          )
     }
     
     
@@ -153,15 +152,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     }
     
     @objc func didTapSettings(){
-//        let vc = SettingsViewController()
-//        present(UINavigationController(rootViewController: vc), animated: true)
+        //        let vc = SettingsViewController()
+        //        present(UINavigationController(rootViewController: vc), animated: true)
     }
-    
-   
-    
-   
-    
-    
 }
 
 extension UIView {
