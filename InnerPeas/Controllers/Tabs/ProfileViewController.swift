@@ -9,7 +9,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     private var collectionView: UICollectionView? = nil
     private var viewModels = [[HomeFeedCellType]()]
     let User = Auth.auth().currentUser
-    let userInfo=UILabel(frame: CGRect(x: 50, y: 130, width: 125, height: 200))
+    let userInfo=UILabel(frame: CGRect(x: 50, y: 150, width: 125, height: 200))
     private let user: User
     
     private var isCurrentUser: Bool{
@@ -30,21 +30,23 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         view.backgroundColor = .white
         userInfo.font = UIFont.systemFont(ofSize: 14.0)
         userInfo.textColor = .black
-        userInfo.text="HERE!!!!!!!!!"
         view.addSubview(userInfo)
         
         //add profile image, and buttons to the container view(the box at the top of the page)
         view.addSubview(profileImageView)
+        
+        
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
         profileImageView.layer.cornerRadius = 120 / 2
-
         profileImageView.layer.borderWidth = 1.0
         profileImageView.contentMode = .scaleAspectFit
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.white.cgColor
-       // profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
         profileImageView.clipsToBounds = true
+        
+        
+        
         view.addSubview(friendsButton)
         
         friendsButton.anchor(right: view.rightAnchor, paddingRight: 170, width: 70, height: 200)
@@ -89,24 +91,25 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     
     
    override func viewDidLoad() {
+       userInfo.lineBreakMode = .byWordWrapping
+       userInfo.numberOfLines = 0
        let email = (Auth.auth().currentUser?.email)?.lowercased()
        let UID = String((Auth.auth().currentUser?.uid)!)
-       print(UID)
        
-       Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
-               guard let dictionary = snapshot.value as? [String:String] else {return}
-           
-           var i = 0;
-               dictionary.forEach({ (key , value) in
-                   if i == 0{
-                       self.userInfo.text=key
-                       i=1
-                   }
-                   self.userInfo.text="\(self.userInfo.text!) \(value)"
-               })
-           }) { (Error) in
-               print("Failed to fetch: ", Error)
-           }
+       Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email!).observeSingleEvent(of: .value, with: { (snapshot) in
+               guard let dictionary = snapshot.value as? [String: Any] else {return}
+
+           if let adonis = dictionary["Adonis"] as? [String: Any] {
+               if let fname = adonis["fname"] as? String { print("fname: \(fname)")
+                   if let lname = adonis["lname"] as? String { print("lname: \(lname)")
+                       if let bio = adonis["bio"] as? String { print("Bio: \(bio)")
+                           if let location = adonis["location"] as? String { print("Location: \(location)")
+                               self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)" }
+                       }
+                   }}}
+                }) { (Error) in
+                print("Failed to fetch: ", Error)
+                }
        let uid = String((Auth.auth().currentUser?.uid)!)
 
        let pathReference = Storage.storage().reference(withPath: "image/\(uid).png")
@@ -122,7 +125,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
          }
        }
        
-       fetchPost()
        view.addSubview(profileImageView)
        view.addSubview(containerView)
        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
@@ -158,44 +160,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
    
     
    
-    
-    private func fetchPost(){
-        //test data
-        let postData: [HomeFeedCellType] =
-        [
-            .poster(
-                viewModel: PosterCollectionViewCell(
-                    username: "FoodThatSmacks",
-                    profilePictureURL: URL(string: "https://mymodernmet.com/wp/wp-content/uploads/2020/01/baby-yoda-eating-food-13.jpg")!
-                    
-                )
-            ),
-            .post(
-                viewModel: PostCollectionViewCell(
-                    postUrl: URL(string: "https://www.foodandwine.com/thmb/Yt46CaGExGFVjruxJsNSFjNVMo0=/2000x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Super-Scoops-FT-2-MAG0622-00568f6534a44e0c8a422b66b25d6cf6.jpg")!
-                )
-            ),
-            
-                .postDescription(
-                    viewModel: PostDescriptionCollectionViewCell(
-                        name: "Ice Cream with a long title to see how it holds in the frame",
-                        isMade: false,
-                        isFav: false
-                    )
-                ),
-            
-                .postRating(
-                    viewModel: PostRatingCollectionViewCell(
-                        averageRating: 3
-                    )
-                ),
-            
-                .thumbNails(viewModel: ThumbnailsCollectionViewCell())
-            
-        ]
-        viewModels.append(postData)
-        collectionView?.reloadData()
-    }
     
     
 }
