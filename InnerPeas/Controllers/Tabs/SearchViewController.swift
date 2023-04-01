@@ -19,7 +19,8 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         searchVC.searchBar.placeholder = "Search..."
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
-
+        view.addSubview(SearchfriendsButton)
+        view.addSubview(SearchfollowersButton)
 
     }
     
@@ -31,6 +32,21 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         }
         resultsVC.update(with: results)
     }
+    
+    
+    let SearchfriendsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Friends", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        return button
+    }()
+    
+    let SearchfollowersButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Followers", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        return button
+    }()
 }
 
 extension SearchViewController: SearchResultsViewControllerDelegate{

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0EB12F2929D2AC430093BBE8 /* LookForFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB12F2829D2AC430093BBE8 /* LookForFriendsViewController.swift */; };
+		0EB12F2B29D2B3420093BBE8 /* LookForFollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB12F2A29D2B3420093BBE8 /* LookForFollowersViewController.swift */; };
 		AB16083C299B43BD00693DB8 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083B299B43BD00693DB8 /* TextField.swift */; };
 		AB16083E299B47E300693DB8 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083D299B47E300693DB8 /* LoginHeaderView.swift */; };
 		AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083F299B575400693DB8 /* createAccountViewController.swift */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		0EB12F2829D2AC430093BBE8 /* LookForFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookForFriendsViewController.swift; sourceTree = "<group>"; };
+		0EB12F2A29D2B3420093BBE8 /* LookForFollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookForFollowersViewController.swift; sourceTree = "<group>"; };
 		AB16083B299B43BD00693DB8 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		AB16083D299B47E300693DB8 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		AB16083F299B575400693DB8 /* createAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,8 @@
 		AB4486AA29A2C303001345E8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				0EB12F2A29D2B3420093BBE8 /* LookForFollowersViewController.swift */,
+				0EB12F2829D2AC430093BBE8 /* LookForFriendsViewController.swift */,
 				AB4486AB29A2C334001345E8 /* PostViewController.swift */,
 				ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */,
 				AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */,
@@ -192,7 +196,6 @@
 				ABC64B082998A0E700C1CE35 /* HomeViewController.swift */,
 				AB699656299B33170022345E /* SearchViewController.swift */,
 				AB699658299B33410022345E /* ProfileViewController.swift */,
-				0EB12F2829D2AC430093BBE8 /* LookForFriendsViewController.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				AB699663299B361F0022345E /* Post.swift in Sources */,
 				ABE49A97299C06FC00B23DAE /* PostDescriptionCollectionViewCell.swift in Sources */,
 				BE86636C29AE9F1F00D6BEFA /* AddPostViewController.swift in Sources */,
+				0EB12F2B29D2B3420093BBE8 /* LookForFollowersViewController.swift in Sources */,
 				ABE49AA0299C6B9C00B23DAE /* PosterCollectionViewCellType.swift in Sources */,
 				AB16083E299B47E300693DB8 /* LoginHeaderView.swift in Sources */,
 				ABE49A95299C066400B23DAE /* PostCollectionViewCell.swift in Sources */,

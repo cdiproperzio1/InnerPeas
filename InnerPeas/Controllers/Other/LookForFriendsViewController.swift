@@ -6,16 +6,16 @@
 //
 
 import UIKit
-import FirebaseStorage
-import FirebaseDatabase
-import FirebaseAuth
+
 
 class LookForFriendsViewController: UIViewController {
 
-        let searchController = UISearchController()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Looking for friends"
+        view.backgroundColor = .systemBackground
+        title = "Looking for friends..."
         navigationItem.searchController = searchController
         // Do any additional setup after loading the view.
     }

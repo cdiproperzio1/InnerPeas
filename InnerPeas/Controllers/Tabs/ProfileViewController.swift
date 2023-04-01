@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
         profileImageView.layer.cornerRadius = 120 / 2
-        
+        //add buttons
         view.addSubview(friendsButton)
         friendsButton.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 90)
         view.addSubview(followersButton)

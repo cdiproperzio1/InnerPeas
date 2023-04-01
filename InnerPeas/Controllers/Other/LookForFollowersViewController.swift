@@ -9,9 +9,13 @@ import UIKit
 
 class LookForFollowersViewController: UIViewController {
 
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Followers List"
+        view.backgroundColor = .systemBackground
+        navigationItem.searchController = searchController
         // Do any additional setup after loading the view.
     }
     
