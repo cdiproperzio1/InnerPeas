@@ -10,11 +10,12 @@ import FirebaseAuth
 import Firebase
 
 struct User: Codable{
-    let username: String
+    var username: String?
     let email: String
+    let uid: String
     
     init(fromFirebaseUser user: FirebaseAuth.User) {
-        self.username = user.uid
+        self.uid = user.uid
         self.email = user.email ?? ""
     }
 }

@@ -9,28 +9,28 @@ import Firebase
 
 class ProfileViewController: UIViewController {
     
-    private let user: User
+    private var user: User
     private var isCurrentUser: Bool
-    private let usersRef = Database.database().reference().child("users")
+    private let usersRef = Database.database().reference().child("Users")
 
     
-    
-    
-    init(user: User){
+    init(user: User) {
         self.user = user
-        self.isCurrentUser = (user.username == Auth.auth().currentUser?.uid)
+        self.isCurrentUser = (user.uid == Auth.auth().currentUser?.uid)
         super.init(nibName: nil, bundle: nil)
-        
-        let uid = user.username
-        usersRef.child(uid).observeSingleEvent(of: .value, with: { snapshot in
-            guard let userData = snapshot.value as? [String: Any],
-                  let username = userData["username"] as? String else {
+
+        usersRef.child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
+            guard let userData = snapshot.value as? [String: Any] else {
                 print("Error: Could not retrieve user data")
                 return
             }
-            self.title = username
+            
+            self.user.username = userData["username"] as? String
+            
+            self.title = user.username
         })
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
