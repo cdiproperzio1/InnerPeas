@@ -45,4 +45,26 @@ final class DatabaseManager {
             completion(error == nil)
         }
     }
+    
+    public func findUser(with email: String, completion: @escaping (User?) -> Void){
+        let ref = database.child("Users")
+        
+        ref.observeSingleEvent(of: .value) { snapshot in
+            guard let usersDict = snapshot.value as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            let users = usersDict.compactMap { (key, value) -> User? in
+                guard let userDict = value as? [String: Any] else {
+                    return nil
+                }
+                var user = User(with: userDict)
+                user?.username = key
+                return user
+            }
+            let user = users.first(where: {$0.email == email})
+            completion(user)
+        }
+    }
+
 }

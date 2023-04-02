@@ -26,26 +26,29 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginClicked(_ sender: UIButton) {
         guard let email = emailTextField.text,
-                let password = passwordTextField.text,
-                !email.isEmpty,
-                !password.isEmpty else {return}
+              let password = passwordTextField.text,
+              !email.isEmpty,
+              !password.isEmpty else {return}
 
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                print("Error signing in: \(error.localizedDescription)")
-                return
+        AuthManager.shared.signIn(
+            email: email,
+            password: password) {[weak self]result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        let vc = TabBarViewController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc, animated: true, completion: nil)
+                        print("User logged in successfully.")
+                            
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             }
 
-            guard let user = authResult?.user else {
-                print("No user found.")
-                return
-            }
 
-            let vc = TabBarViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true) {
-            print("User logged in successfully.")
-            }
+            
         }
-    }
+    
 }
