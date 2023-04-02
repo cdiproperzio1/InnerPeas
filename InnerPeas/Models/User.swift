@@ -9,13 +9,12 @@ import Foundation
 import FirebaseAuth
 import Firebase
 
-struct User: Codable{
-    var username: String?
+struct User: Codable {
+    var username: String
     let email: String
-    let uid: String
-    
-    init(fromFirebaseUser user: FirebaseAuth.User) {
-        self.uid = user.uid
-        self.email = user.email ?? ""
-    }
+    var firstName: String?
+    var lastName: String?
+    var location: String?
+    var bio: String?
 }
+

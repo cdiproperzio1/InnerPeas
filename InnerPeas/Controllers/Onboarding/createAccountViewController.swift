@@ -8,10 +8,12 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 
 class createAccountViewController: UIViewController {
     
     private let database=Database.database().reference()
+    
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -41,45 +43,47 @@ class createAccountViewController: UIViewController {
         guard let password =  passwordTextField.text else {return}
         guard let confirmpassword = confirmPasswordTextField.text else {return}
         
+        let emailRef = Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email)
         
-        if password == confirmpassword
-        {
-            if password.passwordValidator()
-            {
-                Auth.auth().createUser(withEmail: email, password: confirmpassword)
-                { [weak self] firebaseResult, error in
-                    guard let self = self else {return}
-                    if let _ = error {
-                        let alert = UIAlertController(title: "Error", message: "Account already created try and sign in using your email.", preferredStyle: .alert)
+        emailRef.observeSingleEvent(of: .value) { snapshot in
+            //if email is already in database
+            if snapshot.exists() {
+                let alert = UIAlertController(title: "Error", message: "Account already created try and sign in using your email.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else{
+                print("going to check if passwords are equal")
+                if password == confirmpassword
+                {
+                    if password.passwordValidator()
+                    {
+                        guard let customizeAccountVC = self.storyboard?.instantiateViewController(withIdentifier: "customizeAccount") as? CustomizeAccountViewController else {
+                            return
+                        }
+                        
+                        customizeAccountVC.email = email
+                        customizeAccountVC.firstName = fname
+                        customizeAccountVC.lastName = lname
+                        customizeAccountVC.username = username
+                        customizeAccountVC.password = password
+                        
+                        self.navigationController?.pushViewController(customizeAccountVC, animated: true)
+                    }
+                    //password not secure error
+                    else{
+                        let alert = UIAlertController(title: "Error", message: "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
+                        
                     }
-                    else
-                    {
-                        let newUser: [String: Any] = [
-                            "fname" : fname,
-                            "lname" : lname,
-                            "usernmae": username
-                        ]
-                        self.database.child("Users").child(username).setValue(newUser)
-                        self.performSegue(withIdentifier: "customizeAccount", sender: self)
-                    }
+                    //passwords dont match error
+                }else{
+                    let alert =  UIAlertController(title: "Error", message: "Passwords do not match.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
-            }
-            else
-            {
-                let alert = UIAlertController(title: "Error", message: "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
+                
             }
         }
-        else
-        {
-            let alert =  UIAlertController(title: "Error", message: "Passwords do not match.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-        
     }
-    
 }

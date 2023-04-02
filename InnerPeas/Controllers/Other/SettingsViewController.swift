@@ -53,7 +53,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AuthManager.shared.signOut{success in
                 if success{
                     DispatchQueue.main.async{
-                        self?.didTapClose()
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         guard let vc = storyboard.instantiateViewController(withIdentifier: "FirstTimeViewController") as? FirstTimeViewController else {
                             fatalError("Unable to instantiate view controller.")

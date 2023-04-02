@@ -135,7 +135,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension SearchViewController: SearchResultsViewControllerDelegate{
     func searchResultsViewController(_ vc: SearchViewController, didSelectResultWith user: User){
-        let vc = ProfileViewController(user: user)
+        //let vc = ProfileViewController(coder: user)
         navigationController?.pushViewController(vc, animated: true )
     }
 }

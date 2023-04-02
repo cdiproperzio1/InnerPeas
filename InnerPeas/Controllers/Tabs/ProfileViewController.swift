@@ -9,42 +9,31 @@ import Firebase
 
 class ProfileViewController: UIViewController {
     
-    private var user: User
-    private var isCurrentUser: Bool
-    private let usersRef = Database.database().reference().child("Users")
-
-    
-    init(user: User) {
-        self.user = user
-        self.isCurrentUser = (user.uid == Auth.auth().currentUser?.uid)
-        super.init(nibName: nil, bundle: nil)
-
-        usersRef.child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
-            guard let userData = snapshot.value as? [String: Any] else {
-                print("Error: Could not retrieve user data")
-                return
-            }
-            
-            self.user.username = userData["username"] as? String
-            
-            self.title = user.username
-        })
+    private let user: User
+    private var isCurrentUser: Bool {
+        return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
     }
-
+    
+    init(user: User){
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = user.username.uppercased()
         view.backgroundColor = .systemBackground
         configure()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    @objc func didTapSettings(){
+        let vc = SettingsViewController()
+        present(UINavigationController(rootViewController: vc), animated: true)
     }
+    
     
     private func configure() {
         if isCurrentUser{
@@ -55,10 +44,12 @@ class ProfileViewController: UIViewController {
                 action: #selector(didTapSettings)
             )
         }
-    }
-    @objc func didTapSettings(){
-        let vc = SettingsViewController()
-        present(UINavigationController(rootViewController: vc), animated: true)
+    
     }
 
 }
+
+
+
+
+

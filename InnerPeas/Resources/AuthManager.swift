@@ -15,6 +15,10 @@ final class AuthManager {
     
     let auth = Auth.auth()
     
+    enum AuthError: Error {
+        case newUserCreation
+    }
+    
     public var isSignedIn: Bool {
         return auth.currentUser != nil
     }
@@ -30,13 +34,58 @@ final class AuthManager {
         email: String,
         username: String,
         password: String,
-        completion: @escaping (Result<User, Error>) -> Void)
+        profilePicture: Data?,
+        firstName: String,
+        lastName: String,
+        location: String,
+        textView: String,
+        completion: @escaping (Result<User, Error>) -> Void
+    ){
+        let newUser = User(
+            username: username,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            location: location,
+            bio: textView
+        )
+        auth.createUser(withEmail: email, password: password) {result, error in
+            guard result != nil, error == nil else {
+                completion(.failure(AuthError.newUserCreation))
+                return
+            }
+            DatabaseManager.shared.createUser(
+                newUser: newUser,
+                firstName: firstName,
+                lastName: lastName,
+                location: location,
+                bio: textView
+            ) { success in
+                if success{
+                    StorageManager.shared.uploadProfilePicture(
+                        username: username,
+                        data: profilePicture
+                    ){ uploadSuccess in
+                        if uploadSuccess{
+                            completion(.success(newUser))
+                        }
+                        else{
+                            completion(.failure(AuthError.newUserCreation))
+                        }
+                    }
+                        
+                }else {
+                    completion(.failure(AuthError.newUserCreation))
+                }
+            }
+        }
+    }
     
-    {}
     
     public func signOut(completion: @escaping (Bool) -> Void){
         do{
             try auth.signOut()
+            completion(true)
         }
         catch{
             print(error)
