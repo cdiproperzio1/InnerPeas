@@ -1,29 +1,192 @@
-//
-//  ProfileViewController.swift
-//  InnerPeas
-//
-//  Created by Justin Hamilton on 2/13/23.
-//
-
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
-class ProfileViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Profile"
-        view.backgroundColor = .systemBackground
+class ProfileViewController: UIViewController, UICollectionViewDelegate  {
+    private var collectionView: UICollectionView? = nil
+    private var viewModels = [[HomeFeedCellType]()]
+    let User = Auth.auth().currentUser
+    let userInfo=UILabel(frame: CGRect(x: 50, y: 150, width: 125, height: 200))
+    private let user: User
+    
+    private var isCurrentUser: Bool{
+        return (user.email != nil)
+    }
+    init(user: User){
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
+    //declare lazy when adding things to something. Doesn't render until called.
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        userInfo.font = UIFont.systemFont(ofSize: 14.0)
+        userInfo.textColor = .black
+        view.addSubview(userInfo)
+        
+        //add profile image, and buttons to the container view(the box at the top of the page)
+        view.addSubview(profileImageView)
+        
+        
+        profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
+        profileImageView.layer.cornerRadius = 120 / 2
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.clipsToBounds = true
+        
+        
+        
+        view.addSubview(friendsButton)
+        
+        friendsButton.anchor(right: view.rightAnchor, paddingRight: 170, width: 70, height: 200)
+        view.addSubview(followersButton)
+        followersButton.anchor(right: view.rightAnchor, paddingRight: 100, width: 70, height: 200)
+        
+        view.addSubview(recipesLabel)
+        recipesLabel.anchor(right: view.rightAnchor, paddingRight: 30, width: 70, height: 200)
+        return view
+    }()
+    
+    let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .systemPink
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    let friendsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Friends", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
+        return button
+    }()
+    
+    let followersButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Followers", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
+        return button
+    }()
+    
+    let recipesLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.text = "Recipes"
+        label.textColor = .blue
+        return label
+    }()
+    
+    
+    override func viewDidLoad() {
+        userInfo.lineBreakMode = .byWordWrapping
+        userInfo.numberOfLines = 0
+        let email = (Auth.auth().currentUser?.email)?.lowercased()
+        let UID = String((Auth.auth().currentUser?.uid)!)
+        
+        Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email!).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else {return}
+            
+            if let adonis = dictionary["Adonis"] as? [String: Any] {
+                if let fname = adonis["fname"] as? String { print("fname: \(fname)")
+                    if let lname = adonis["lname"] as? String { print("lname: \(lname)")
+                        if let bio = adonis["bio"] as? String { print("Bio: \(bio)")
+                            if let location = adonis["location"] as? String { print("Location: \(location)")
+                                self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)" }
+                        }
+                    }}}
+        }) { (Error) in
+            print("Failed to fetch: ", Error)
+        }
+        let uid = String((Auth.auth().currentUser?.uid)!)
+        
+        let pathReference = Storage.storage().reference(withPath: "image/\(uid).png")
+        pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            if let error = error {
+                print(error)
+                // Uh-oh, an error occurred!
+            } else {
+                // Data for "images/island.jpg" is returned
+                let myImage = UIImage(data: data!)
+                self.profileImageView.image=myImage
+                
+            }
+        }
+        
+        view.addSubview(profileImageView)
+        view.addSubview(containerView)
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
+        
+        //        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
+        //          self.comments.append(snapshot)
+        //          print(snapshot)
+        //          print(comments)
+        //          self.tableView.insertRows(
+        //            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
+        //            with: UITableView.RowAnimation.automatic
+        //          )
+    }
+    
+    
+    private func configure() {
+        if isCurrentUser{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: UIImage(systemName: "gear"),
+                style: .done,
+                target: self,
+                action: #selector(didTapSettings)
+            )
+        }
+    }
+    
+    @objc func didTapSettings(){
+        //        let vc = SettingsViewController()
+        //        present(UINavigationController(rootViewController: vc), animated: true)
+    }
+}
 
+extension UIView {
+    //reusable function to add constraints
+    func anchor(top: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, paddingTop: CGFloat? = 0, paddingLeft: CGFloat? = 0, paddingBottom: CGFloat? = 0, paddingRight: CGFloat? = 0, width: CGFloat? = nil, height: CGFloat? = nil) {
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let top = top{
+            topAnchor.constraint(equalTo: top, constant:paddingTop!).isActive = true
+        }
+        
+        if let left = left{
+            leftAnchor.constraint(equalTo: left, constant:paddingLeft!).isActive = true
+        }
+        
+        if let right = right{
+            if let paddingRight = paddingRight {
+                self.rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
+            }
+        }
+        if let bottom = bottom{
+            if let paddingBottom = paddingBottom {
+                self.bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom).isActive = true
+            }
+        }
+        
+        if let width = width {
+            widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        if let height = height{
+            heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+    }
 }
