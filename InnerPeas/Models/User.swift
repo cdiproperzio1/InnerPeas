@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import FirebaseAuth
+import Firebase
 
-//struct User: Codable{
-//    let username: String
-//    let email: String
-//}
+struct User: Codable {
+    var username: String
+    let email: String
+    var firstName: String?
+    var lastName: String?
+    var location: String?
+    var bio: String?
+}
+

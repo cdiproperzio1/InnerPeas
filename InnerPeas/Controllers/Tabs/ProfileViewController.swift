@@ -1,5 +1,13 @@
+//
+//  ProfileViewController.swift
+//  InnerPeas
+//
+//  Created by Justin Hamilton on 2/13/23.
+//
 import UIKit
 import Firebase
+
+class ProfileViewController: UIViewController {
 import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
@@ -12,9 +20,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     let User = Auth.auth().currentUser
     
     private let user: User
-    
-    private var isCurrentUser: Bool{
-        return (user.email != nil)
+    private var isCurrentUser: Bool {
+        return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
     }
     
     init(user: User){
@@ -24,7 +31,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
@@ -125,6 +132,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     
     
     private func configure() {
+        if isCurrentUser{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: UIImage(systemName: "gear"),
+                style: .done,
+                target: self,
+                action: #selector(didTapSettings)
         if isCurrentUser{
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: UIImage(systemName: "gear"),
