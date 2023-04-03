@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Post: Codable {
+    let id: String
+    let postedDate: String
+    let caption: String
+}

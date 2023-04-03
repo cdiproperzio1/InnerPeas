@@ -66,5 +66,12 @@ final class DatabaseManager {
             completion(user)
         }
     }
+    
+    public func createPost(post: Post, completion: @escaping (Bool) -> Void){
+        guard let usernmae = UserDefaults.standard.string(forKey: "username") else {
+            completion(false)
+            return
+        }
+    }
 
 }

@@ -35,7 +35,10 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var textView: UITextView!
     
-    
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImage.layer.borderWidth = 1.0
@@ -102,7 +105,6 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
                     let vc = TabBarViewController()
                     vc.modalPresentationStyle = .fullScreen
                     self?.present(vc, animated: true)
-                    //self?.navigationController?.popToRootViewController(animated: true)
                     self?.completion?()
                 case .failure(let error):
                     print(error)

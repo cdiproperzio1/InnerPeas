@@ -182,6 +182,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         cell.textLabel?.text = (prettyJ)
         return cell;
     }
+    
+    
     func didSelect(image: UIImage?) {
         guard let image = image else {
             return
@@ -203,4 +205,22 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         }
     }
 }
+
+
   
+//    @objc func postPost(){
+//        guard let newPostID = createNewPostID() else{
+//            return
+//        }
+//
+//        StorageManager.shared.uploadPost(
+//            //data: images.description.data(using: png),
+//            id: newPostID)
+//        { success in
+//            guard success else{
+//                print("error: failed to upload")
+//                return
+//            }
+//        }
+//
+//    }
