@@ -66,6 +66,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate=self
         tableView.dataSource=self
+        tableView.alwaysBounceVertical = true
+        tableView.bounces = true
         self.view.addSubview(tableView)
         let addIngred = UIButton(frame: CGRect(x: 325, y: 450, width: 40, height: 40))
         addIngred.backgroundColor = .systemBlue
@@ -129,7 +131,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ingredients.count
+        return 3;
     }
     @objc func postPost(){
         let UID = String((Auth.auth().currentUser?.uid)!)

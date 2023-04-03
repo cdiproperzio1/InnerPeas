@@ -5,12 +5,14 @@ import FirebaseStorage
 import FirebaseDatabase
 
 
-class ProfileViewController: UIViewController, UICollectionViewDelegate  {
-    private var collectionView: UICollectionView? = nil
+class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
+    var collectionView:UICollectionView?
     private var viewModels = [[HomeFeedCellType]()]
     let User = Auth.auth().currentUser
     let userInfo=UILabel(frame: CGRect(x: 50, y: 150, width: 125, height: 200))
     private let user: User
+    var firstView:Int=300
+    var postImages = [Any]()
     
     private var isCurrentUser: Bool{
         return (user.email != nil)
@@ -27,7 +29,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        var firstView=view.height
+        view.backgroundColor = .systemMint
         userInfo.font = UIFont.systemFont(ofSize: 14.0)
         userInfo.textColor = .black
         view.addSubview(userInfo)
@@ -93,8 +96,23 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     override func viewDidLoad() {
         userInfo.lineBreakMode = .byWordWrapping
         userInfo.numberOfLines = 0
+        view.backgroundColor = .white
         let email = (Auth.auth().currentUser?.email)?.lowercased()
         let UID = String((Auth.auth().currentUser?.uid)!)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 60, height: 60)
+        print(firstView)
+        let frame = CGRect(x:10, y: firstView + 10, width: Int(self.view.frame.width)-20, height: Int(self.view.frame.height)-firstView)
+        self.collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+    
+        collectionView!.backgroundColor = .lightGray
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        collectionView?.dataSource = self
+        collectionView?.delegate = self
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.bounces = true
+        view.addSubview(collectionView!)
         
         Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email!).observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else {return}
@@ -120,6 +138,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
             } else {
                 // Data for "images/island.jpg" is returned
                 let myImage = UIImage(data: data!)
+                self.postImages.append(myImage!)
+                //collectionView?.reloadData()
                 self.profileImageView.image=myImage
                 
             }
@@ -138,7 +158,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         //            with: UITableView.RowAnimation.automatic
         //          )
     }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 50
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
+        myCell.backgroundColor = .blue
+        return myCell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+           print("User tapped on item \(indexPath.row)")
+        }
     
     private func configure() {
         if isCurrentUser{
