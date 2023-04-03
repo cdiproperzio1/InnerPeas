@@ -43,8 +43,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
         profileImageView.layer.cornerRadius = 120 / 2
         profileImageView.layer.borderWidth = 1.0
-        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.masksToBounds = true
+        
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.clipsToBounds = true
         
@@ -64,7 +65,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemPink
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     

@@ -66,8 +66,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate=self
         tableView.dataSource=self
-        tableView.alwaysBounceVertical = true
-        tableView.bounces = true
+        
         self.view.addSubview(tableView)
         let addIngred = UIButton(frame: CGRect(x: 325, y: 450, width: 40, height: 40))
         addIngred.backgroundColor = .systemBlue
