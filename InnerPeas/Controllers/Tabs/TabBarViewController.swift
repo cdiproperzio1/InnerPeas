@@ -29,6 +29,7 @@ class TabBarViewController: UITabBarController {
             let nav3 = UINavigationController(rootViewController: search)
             let nav4 = UINavigationController(rootViewController: profile)
             
+            
             nav1.navigationBar.tintColor = .label
             nav2.navigationBar.tintColor = .label
             nav3.navigationBar.tintColor = .label
