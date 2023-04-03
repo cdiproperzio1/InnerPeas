@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchResultsViewControllerDelegate: AnyObject {
-    func searchResultsViewController(_ vc: SearchViewController, didSelectResultWith user: User)
+    func searchResultsViewController(_ vc: SearchResultsViewController, didSelectResultWith user: User)
 }
 
 class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -35,13 +35,13 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
 
     }
-//    public func update(with: results: [Users]){
-//        self.users = results
-//        tableView.reloadData()
-//        if users.isEmpty {
-//            tableView.isHidden = false
-//        }
-//    }
+    public func update(with results: [User]){
+        self.users = results
+        tableView.reloadData()
+        if users.isEmpty {
+            tableView.isHidden = false
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
@@ -55,7 +55,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //delegate?.searchResultsViewController(self, didSelectResultWith: user.[indexPath.row])
+        delegate?.searchResultsViewController(self, didSelectResultWith: users[indexPath.row])
     }
 
 

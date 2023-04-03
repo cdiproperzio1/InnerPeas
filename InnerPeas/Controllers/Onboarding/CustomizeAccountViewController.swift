@@ -58,14 +58,14 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
     func textViewDidBeginEditing(_ textView : UITextView ) {
         if self.textView.textColor == UIColor.lightGray {
             self.textView.text = nil
-            self.textView.textColor = UIColor.black
+//            self.textView.textColor = UIColor.black
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if self.textView.text.isEmpty {
             self.textView.text = "What food do you like to make? (150 Characters)"
-            self.textView.textColor = UIColor.lightGray
+//            self.textView.textColor = UIColor.lightGray
         }
     }
     

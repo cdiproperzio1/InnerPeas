@@ -41,4 +41,8 @@ final class StorageManager{
         }
     }
     
+    public func downloadURL(for post: Post, completion: @escaping (URL?) -> Void){
+        
+    }
+    
 }

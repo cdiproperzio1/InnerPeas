@@ -40,4 +40,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     func configure(with image: UIImage?){
         imageView.image = image
     }
+    
+    func configure(with url: URL?){
+        imageView.kf.setImage(with: url, completionHandler: nil)
+    }
+
 }

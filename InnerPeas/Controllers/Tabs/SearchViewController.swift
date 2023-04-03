@@ -90,7 +90,9 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         collectionView.frame = view.bounds
     }
 
-
+    private var posts = [Post]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Search"
@@ -102,17 +104,29 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
+        fetchData()
 
 
     }
+    
+    private func fetchData(){
+        DatabaseManager.shared.explorePosts{posts in
+            print("\n\n\nPosts: \(posts.count)")
+        }
+    }
 
     func updateSearchResults(for searchController: UISearchController) {
-        guard let resultsVC = searchController.searchResultsController as? SearchViewController,
-                let term = searchController.searchBar.text,
+        guard let resultsVC = searchController.searchResultsController as? SearchResultsViewController,
+              let term = searchController.searchBar.text,
               !term.trimmingCharacters(in: .whitespaces).isEmpty else{
             return
         }
-        //resultsVC.update(with: results)
+        DatabaseManager.shared.searchUsers(with: term) { results in
+            DispatchQueue.main.async {
+                resultsVC.update(with: results)
+            }
+        }
+        
     }
 }
 
@@ -134,8 +148,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension SearchViewController: SearchResultsViewControllerDelegate{
-    func searchResultsViewController(_ vc: SearchViewController, didSelectResultWith user: User){
-        //let vc = ProfileViewController(coder: user)
+    func searchResultsViewController(_ vc: SearchResultsViewController, didSelectResultWith user: User) {
+        let vc = ProfileViewController(user: user)
         navigationController?.pushViewController(vc, animated: true )
     }
+    
+
 }
