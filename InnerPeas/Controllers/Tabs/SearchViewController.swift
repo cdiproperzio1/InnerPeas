@@ -104,8 +104,8 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
-        fetchData()
-
+        view.addSubview(SearchfriendsButton)
+        view.addSubview(SearchfollowersButton)
 
     }
     

@@ -94,7 +94,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
     }
     
     @IBAction func `continue`(_ sender: Any) {
-        let UID = String((Auth.auth().currentUser?.uid)!)
+        
         if(self.textView.text == "What food do you like to make? (150 Characters)"){
             self.textView.text=" "
         }
@@ -129,42 +129,12 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
                     print(error)
                 }
             }
-            
-        }
-            
-        
+        self.database.child("Users").child(self.uname!).child("bio").setValue(self.textView.text!)
+        self.database.child("Users").child(self.uname!).child("location").setValue(self.location.text!)
+        let vc = TabBarViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-}
-    
-//CODE TO REUSE
-//let UID = String((Auth.auth().currentUser?.uid)!)
-//if(self.textView.text == "What food do you like to make? (150 Characters)"){
-//    self.textView.text=" "
-//}
-//guard let imageData = profileImage.image?.pngData() else {
-//    return
-//}
-//
-//storage.child("image/\(UID).png").putData(imageData) { error in
-//    guard error != nil else {
-//        print("failed to upload")
-//        return
-//    }
-//        self.storage.child("images/file.png").downloadURL(completion: {url, error in
-//            guard let url = url, error == nil else {
-//                return
-//            }
-//            let urlString = url.absoluteString
-//        })
-//    }
-//self.database.child("Users").child(UID).child("bio").setValue(self.textView.text!)
-//self.database.child("Users").child(UID).child("location").setValue(self.location.text!)
-//let vc = TabBarViewController()
-//vc.modalPresentationStyle = .fullScreen
-//self.present(vc, animated: true)
-//}
-
+    }
 
 
 
