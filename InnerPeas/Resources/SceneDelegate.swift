@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -23,6 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError("Unable to instantiate view controller.")
         }
         
+//        do {
+//          try Auth.auth().signOut()
+//        } catch let signOutError as NSError {
+//          print("Error signing out: %@", signOutError)
+//        }
+//        
         
         if AuthManager.shared.isSignedIn{
             window.rootViewController = TabBarViewController()
