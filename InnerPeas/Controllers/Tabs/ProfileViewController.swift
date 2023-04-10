@@ -1,3 +1,9 @@
+//
+//  ProfileViewController.swift
+//  InnerPeas
+//
+//  Created by Justin Hamilton on 2/13/23.
+//
 import UIKit
 import Firebase
 import FirebaseAuth
@@ -6,15 +12,18 @@ import FirebaseDatabase
 
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate  {
+<<<<<<< HEAD
     private var collectionView: UICollectionView? = nil
     private var viewModels = [[HomeFeedCellType]()]
     
     let User = Auth.auth().currentUser
     
+=======
+    //Code from Justin
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
     private let user: User
-    
-    private var isCurrentUser: Bool{
-        return (user.email != nil)
+    private var isCurrentUser: Bool {
+        return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
     }
     
     init(user: User){
@@ -24,18 +33,33 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
+<<<<<<< HEAD
+=======
+
+    //Code from cat
+    private var collectionView: UICollectionView? = nil
+    private var viewModels = [[HomeFeedCellType]()]
+    let userInfo=UILabel(frame: CGRect(x: 50, y: 150, width: 125, height: 200))
+        
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
     //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .white
+        userInfo.font = UIFont.systemFont(ofSize: 14.0)
+        userInfo.textColor = .black
+        view.addSubview(userInfo)
         
         //add profile image, and buttons to the container view(the box at the top of the page)
         view.addSubview(profileImageView)
+        
+        
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
         profileImageView.layer.cornerRadius = 120 / 2
+<<<<<<< HEAD
         //add buttons
         view.addSubview(friendsButton)
         friendsButton.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 90)
@@ -44,6 +68,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         
         view.addSubview(recipesLabel)
         recipesLabel.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 120)
+=======
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.clipsToBounds = true
+        
+        
+        
+        view.addSubview(friendsButton)
+        
+        friendsButton.anchor(right: view.rightAnchor, paddingRight: 170, width: 70, height: 200)
+        view.addSubview(followersButton)
+        followersButton.anchor(right: view.rightAnchor, paddingRight: 100, width: 70, height: 200)
+        
+        view.addSubview(recipesLabel)
+        recipesLabel.anchor(right: view.rightAnchor, paddingRight: 30, width: 70, height: 200)
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
         return view
     }()
     
@@ -58,6 +100,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         let button = UIButton(type: .system)
         button.setTitle("Friends", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+<<<<<<< HEAD
+=======
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
         return button
     }()
     
@@ -65,15 +111,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         let button = UIButton(type: .system)
         button.setTitle("Followers", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+<<<<<<< HEAD
+=======
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
         return button
     }()
     
     let recipesLabel: UILabel = {
         let label = UILabel()
+<<<<<<< HEAD
+=======
+        label.font = UIFont.systemFont(ofSize: 14.0)
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
         label.text = "Recipes"
         label.textColor = .blue
         return label
     }()
+<<<<<<< HEAD
         
   //  var ref: DatabaseReference!
 //    ref = Database.database().reference()
@@ -135,11 +190,25 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         }
     }
     
+=======
+
+
+        
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = user.username.uppercased()
+        view.backgroundColor = .systemBackground
+        configure()
+    }
+    
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
     @objc func didTapSettings(){
 //        let vc = SettingsViewController()
 //        present(UINavigationController(rootViewController: vc), animated: true)
     }
     
+<<<<<<< HEAD
    
     
    
@@ -183,6 +252,20 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     }
     
     
+=======
+    
+    private func configure() {
+        if isCurrentUser{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: UIImage(systemName: "gear"),
+                style: .done,
+                target: self,
+                action: #selector(didTapSettings)
+            )
+        }
+    
+    }
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445
 }
 
 extension UIView {
@@ -219,3 +302,10 @@ extension UIView {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 3e28434937c021fa663385eea4a6582741122445

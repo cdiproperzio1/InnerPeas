@@ -11,16 +11,22 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, ImagePickerDelegate{
+    
+
+    
     private let storage = Storage.storage().reference()
     private let database=Database.database().reference()
+    
     var images = [UIImage]()
     var dirList=UITextView()
     var imagePicker: ImagePicker!
+    
     var tableView = UITableView()
     let postName=UITextField(frame: CGRect(x: 50, y: 100, width: 125, height: 40))
     let amountTextField=UITextField(frame: CGRect(x: 225, y: 450, width: 100, height: 40))
     let ingredTextField=UITextField(frame: CGRect(x: 50, y: 450, width: 125, height: 40))
     var ingredients = [[String:String]]()
+    
     let image1 = UIImageView(frame: CGRect(x: 50, y: 400, width: 40, height: 40))
     let image2 = UIImageView(frame: CGRect(x: 100, y: 400, width: 40, height: 40))
     let image3 = UIImageView(frame: CGRect(x: 150, y: 400, width: 40, height: 40))
@@ -28,6 +34,10 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
         view.backgroundColor = .systemBackground
         dirList=UITextView(frame: CGRect(x: 50, y: 150, width: self.view.frame.width - 100, height: 200))
         okButton=UIButton(frame: CGRect(x: (self.view.width/2)-50, y: 720, width: 100, height: 40))
@@ -91,6 +101,11 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         tableView.reloadData()
     }
     
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
+    
     func textViewDidEndEditing(_ dirList : UITextView) {
         if self.dirList.text!.isEmpty {
             self.dirList.text = "Directions"
@@ -131,7 +146,18 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredients.count
     }
+    
+    
     @objc func postPost(){
+        guard let username = UserDefaults.standard.string(forKey: "username"),
+               let email = UserDefaults.standard.string(forKey: "email") else{
+             return
+         }
+         let currentUser = User(
+             username: username,
+             email: email
+         )
+        
         let UID = String((Auth.auth().currentUser?.uid)!)
         let postID = UUID().uuidString
         var imageIDs=[String]()
@@ -144,7 +170,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
                 return
             }
             
-            storage.child("image/\(imageID).png").putData(imageData) { error in
+            storage.child("\(currentUser.username)/\(imageID).png").putData(imageData) { error in
                 guard error != nil else {
                     print("failed to upload")
                     return
@@ -158,10 +184,10 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
             }
         }
         
-        self.database.child("Post").child(UID).child(postID).child("directions").setValue(self.dirList.text!)
-        self.database.child("Post").child(UID).child(postID).child("ingredients").setValue(self.ingredients)
-        self.database.child("Post").child(UID).child(postID).child("name").setValue(self.postName.text!)
-        self.database.child("Post").child(UID).child(postID).child("images").setValue(imageIDs)
+        self.database.child("Users").child(username).child("Post").child(postID).child("directions").setValue(self.dirList.text!)
+        self.database.child("Users").child(username).child("Post").child(postID).child("ingredients").setValue(self.ingredients)
+        self.database.child("Users").child(username).child("Post").child(postID).child("name").setValue(self.postName.text!)
+        self.database.child("Users").child(username).child("Post").child(postID).child("images").setValue(imageIDs)
         
         self.images=[UIImage]()
         image1.image=nil
@@ -171,7 +197,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         ingredients=[[String:String]]()
         tableView.reloadData()
         let vc = HomeViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.popToRootViewController(animated: false)
+        self.tabBarController?.selectedIndex = 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -182,6 +209,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         cell.textLabel?.text = (prettyJ)
         return cell;
     }
+    
+    
     func didSelect(image: UIImage?) {
         guard let image = image else {
             return
@@ -203,4 +232,22 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         }
     }
 }
+
+
   
+//    @objc func postPost(){
+//        guard let newPostID = createNewPostID() else{
+//            return
+//        }
+//
+//        StorageManager.shared.uploadPost(
+//            //data: images.description.data(using: png),
+//            id: newPostID)
+//        { success in
+//            guard success else{
+//                print("error: failed to upload")
+//                return
+//            }
+//        }
+//
+//    }
