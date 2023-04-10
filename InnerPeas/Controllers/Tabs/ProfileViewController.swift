@@ -11,9 +11,8 @@ import FirebaseStorage
 import FirebaseDatabase
 
 
-class ProfileViewController: UIViewController, UICollectionViewDelegate  {
-<<<<<<< HEAD
-    private var collectionView: UICollectionView? = nil
+class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
+    var collectionView:UICollectionView?
     private var viewModels = [[HomeFeedCellType]()]
     
     let User = Auth.auth().currentUser
@@ -22,8 +21,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     //Code from Justin
 >>>>>>> 3e28434937c021fa663385eea4a6582741122445
     private let user: User
-    private var isCurrentUser: Bool {
-        return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
+    var firstView:Int=300
+    var postImages = [Any]()
+    
+    private var isCurrentUser: Bool{
+        return (user.email != nil)
     }
     
     init(user: User){
@@ -47,7 +49,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        var firstView=view.height
+        view.backgroundColor = .systemMint
         userInfo.font = UIFont.systemFont(ofSize: 14.0)
         userInfo.textColor = .black
         view.addSubview(userInfo)
@@ -70,8 +73,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         recipesLabel.anchor(right: view.rightAnchor, paddingRight: 32, width: 120, height: 120)
 =======
         profileImageView.layer.borderWidth = 1.0
-        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.masksToBounds = true
+        
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.clipsToBounds = true
         
@@ -92,7 +96,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemPink
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -133,51 +137,83 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
   //  var ref: DatabaseReference!
 //    ref = Database.database().reference()
     
-   override func viewDidLoad() {
-       let email = Auth.auth().currentUser?.email
-//       let ref = Database.database().reference(withPath: "Users")
-//       let userRef=ref.child(UID!)
-//
-//       userRef.observe(.value, with: { snapshot in
-//         // This is the snapshot of the data at the moment in the Firebase database
-//         // To get value from the snapshot, we user snapshot.value
-//         print(snapshot.value as Any)
-//       })
-       Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
-
-
-               guard let dictionary = snapshot.value as? [String:Any] else {return}
-
-               dictionary.forEach({ (key , value) in
-
-                   print("Key \(key), value \(value) ")
-
-
-               })
-
-
-
-           }) { (Error) in
-
-               print("Failed to fetch: ", Error)
-
-           }
-       fetchPost()
-       view.addSubview(profileImageView)
-       view.addSubview(containerView)
-       containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
-
-//        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
-//          self.comments.append(snapshot)
-//          print(snapshot)
-//          print(comments)
-//          self.tableView.insertRows(
-//            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
-//            with: UITableView.RowAnimation.automatic
-//          )
+    override func viewDidLoad() {
+        userInfo.lineBreakMode = .byWordWrapping
+        userInfo.numberOfLines = 0
+        view.backgroundColor = .white
+        let email = (Auth.auth().currentUser?.email)?.lowercased()
+        let UID = String((Auth.auth().currentUser?.uid)!)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 60, height: 60)
+        print(firstView)
+        let frame = CGRect(x:10, y: firstView + 10, width: Int(self.view.frame.width)-20, height: Int(self.view.frame.height)-firstView)
+        self.collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+    
+        collectionView!.backgroundColor = .lightGray
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        collectionView?.dataSource = self
+        collectionView?.delegate = self
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.bounces = true
+        view.addSubview(collectionView!)
         
+        Database.database().reference().child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email!).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else {return}
+            
+            if let adonis = dictionary["Adonis"] as? [String: Any] {
+                if let fname = adonis["fname"] as? String { print("fname: \(fname)")
+                    if let lname = adonis["lname"] as? String { print("lname: \(lname)")
+                        if let bio = adonis["bio"] as? String { print("Bio: \(bio)")
+                            if let location = adonis["location"] as? String { print("Location: \(location)")
+                                self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)" }
+                        }
+                    }}}
+        }) { (Error) in
+            print("Failed to fetch: ", Error)
+        }
+        let uid = String((Auth.auth().currentUser?.uid)!)
+        
+        let pathReference = Storage.storage().reference(withPath: "image/\(uid).png")
+        pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            if let error = error {
+                print(error)
+                // Uh-oh, an error occurred!
+            } else {
+                // Data for "images/island.jpg" is returned
+                let myImage = UIImage(data: data!)
+                self.postImages.append(myImage!)
+                //collectionView?.reloadData()
+                self.profileImageView.image=myImage
+                
+            }
+        }
+        
+        view.addSubview(profileImageView)
+        view.addSubview(containerView)
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
+        
+        //        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
+        //          self.comments.append(snapshot)
+        //          print(snapshot)
+        //          print(comments)
+        //          self.tableView.insertRows(
+        //            at: [IndexPath(row: self.comments.count - 1, section: self.kSectionComments)],
+        //            with: UITableView.RowAnimation.automatic
+        //          )
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 50
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
+        myCell.backgroundColor = .blue
+        return myCell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+           print("User tapped on item \(indexPath.row)")
+        }
     
     private func configure() {
         if isCurrentUser{
