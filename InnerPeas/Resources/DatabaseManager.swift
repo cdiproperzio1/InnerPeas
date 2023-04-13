@@ -16,6 +16,7 @@ final class DatabaseManager {
     
     let database = Database.database().reference()
     
+    //CREATE USER FUNC
     public func createUser(
         newUser: User,
         firstName: String?,
@@ -45,7 +46,7 @@ final class DatabaseManager {
                 completion(error == nil)
             }
         }
-    
+    //FIND USER FOR PROFILE FUNC
     public func findUser(with email: String, completion: @escaping (User?) -> Void){
         let ref = database.child("Users")
         
@@ -67,12 +68,35 @@ final class DatabaseManager {
         }
     }
     
-    public func posts(
-        for username: String,
-        completion: @escaping (Result<[Post], Error>) -> Void){
+    //RETRIEVE POST FOR FEED FUNC
+    public func posts(for username: String, completion: @escaping (Result<[Post], Error>) -> Void) {
+        let ref = Database.database().reference().child("Users").child(username).child("Post")
+        
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value as? [String: AnyObject] else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Data is not available"])))
+                return
+            }
             
+            var posts = [Post]()
+            
+            for (key, data) in value {
+                if let data = data as? [String: Any] {
+                    var postData = data
+                    postData["id"] = key
+                    if let post = Post(with: postData) {
+                        posts.append(post)
+                    }
+                }
+            }
+            
+            completion(.success(posts))
+        }) { error in
+            completion(.failure(error))
         }
+    }
     
+    //SEARCH USER FUNC
     public func searchUsers(
         with usernamePrefix: String,
         completion: @escaping ([User]) -> Void){
@@ -100,41 +124,79 @@ final class DatabaseManager {
             }
         }
     
-    
+    //FUNC FOR SEARCH FEED
+
+
     public func explorePosts(completion: @escaping ([Post]) -> Void) {
-        let ref = Database.database().reference().child("Users")
+         let ref = Database.database().reference().child("Users")
+
+         ref.observeSingleEvent(of: .value) { snapshot in
+             guard let usersData = snapshot.value as? [String: [String: AnyObject]] else {
+                 completion([])
+                 return
+             }
+
+             let users = usersData.compactMap { (_, userData) -> User? in
+                 return User(with: userData)
+             }
+
+             let group = DispatchGroup()
+             var aggregatePosts = [Post]()
+
+             users.forEach { user in
+                 group.enter()
+                 //print("\n\n\n this is user \(user)")
+                 let username = user.username
+                 let postRef = Database.database().reference().child("Users/\(username)/Posts")
+                 //print("\n\n\n post ref \(postRef)")
+
+                 postRef.observeSingleEvent(of: .value) { snapshot in
+                     defer {
+                         group.leave()
+                     }
+
+                     guard let postsData = snapshot.value as? [String: [String: AnyObject]] else {
+                         return
+                     }
+                     //print("\n\n\n This is the post data here: \(postsData)")
+                     
+
+                     let posts = postsData.compactMap { (_, postData) -> Post? in
+                         print("\n\n\n This is the post \(String(describing: Post(with: postData)))")
+                         return Post(with: postData)
+                     }
+                     //print("\n\n\n this is the post with a s \(posts)")
+                     aggregatePosts.append(contentsOf: posts)
+                 }
+             }
+
+             group.notify(queue: .main) {
+                 completion(aggregatePosts)
+             }
+         }
+     }
+
+
+
+
+
+
+    
+    public func createPost(newPost: Post, completion: @escaping (Bool) -> Void) {
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            completion(false)
+            return
+        }
         
-        ref.observeSingleEvent(of: .value) { snapshot in
-            var aggregatePosts = [Post]()
-            let group = DispatchGroup()
-            
-            for child in snapshot.children {
-                guard let userSnapshot = child as? DataSnapshot,
-                      let userValue = userSnapshot.value as? [String: Any],
-                      let username = userValue["username"] as? String else {
-                    continue
-                }
-                
-                group.enter()
-                let postRef = Database.database().reference().child("Users/\(username)/Post")
-                
-                postRef.observeSingleEvent(of: .value) { postSnapshot in
-                    guard let postDict = postSnapshot.value as? [String: [String: Any]] else {
-                        group.leave()
-                        return
-                    }
-                    
-                    let posts = postDict.compactMap { Post(with: $0.value) }
-                    aggregatePosts.append(contentsOf: posts)
-                    
-                    group.leave()
-                }
-            }
-            
-            group.notify(queue: .main) {
-                completion(aggregatePosts)
-            }
+        let ref = Database.database().reference().child("Users").child(username).child("Posts").child(newPost.id)
+        guard let data = newPost.asDictionary() else {
+            completion(false)
+            return
+        }
+        
+        ref.setValue(data) { error, _ in
+            completion(error == nil)
         }
     }
-    
+
 }

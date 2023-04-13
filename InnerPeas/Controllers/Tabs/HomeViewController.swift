@@ -33,6 +33,24 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     private func fetchPost(){
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            return
+        }
+        DatabaseManager.shared.posts(for: username) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let posts):
+                    print("\n\n\n Posts: \(posts.count)")
+                case .failure(let error):
+                    print(error)
+                    
+                }
+            }
+        }
+ 
+    }
+    
+    private func createMockData(){
         //test data
         let postData: [HomeFeedCellType] =
         [
@@ -300,10 +318,9 @@ extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
     }
     
     func PostDescriptionCollectionViewCellTypeDidTapComment(_cell: PostDescriptionCollectionViewCellType) {
-        let vc = PostViewController()
-        vc.title = "Comments"
-        navigationController?.pushViewController(vc, animated: true)
-        print("Tapped comment")
+//        let vc = PostViewController()
+//        vc.title = "Comments"
+//        navigationController?.pushViewController(vc, animated: true)
         }
         
     }

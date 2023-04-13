@@ -14,6 +14,7 @@ import FirebaseDatabase
 class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     //Code from Justin
     private let user: User
+    var firstView:Int=300
     private var isCurrentUser: Bool {
         return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
     }
@@ -98,12 +99,31 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     }()
 
 
-        
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = user.username.uppercased()
         view.backgroundColor = .systemBackground
+        view.addSubview(profileImageView)
+        view.addSubview(containerView)
+        //layout for post?
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 60, height: 60)
+        print(firstView)
+        let frame = CGRect(x:10, y: firstView + 10, width: Int(self.view.frame.width)-20, height: Int(self.view.frame.height)-firstView)
+        self.collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+    
+        collectionView!.backgroundColor = .lightGray
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        //collectionView?.dataSource = self
+        collectionView?.delegate = self
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.bounces = true
+        view.addSubview(collectionView!)
+        
+        //other stuff
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
         configure()
     }
     
