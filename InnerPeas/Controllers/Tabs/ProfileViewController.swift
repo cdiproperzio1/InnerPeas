@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     private let user: User
     var firstView:Int=300
     var posts = [Post]()
-
+    
     
     
     private var isCurrentUser: Bool {
@@ -40,7 +40,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         userInfo.font = UIFont.systemFont(ofSize: 14.0)
         userInfo.textColor = .black
         view.addSubview(userInfo)
@@ -74,7 +74,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemPink
+        imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -117,7 +117,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         collectionView!.backgroundColor = .white
         collectionView?.register(PhotoCollectionViewCell.self,
-                                forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+                                 forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.alwaysBounceVertical = true
@@ -159,7 +159,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 }
             }
             self.collectionView?.reloadData()
-        
+            
         });
         
         let pathReference = Storage.storage().reference(withPath: "\(username)/profile_picture.png")
@@ -178,10 +178,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         view.addSubview(containerView)
         containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
         
-    
+        
         
     }
-   
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
@@ -201,6 +201,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("User tapped on item \(indexPath.row)")
     }
+    @objc func didTapSettings(){
+        let vc = SettingsViewController()
+        present(UINavigationController(rootViewController: vc), animated: true)
+    }
+    
     
     private func configure() {
         if isCurrentUser{
@@ -211,11 +216,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 action: #selector(didTapSettings)
             )
         }
-    }
-    
-    @objc func didTapSettings(){
-        //        let vc = SettingsViewController()
-        //        present(UINavigationController(rootViewController: vc), animated: true)
+        
     }
 }
     
