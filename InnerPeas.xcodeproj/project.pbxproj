@@ -16,6 +16,7 @@
 		AB4486AC29A2C334001345E8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4486AB29A2C334001345E8 /* PostViewController.swift */; };
 		AB4E366B29B6CF54007FCA8D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */; };
 		AB4E366D29B6DC64007FCA8D /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */; };
+		AB52964929DCADA70039EE40 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB52964829DCADA70039EE40 /* AddPostViewController.swift */; };
 		AB5AADA929D29805002D4237 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5AADA829D29805002D4237 /* PhotoCollectionViewCell.swift */; };
 		AB69964C299AE41E0022345E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB69964B299AE41E0022345E /* Storage.swift */; };
 		AB69964E299B1AF60022345E /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB69964D299B1AF60022345E /* AuthManager.swift */; };
@@ -76,7 +77,6 @@
 		BE164D5429AD79550018044D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE164D5329AD79550018044D /* Main.storyboard */; };
 		BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */; };
 		BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */; };
-		BE86636C29AE9F1F00D6BEFA /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636B29AE9F1F00D6BEFA /* AddPostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +89,7 @@
 		AB4486AB29A2C334001345E8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
+		AB52964829DCADA70039EE40 /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		AB5AADA829D29805002D4237 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB69964B299AE41E0022345E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		AB69964D299B1AF60022345E /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -123,7 +124,6 @@
 		BE164D5329AD79550018044D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeAccountViewController.swift; sourceTree = "<group>"; };
 		BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerDelegate.swift; sourceTree = "<group>"; };
-		BE86636B29AE9F1F00D6BEFA /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,8 +190,8 @@
 		AB69965D299B353F0022345E /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				AB52964829DCADA70039EE40 /* AddPostViewController.swift */,
 				AB69965E299B35B60022345E /* TabBarViewController.swift */,
-				BE86636B29AE9F1F00D6BEFA /* AddPostViewController.swift */,
 				ABC64B082998A0E700C1CE35 /* HomeViewController.swift */,
 				AB699656299B33170022345E /* SearchViewController.swift */,
 				AB699658299B33410022345E /* ProfileViewController.swift */,
@@ -416,12 +416,12 @@
 				AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */,
 				AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */,
 				AB16083C299B43BD00693DB8 /* TextField.swift in Sources */,
+				AB52964929DCADA70039EE40 /* AddPostViewController.swift in Sources */,
 				BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */,
 				ABE9112C29CB7ED5006F7D9E /* DatabaseManager.swift in Sources */,
 				AB69964C299AE41E0022345E /* Storage.swift in Sources */,
 				AB699663299B361F0022345E /* Post.swift in Sources */,
 				ABE49A97299C06FC00B23DAE /* PostDescriptionCollectionViewCell.swift in Sources */,
-				BE86636C29AE9F1F00D6BEFA /* AddPostViewController.swift in Sources */,
 				ABE49AA0299C6B9C00B23DAE /* PosterCollectionViewCellType.swift in Sources */,
 				AB16083E299B47E300693DB8 /* LoginHeaderView.swift in Sources */,
 				ABE49A95299C066400B23DAE /* PostCollectionViewCell.swift in Sources */,
@@ -589,8 +589,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InnerPeas/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = InnerPeas;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -598,7 +600,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = WorldWideFoodies.InnerPeas;
+				PRODUCT_BUNDLE_IDENTIFIER = WorldWideFoodies.InnerPeasV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -620,8 +622,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InnerPeas/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = InnerPeas;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -629,7 +633,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = WorldWideFoodies.InnerPeas;
+				PRODUCT_BUNDLE_IDENTIFIER = WorldWideFoodies.InnerPeasV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

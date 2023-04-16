@@ -25,10 +25,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
 //>>>>>>> 3e28434937c021fa663385eea4a6582741122445
     private let user: User
     var firstView:Int=300
-    var postImages = [Any]()
-    
-    private var isCurrentUser: Bool{
-        return (user.email != nil)
+    private var isCurrentUser: Bool {
+        return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
     }
     
     init(user: User){
@@ -135,11 +133,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         label.textColor = .blue
         return label
     }()
-//<<<<<<< HEAD
-        
-  //  var ref: DatabaseReference!
-//    ref = Database.database().reference()
-    
+
+
     override func viewDidLoad() {
         userInfo.lineBreakMode = .byWordWrapping
         userInfo.numberOfLines = 0
@@ -238,6 +233,27 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         super.viewDidLoad()
         title = user.username.uppercased()
         view.backgroundColor = .systemBackground
+        view.addSubview(profileImageView)
+        view.addSubview(containerView)
+        //layout for post?
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 60, height: 60)
+        print(firstView)
+        let frame = CGRect(x:10, y: firstView + 10, width: Int(self.view.frame.width)-20, height: Int(self.view.frame.height)-firstView)
+        self.collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+    
+        collectionView!.backgroundColor = .lightGray
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        //collectionView?.dataSource = self
+        collectionView?.delegate = self
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.bounces = true
+        view.addSubview(collectionView!)
+        
+        //other stuff
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
         configure()
     }*/
     

@@ -110,15 +110,18 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         collectionView.dataSource = self
         fetchData()
 
-//>>>>>>> 3e28434937c021fa663385eea4a6582741122445
-
     }
     
     private func fetchData(){
-        DatabaseManager.shared.explorePosts{posts in
-            print("\n\n\nPosts: \(posts.count)")
+        DatabaseManager.shared.explorePosts{ [weak self] posts in
+            DispatchQueue.main.async {
+                self?.posts = posts
+                self?.collectionView.reloadData()
+            }
         }
     }
+    
+
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let resultsVC = searchController.searchResultsController as? SearchResultsViewController,
@@ -137,37 +140,31 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-            PhotoCollectionViewCell.identifier,
-            for: indexPath
-        ) as? PhotoCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
             fatalError()
         }
-        cell.configure(with: UIImage(named: "food"))
+        let post = posts[indexPath.row]
+        let postUrls = post.postURLs
+        for url in postUrls {
+            cell.configure(with: URL(string: url))
+        }
         return cell
     }
     
-    
-    func SearchFriendsCollectionViewCellTypeDidTapSearchFriends(_cell: PostDescriptionCollectionViewCellType) {
-        let vc = LookForFriendsViewController()
-        vc.title = "Friends"
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let post = posts[indexPath.row]
+        let vc = PostViewController(post: post)
         navigationController?.pushViewController(vc, animated: true)
-        print("Tapped friends")
-        }
-    
-    func SearchForFollowersCollectionViewCellTypeDidSearchFollowers(_cell: PostDescriptionCollectionViewCellType) {
-        let vc = LookForFollowersViewController()
-        vc.title = "Followers"
-        navigationController?.pushViewController(vc, animated: true)
-        print("Tapped followers")
-        }
-    
-    
+    }
 }
+        
+        
+
 
 extension SearchViewController: SearchResultsViewControllerDelegate{
     func searchResultsViewController(_ vc: SearchResultsViewController, didSelectResultWith user: User) {

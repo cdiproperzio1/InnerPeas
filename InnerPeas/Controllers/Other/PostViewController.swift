@@ -9,11 +9,19 @@ import UIKit
 
 class PostViewController: UIViewController {
 
+    let post: Post
+    
+    init(post: Post){
+        self.post = post
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder){
+        fatalError()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-//<<<<<<< HEAD
-        
-//=======
+        title = "Post"
         view.backgroundColor = .systemBackground
 //>>>>>>> 3e28434937c021fa663385eea4a6582741122445
 
