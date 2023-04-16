@@ -101,16 +101,16 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         searchVC.searchBar.placeholder = "Search..."
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
-<<<<<<< HEAD
-        view.addSubview(SearchfriendsButton)
-        view.addSubview(SearchfollowersButton)
-=======
+//<<<<<<< HEAD
+        //view.addSubview(SearchfriendsButton)
+        //view.addSubview(SearchfollowersButton)
+//=======
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
         fetchData()
 
->>>>>>> 3e28434937c021fa663385eea4a6582741122445
+//>>>>>>> 3e28434937c021fa663385eea4a6582741122445
 
     }
     
@@ -152,19 +152,21 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     
-    let SearchfriendsButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Friends", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        return button
-    }()
+    func SearchFriendsCollectionViewCellTypeDidTapSearchFriends(_cell: PostDescriptionCollectionViewCellType) {
+        let vc = LookForFriendsViewController()
+        vc.title = "Friends"
+        navigationController?.pushViewController(vc, animated: true)
+        print("Tapped friends")
+        }
     
-    let SearchfollowersButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Followers", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        return button
-    }()
+    func SearchForFollowersCollectionViewCellTypeDidSearchFollowers(_cell: PostDescriptionCollectionViewCellType) {
+        let vc = LookForFollowersViewController()
+        vc.title = "Followers"
+        navigationController?.pushViewController(vc, animated: true)
+        print("Tapped followers")
+        }
+    
+    
 }
 
 extension SearchViewController: SearchResultsViewControllerDelegate{

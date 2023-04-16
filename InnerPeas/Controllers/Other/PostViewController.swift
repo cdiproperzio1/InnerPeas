@@ -11,11 +11,11 @@ class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
+//<<<<<<< HEAD
         
-=======
+//=======
         view.backgroundColor = .systemBackground
->>>>>>> 3e28434937c021fa663385eea4a6582741122445
+//>>>>>>> 3e28434937c021fa663385eea4a6582741122445
 
         // Do any additional setup after loading the view.
     }
