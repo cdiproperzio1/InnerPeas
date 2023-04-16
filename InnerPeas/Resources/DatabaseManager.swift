@@ -90,6 +90,7 @@ final class DatabaseManager {
                 }
             }
             
+            
             completion(.success(posts))
         }) { error in
             completion(.failure(error))
