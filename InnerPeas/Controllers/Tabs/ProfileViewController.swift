@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     private let user: User
     var firstView:Int=300
     var posts = [Post]()
+    var recipesCount:UILabel?
     
     
     
@@ -44,8 +45,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         userInfo.font = UIFont.systemFont(ofSize: 14.0)
         userInfo.textColor = .black
         view.addSubview(userInfo)
+        self.recipesCount=UILabel(frame: CGRect(x: self.view.frame.width-100, y: 100, width: 40, height: 40))
+        self.recipesCount!.font = UIFont.systemFont(ofSize: 14.0)
+        self.recipesCount!.textColor = .blue
+        view.addSubview(self.recipesCount!)
         
-        
+        configure()
         //add profile image, and buttons to the container view(the box at the top of the page)
         view.addSubview(profileImageView)
         
@@ -102,7 +107,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         label.textColor = .blue
         return label
     }()
-    
+   
     
     override func viewDidLoad() {
         userInfo.lineBreakMode = .byWordWrapping
@@ -184,6 +189,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.recipesCount!.text="\(posts.count)"
         return posts.count
     }
     
