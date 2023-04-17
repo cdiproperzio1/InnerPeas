@@ -40,7 +40,28 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             DispatchQueue.main.async {
                 switch result {
                 case .success(let posts):
-                    print("\n\n\n Posts: \(posts.count)")
+                    print("\n\n\n Posts for user \(username): \(posts.count)")
+                    //print(posts)
+                    
+                    let group = DispatchGroup()
+                    
+                    posts.forEach { model in
+                        //print("\n\n\n Entering dispatch Group")
+                        //print(model)
+                        group.enter()
+                        self?.createViewModel(model: model, username: username, completion: {success in
+                            defer {
+                                group.leave()
+                            }
+                            if !success {
+                                print("\n\n\n failed to create")
+                            
+                            }
+                        })
+                    }
+                    group.notify(queue: .main){
+                        self?.collectionView?.reloadData()
+                    }
                 case .failure(let error):
                     print(error)
                     
@@ -50,42 +71,49 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
  
     }
     
-    private func createMockData(){
-        //test data
-        let postData: [HomeFeedCellType] =
-        [
-            .poster(
-                viewModel: PosterCollectionViewCell(
-                    username: "FoodThatSmacks",
-                    profilePictureURL: URL(string: "https://mymodernmet.com/wp/wp-content/uploads/2020/01/baby-yoda-eating-food-13.jpg")!
-          
-                )
-            ),
-            .post(
-                viewModel: PostCollectionViewCell(
-                    postUrl: URL(string: "https://www.simplyrecipes.com/thmb/rngm-7eZfo-gsKuRWOceBMM9m_c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Homemade-Pizza-Dough-Lead-Shot-1b-ea13798d224048b3a28afb0936c9b645.jpg")!
-                )
-            ),
-            
-            .postDescription(
-                viewModel: PostDescriptionCollectionViewCell(
-                    name: "Home-made Mushroom Pizza",
-                    isMade: false,
-                    isFav: false
-                )
-            ),
-            
-            .postRating(
-                viewModel: PostRatingCollectionViewCell(
-                    averageRating: 3
-                )
-            ),
-            
-            .thumbNails(viewModel: ThumbnailsCollectionViewCell())
-            
-        ]
-        viewModels.append(postData)
-        collectionView?.reloadData()
+    private func createViewModel(model: Post, username: String, completion: @escaping (Bool) -> Void){
+        StorageManager.shared.downloadURL(for: model) { [weak self] url in
+            guard let PostUrl = url else {
+                return
+            }
+
+            let postData: [HomeFeedCellType] =
+            [
+                .poster(
+                    viewModel: PosterCollectionViewCell(
+                        username: username,
+                        profilePictureURL: URL(string: "https://mymodernmet.com/wp/wp-content/uploads/2020/01/baby-yoda-eating-food-13.jpg")!
+              
+                    )
+                ),
+                .post(
+                    viewModel: PostCollectionViewCell(
+                        postUrl: PostUrl
+                    )
+                ),
+                
+                .postDescription(
+                    viewModel: PostDescriptionCollectionViewCell(
+                        name: model.title,
+                        isMade: false,
+                        isFav: false
+                    )
+                ),
+                
+                .postRating(
+                    viewModel: PostRatingCollectionViewCell(
+                        averageRating: 3
+                    )
+                ),
+                
+                .thumbNails(viewModel: ThumbnailsCollectionViewCell())
+                
+            ]
+            self?.viewModels.append(postData)
+            completion(true)
+        }
+        
+        
     }
     
     func configureCollectionView(){

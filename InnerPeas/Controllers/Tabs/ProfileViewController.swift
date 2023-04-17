@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
     //declare lazy when adding things to something. Doesn't render until called.
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         userInfo.font = UIFont.systemFont(ofSize: 14.0)
         userInfo.textColor = .black
         view.addSubview(userInfo)
@@ -105,6 +105,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate  {
         view.backgroundColor = .systemBackground
         view.addSubview(profileImageView)
         view.addSubview(containerView)
+        
         //layout for post?
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 
