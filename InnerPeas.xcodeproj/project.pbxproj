@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0EB12F2929D2AC430093BBE8 /* LookForFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB12F2829D2AC430093BBE8 /* LookForFriendsViewController.swift */; };
 		AB16083C299B43BD00693DB8 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083B299B43BD00693DB8 /* TextField.swift */; };
 		AB16083E299B47E300693DB8 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083D299B47E300693DB8 /* LoginHeaderView.swift */; };
 		AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB16083F299B575400693DB8 /* createAccountViewController.swift */; };
@@ -80,7 +79,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0EB12F2829D2AC430093BBE8 /* LookForFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookForFriendsViewController.swift; sourceTree = "<group>"; };
 		AB16083B299B43BD00693DB8 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		AB16083D299B47E300693DB8 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		AB16083F299B575400693DB8 /* createAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 		AB4486AA29A2C303001345E8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				0EB12F2829D2AC430093BBE8 /* LookForFriendsViewController.swift */,
 				AB4486AB29A2C334001345E8 /* PostViewController.swift */,
 				ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */,
 				AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */,
@@ -443,7 +440,6 @@
 				BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */,
 				ABE49A93299C05ED00B23DAE /* PosterCollectionViewCell.swift in Sources */,
 				ABE49AA2299C6CE100B23DAE /* PostCollectionViewCellType.swift in Sources */,
-				0EB12F2929D2AC430093BBE8 /* LookForFriendsViewController.swift in Sources */,
 				ABC64B092998A0E700C1CE35 /* HomeViewController.swift in Sources */,
 				AB70D181298B4F71000C79D6 /* SceneDelegate.swift in Sources */,
 				ABE49A99299C123200B23DAE /* PostRatingCollectionViewCell.swift in Sources */,
