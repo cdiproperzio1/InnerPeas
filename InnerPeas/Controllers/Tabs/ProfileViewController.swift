@@ -52,20 +52,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         view.addSubview(self.recipesCount!)
         
         configure()
-        //add profile image, and buttons to the container view(the box at the top of the page)
-        view.addSubview(profileImageView)
-        
-        
-        
-        profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
-        profileImageView.layer.cornerRadius = 120 / 2
-        profileImageView.layer.borderWidth = 1.0
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.masksToBounds = true
-        
-        profileImageView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.clipsToBounds = true
         
         view.addSubview(friendsButton)
         
@@ -75,12 +61,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         view.addSubview(recipesLabel)
         recipesLabel.anchor(right: view.rightAnchor, paddingRight: 30, width: 70, height: 200)
+        
+        
+        view.addSubview(profileImageView)
+        profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
+        profileImageView.layer.cornerRadius = 120 / 2
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.layer.masksToBounds = true
+        
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.clipsToBounds = true
         return view
     }()
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
+        print("hi-------")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -114,12 +112,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         super.viewDidLoad()
         title = user.username.uppercased()
         view.backgroundColor = .systemBackground
-        view.addSubview(profileImageView)
         view.addSubview(containerView)
         userInfo.lineBreakMode = .byWordWrapping
         userInfo.numberOfLines = 0
         view.backgroundColor = .systemBackground
-        //layout for post?
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         layout.itemSize = CGSize(width: 110, height: 110)
@@ -186,7 +182,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 
             }
         }
-        view.addSubview(profileImageView)
         view.addSubview(containerView)
         containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
         
