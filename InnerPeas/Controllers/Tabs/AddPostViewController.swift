@@ -211,6 +211,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
                 return
             }
             let imageID = UUID().uuidString
+            UserDefaults.standard.setValue(imageID, forKey: "image_ID")
 
             StorageManager.shared.uploadPost(
                 data: data,

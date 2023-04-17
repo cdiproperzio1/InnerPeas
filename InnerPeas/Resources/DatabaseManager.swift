@@ -70,7 +70,7 @@ final class DatabaseManager {
     
     //RETRIEVE POST FOR FEED FUNC
     public func posts(for username: String, completion: @escaping (Result<[Post], Error>) -> Void) {
-        let ref = Database.database().reference().child("Users").child(username).child("Post")
+        let ref = Database.database().reference().child("Users").child(username).child("Posts")
         
         ref.observeSingleEvent(of: .value, with: { snapshot in
             guard let value = snapshot.value as? [String: AnyObject] else {
@@ -89,6 +89,7 @@ final class DatabaseManager {
                     }
                 }
             }
+            
             
             completion(.success(posts))
         }) { error in
@@ -125,8 +126,6 @@ final class DatabaseManager {
         }
     
     //FUNC FOR SEARCH FEED
-
-
     public func explorePosts(completion: @escaping ([Post]) -> Void) {
          let ref = Database.database().reference().child("Users")
 
@@ -162,7 +161,7 @@ final class DatabaseManager {
                      
 
                      let posts = postsData.compactMap { (_, postData) -> Post? in
-                         print("\n\n\n This is the post \(String(describing: Post(with: postData)))")
+                         //print("\n\n\n This is the post \(String(describing: Post(with: postData)))")
                          return Post(with: postData)
                      }
                      //print("\n\n\n this is the post with a s \(posts)")

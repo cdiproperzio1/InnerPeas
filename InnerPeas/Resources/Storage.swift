@@ -51,7 +51,7 @@ final class StorageManager{
             completion(nil)
             return
         }
-        
+        print("\n\n\n this is the reference from the storage ref \(ref)")
         storage.child(ref).downloadURL{ url, _ in
              completion(url)
         }
