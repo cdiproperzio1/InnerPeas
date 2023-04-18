@@ -12,6 +12,7 @@ class PostViewController: UIViewController {
     var postImage:UIImageView?
     var postTitle: UILabel?
     var postDirections: UILabel?
+    var postIngredients: UILabel?
     
     let post: Post
     var currentIndex=0
@@ -31,19 +32,40 @@ class PostViewController: UIViewController {
         postImage = UIImageView(frame: CGRect(x: 50, y: 200, width: self.view.frame.width-100, height: self.view.frame.width-100))
         postTitle?.textColor = .systemGray;
         postTitle!.text="\(post.title)"
-        postDirections=UILabel(frame: CGRect(x: 50, y: 200+(self.view.frame.width-100)+50, width: self.view.frame.width-100, height: 50))
-        postDirections!.text=("\(post.directions)")
+        postTitle!.font = UIFont.boldSystemFont(ofSize: 16.0)
+        postDirections=UILabel(frame: CGRect(x: 50, y: 200+(self.view.frame.width-100), width: self.view.frame.width-100, height: 50))
+        postDirections!.text=("\nDirections\n---------------\n\(post.directions)")
         postDirections!.textColor = .systemGray
         postDirections!.lineBreakMode = .byWordWrapping
         postDirections!.numberOfLines = 0
+
         postDirections?.sizeToFit()
         view.addSubview(postDirections!)
+        
+        let y = (200+(self.view.frame.width-100)+postDirections!.height)
+        postIngredients=UILabel(frame: CGRect(x: 50, y: y, width: self.view.frame.width-100, height: 50))
+    
+        postIngredients!.textColor = .systemGray
+        postIngredients!.lineBreakMode = .byWordWrapping
+        postIngredients!.numberOfLines = 0
+        postIngredients!.text="\nIngredients\n---------------"
+        for i in 0..<post.ingredients.count{
+            for (key, value) in post.ingredients[i] {
+                self.postIngredients!.text!+=("\n\(value) \(key)")
+            }
+        }
+        
+
+        postIngredients?.sizeToFit()
+        view.addSubview(postIngredients!)
+        
+        
         postImage!.backgroundColor = .white
         postImage!.layer.borderColor = UIColor.white.cgColor
         view.addSubview(postTitle!)
         let url=post.postURLs[0]
         let ref = Storage.storage().reference(forURL: url)
-        ref.getData(maxSize: (1 * 2048 * 2048)) { (data, error) in
+        ref.getData(maxSize: (1 * 4028 * 4028)) { (data, error) in
             if let err = error {
                 print(err)
             } else {
