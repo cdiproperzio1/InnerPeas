@@ -13,6 +13,9 @@ class PostViewController: UIViewController {
     var postTitle: UILabel?
     var postDirections: UILabel?
     var postIngredients: UILabel?
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+
     
     let post: Post
     var currentIndex=0
@@ -26,6 +29,7 @@ class PostViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupScrollView()
         title = "Post"
         view.backgroundColor = .systemBackground
         postTitle=UILabel(frame: CGRect(x: 50, y: 150, width: self.view.frame.width-100, height: 50))
@@ -122,6 +126,22 @@ class PostViewController: UIViewController {
                 }
         }
     }
+    func setupScrollView(){
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(scrollView)
+            scrollView.addSubview(contentView)
+            
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        }
 
     
     

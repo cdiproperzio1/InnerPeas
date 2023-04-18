@@ -18,7 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
+    
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+       
+            
 
         guard let vc = storyboard.instantiateViewController(withIdentifier: "FirstTimeViewController") as? FirstTimeViewController else {
             fatalError("Unable to instantiate view controller.")
