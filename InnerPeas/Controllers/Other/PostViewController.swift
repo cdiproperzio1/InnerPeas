@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class PostViewController: UIViewController {
-
-    let post: Post
+    var postImage:UIImageView?
+    var postTitle: UILabel?
+    var postDirections: UILabel?
+    var postIngredients: UILabel?
     
+    let post: Post
+    var currentIndex=0
     init(post: Post){
         self.post = post
         super.init(nibName: nil, bundle: nil)
@@ -23,9 +28,102 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         title = "Post"
         view.backgroundColor = .systemBackground
+        postTitle=UILabel(frame: CGRect(x: 50, y: 150, width: self.view.frame.width-100, height: 50))
+        postImage = UIImageView(frame: CGRect(x: 50, y: 200, width: self.view.frame.width-100, height: self.view.frame.width-100))
+        postTitle?.textColor = .systemGray;
+        postTitle!.text="\(post.title)"
+        postTitle!.font = UIFont.boldSystemFont(ofSize: 16.0)
+        postDirections=UILabel(frame: CGRect(x: 50, y: 200+(self.view.frame.width-100), width: self.view.frame.width-100, height: 50))
+        postDirections!.text=("\nDirections\n---------------\n\(post.directions)")
+        postDirections!.textColor = .systemGray
+        postDirections!.lineBreakMode = .byWordWrapping
+        postDirections!.numberOfLines = 0
 
-        // Do any additional setup after loading the view.
+        postDirections?.sizeToFit()
+        view.addSubview(postDirections!)
+        
+        let y = (200+(self.view.frame.width-100)+postDirections!.height)
+        postIngredients=UILabel(frame: CGRect(x: 50, y: y, width: self.view.frame.width-100, height: 50))
+    
+        postIngredients!.textColor = .systemGray
+        postIngredients!.lineBreakMode = .byWordWrapping
+        postIngredients!.numberOfLines = 0
+        postIngredients!.text="\nIngredients\n---------------"
+        for i in 0..<post.ingredients.count{
+            for (key, value) in post.ingredients[i] {
+                self.postIngredients!.text!+=("\n\(value) \(key)")
+            }
+        }
+        
+
+        postIngredients?.sizeToFit()
+        view.addSubview(postIngredients!)
+        
+        
+        postImage!.backgroundColor = .white
+        postImage!.layer.borderColor = UIColor.white.cgColor
+        view.addSubview(postTitle!)
+        let url=post.postURLs[0]
+        let ref = Storage.storage().reference(forURL: url)
+        ref.getData(maxSize: (1 * 4028 * 4028)) { (data, error) in
+            if let err = error {
+                print(err)
+            } else {
+                if let image  = data {
+                    let myImage: UIImage! = UIImage(data: image)
+                    self.postImage!.image=myImage
+                }
+            }
+        }
+        view.addSubview(postImage!)
+        postImage!.isUserInteractionEnabled = true
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.getSwipeAction(_:)))
+        self.postImage!.addGestureRecognizer(swipeGesture)
     }
+    @objc func getSwipeAction( _ recognizer : UISwipeGestureRecognizer){
+        
+        if recognizer.direction == .right{
+            currentIndex=currentIndex-1;
+            if(currentIndex<0){
+                currentIndex=(post.postURLs.count-1);
+            }
+            
+                let url=post.postURLs[currentIndex]
+                let ref = Storage.storage().reference(forURL: url)
+                ref.getData(maxSize: (1 * 4048 * 4048)) { (data, error) in
+                    if let err = error {
+                        print(err)
+                    } else {
+                        if let image  = data {
+                            let myImage: UIImage! = UIImage(data: image)
+                            self.postImage!.image=myImage
+                        }
+                    }
+                }
+            
+        } else if recognizer.direction == .left {
+            currentIndex=currentIndex+1
+            if(currentIndex>=post.postURLs.count){
+                currentIndex=0;
+            }
+            
+            
+                let url=post.postURLs[currentIndex]
+                let ref = Storage.storage().reference(forURL: url)
+                ref.getData(maxSize: (1 * 4048 * 4048)) { (data, error) in
+                    if let err = error {
+                        print(err)
+                    } else {
+                        if let image  = data {
+                            let myImage: UIImage! = UIImage(data: image)
+                            self.postImage!.image=myImage
+                        }
+                    }
+                }
+        }
+    }
+
+    
     
 
     /*

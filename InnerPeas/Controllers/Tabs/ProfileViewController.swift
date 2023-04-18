@@ -78,7 +78,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
-        print("hi-------")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -207,7 +206,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("User tapped on item \(indexPath.row)")
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let post = posts[indexPath.row]
+        let vc = PostViewController(post: post)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func didTapSettings(){
         let vc = SettingsViewController()
