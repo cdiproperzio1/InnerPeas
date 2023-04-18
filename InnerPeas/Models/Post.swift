@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseStorage
 
 struct Post: Codable {
     let id: String
@@ -17,8 +18,8 @@ struct Post: Codable {
     
     var storageReference: String? {
         guard let username = UserDefaults.standard.string(forKey: "username") else { return nil}
-        return "\(username)/Posts/\(id).png"
-        //("\(username)/Posts/post_\(id)/\(imageID).png")
+        return "\(username)/Posts/\(id)"
+ 
     }
     
     init(id: String, title: String, directions: String, postURLString: String, postURLs: [String] = [], ingredients: [[String:String]]) {
