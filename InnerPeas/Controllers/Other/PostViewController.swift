@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseStorage
+import FirebaseDatabase
 
 class PostViewController: UIViewController {
     var postImage:UIImageView?
@@ -15,6 +16,7 @@ class PostViewController: UIViewController {
     var postIngredients: UILabel?
     let scrollView = UIScrollView()
     let contentView = UIView()
+    var profileImageView = UIImageView()
 
     
     let post: Post
@@ -30,12 +32,40 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
-        title = "Post"
+        title = "\(post.title)"
+        
+        
+        profileImageView = UIImageView(frame: CGRect(x: 50, y: 125, width: 50, height: 50))
+        profileImageView.layer.cornerRadius = 60 / 2
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.clipsToBounds = true
+        view.addSubview(profileImageView)
+        
         view.backgroundColor = .systemBackground
-        postTitle=UILabel(frame: CGRect(x: 50, y: 150, width: self.view.frame.width-100, height: 50))
+        postTitle=UILabel(frame: CGRect(x: 70+(profileImageView.width), y: 150, width: (self.view.frame.width-100), height: 50))
         postImage = UIImageView(frame: CGRect(x: 50, y: 200, width: self.view.frame.width-100, height: self.view.frame.width-100))
         postTitle?.textColor = .systemGray;
-        postTitle!.text="\(post.title)"
+        //get username by substring in id
+        let id = post.id
+        let delimiter="_"
+        let username = id.components(separatedBy: delimiter)
+
+        let pathReference = Storage.storage().reference(withPath: "\(username[0])/profile_picture.png")
+        pathReference.getData(maxSize: 1 * 4048 * 4048) { data, error in
+            if let error = error {
+                print(error)
+                // Uh-oh, an error occurred!
+            } else {
+                // Data for "images/island.jpg" is returned
+                let myImage = UIImage(data: data!)
+                self.profileImageView.image=myImage
+                
+            }
+        }
+        
+        postTitle!.text="\(username[0])"
         postTitle!.font = UIFont.boldSystemFont(ofSize: 16.0)
         postDirections=UILabel(frame: CGRect(x: 50, y: 200+(self.view.frame.width-100), width: self.view.frame.width-100, height: 50))
         postDirections!.text=("\nDirections\n---------------\n\(post.directions)")
@@ -142,6 +172,7 @@ class PostViewController: UIViewController {
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
+
 
     
     

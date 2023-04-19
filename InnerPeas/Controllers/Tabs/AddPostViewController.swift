@@ -53,7 +53,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         dirList=UITextView(frame: CGRect(x: 50, y: 150, width: self.view.frame.width - 100, height: 200))
         
         okButton.frame = CGRect(
-            x: view.width/2,
+            x: (view.width/2)-50,
             y: 720,
             width: 100,
             height: 40)
