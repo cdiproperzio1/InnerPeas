@@ -35,11 +35,10 @@ class PostViewController: UIViewController {
         title = "\(post.title)"
         
         
-        profileImageView = UIImageView(frame: CGRect(x: 50, y: 125, width: 50, height: 50))
-        profileImageView.layer.cornerRadius = 60 / 2
+        profileImageView = UIImageView(frame: CGRect(x: 50, y: 150, width: 50, height: 50))
+        profileImageView.layer.cornerRadius = 50 / 2
         profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.masksToBounds = true
-        profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.clipsToBounds = true
         view.addSubview(profileImageView)
         
