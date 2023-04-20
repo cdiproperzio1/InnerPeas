@@ -147,7 +147,7 @@ final class DatabaseManager {
                  //print("\n\n\n this is user \(user)")
                  let username = user.username
                  let postRef = Database.database().reference().child("Users/\(username)/Posts")
-                 //print("\n\n\n post ref \(postRef)")
+                 print("\n\n\n post ref \(postRef)")
 
                  postRef.observeSingleEvent(of: .value) { snapshot in
                      defer {

@@ -14,6 +14,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     private var collectionView: UICollectionView? = nil
     
     private var viewModels = [[HomeFeedCellType]()]
+    private var posts = [Post]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +42,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             DispatchQueue.main.async {
                 switch result {
                 case .success(let posts):
-                    print("\n\n\n Posts for user \(username): \(posts.count)")
+                    //print("\n\n\n Posts for user \(username): \(posts.count)")
                     //print(posts)
                     
                     let group = DispatchGroup()
                     
                     posts.forEach { model in
                         //print("\n\n\n Entering dispatch Group")
-                        //print(model)
+                        //print("This is the model \(model)")
                         group.enter()
                         self?.createViewModel(model: model, username: username, completion: {success in
                             defer {
@@ -72,23 +74,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     private func createViewModel(model: Post, username: String, completion: @escaping (Bool) -> Void){
-        StorageManager.shared.downloadURL(for: model) { [weak self] url in
-            guard let PostUrl = url else {
-                return
-            }
-
+            
+        StorageManager.shared.profilePictureURL(for: username) { [weak self] profilePictureURL in
+            guard let profilePhotoURL = profilePictureURL else {return}
+            guard let postURL = model.postURLs.first else {return}
+            
             let postData: [HomeFeedCellType] =
             [
                 .poster(
                     viewModel: PosterCollectionViewCell(
                         username: username,
-                        profilePictureURL: URL(string: "https://mymodernmet.com/wp/wp-content/uploads/2020/01/baby-yoda-eating-food-13.jpg")!
+                        profilePictureURL: profilePhotoURL
               
                     )
                 ),
                 .post(
                     viewModel: PostCollectionViewCell(
-                        postUrl: PostUrl
+                        postUrl: URL(string: postURL)!
                     )
                 ),
                 
@@ -112,6 +114,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self?.viewModels.append(postData)
             completion(true)
         }
+            
         
         
     }
@@ -332,7 +335,7 @@ extension HomeViewController: ThumbnailsCollectionViewCellTypeDelegate{
 extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
     func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType) {
         let vc = RecipeViewController()
-        vc.title = "Home-made Mushroom Pizza"
+        vc.title = "TEST"
         navigationController?.pushViewController(vc, animated: true)
         print("Tapped recipe")
     }
@@ -346,7 +349,7 @@ extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
     }
     
     func PostDescriptionCollectionViewCellTypeDidTapComment(_cell: PostDescriptionCollectionViewCellType) {
-//        let vc = PostViewController()
+//        let vc = PostViewController(post: Post)
 //        vc.title = "Comments"
 //        navigationController?.pushViewController(vc, animated: true)
         }
