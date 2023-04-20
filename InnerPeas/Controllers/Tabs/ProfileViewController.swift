@@ -12,7 +12,8 @@ import FirebaseDatabase
 
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
-    var collectionView:UICollectionView?
+    
+    private var collectionView:UICollectionView?
     private var viewModels = [[HomeFeedCellType]()]
     let User = Auth.auth().currentUser
     let userInfo=UILabel(frame: CGRect(x: 50, y: 150, width: 125, height: 200))
@@ -42,20 +43,25 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
-        view.backgroundColor = .systemBackground
-        userInfo.font = UIFont.systemFont(ofSize: 14.0)
-        userInfo.textColor = .black
+        userInfo.font = UIFont.systemFont(ofSize: 16)
+        //userInfo.textColor = .secondaryLabel
         view.addSubview(userInfo)
+        
         self.recipesCount=UILabel(frame: CGRect(x: self.view.frame.width-100, y: 100, width: 40, height: 40))
         self.recipesCount!.font = UIFont.systemFont(ofSize: 14.0)
-        self.recipesCount!.textColor = .blue
+        //self.recipesCount!.textColor = .blue
         view.addSubview(self.recipesCount!)
         
         configure()
         
+        let buttonWidth: CGFloat = (view.width-10)/3
         view.addSubview(friendsButton)
-        
         friendsButton.anchor(right: view.rightAnchor, paddingRight: 170, width: 70, height: 200)
+        //friendsButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: view.height/2)
+        
+        //view.addSubview(followButton)
+        //followButton.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 5, width: 150, height: 100)
+
         view.addSubview(followersButton)
         followersButton.anchor(right: view.rightAnchor, paddingRight: 100, width: 70, height: 200)
         
@@ -77,15 +83,20 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .white
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     let friendsButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
+        button.setTitleColor(.label, for: .normal)
         button.setTitle("Friends", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel?.numberOfLines = 2
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 0.5
+        //button.layer.borderColor = UIColor.tertiaryLabel.cgColor
         button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
         return button
     }()
@@ -93,7 +104,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     let followersButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Followers", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.numberOfLines = 2
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 0.5
+        //ffrttgv button.layer.borderColor = UIColor.tertiaryLabel.cgColor
         button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
         return button
     }()
@@ -102,9 +117,19 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14.0)
         label.text = "Recipes"
-        label.textColor = .blue
+        label.tintColor = .label
         return label
     }()
+    
+    //follow button
+    let followButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemBlue
+        button.setTitle("Follow", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
    
     
     override func viewDidLoad() {
@@ -115,14 +140,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         userInfo.lineBreakMode = .byWordWrapping
         userInfo.numberOfLines = 0
         view.backgroundColor = .systemBackground
+        
+        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         layout.itemSize = CGSize(width: 110, height: 110)
         print(firstView)
+        
+        
         let frame = CGRect(x:10, y: firstView + 10, width: Int(self.view.frame.width)-20, height: Int(self.view.frame.height)-firstView)
         self.collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         
-        collectionView!.backgroundColor = .white
+        collectionView!.backgroundColor = .systemBackground
         collectionView?.register(PhotoCollectionViewCell.self,
                                  forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView?.dataSource = self
@@ -189,6 +218,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.recipesCount!.text="\(posts.count)"
         return posts.count
@@ -228,6 +259,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         
     }
+    
+
 }
     
 extension UIView {

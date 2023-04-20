@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     private var collectionView: UICollectionView? = nil
     
     private var viewModels = [[HomeFeedCellType]()]
+    private var posts = [Post]()
 
     
     override func viewDidLoad() {
@@ -41,7 +42,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             DispatchQueue.main.async {
                 switch result {
                 case .success(let posts):
-                    print("\n\n\n Posts for user \(username): \(posts.count)")
+                    //print("\n\n\n Posts for user \(username): \(posts.count)")
                     //print(posts)
                     
                     let group = DispatchGroup()
@@ -334,7 +335,7 @@ extension HomeViewController: ThumbnailsCollectionViewCellTypeDelegate{
 extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
     func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType) {
         let vc = RecipeViewController()
-        vc.title = "Home-made Mushroom Pizza"
+        vc.title = "TEST"
         navigationController?.pushViewController(vc, animated: true)
         print("Tapped recipe")
     }
