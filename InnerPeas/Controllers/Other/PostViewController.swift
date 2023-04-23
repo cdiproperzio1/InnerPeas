@@ -10,6 +10,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 class PostViewController: UIViewController {
+    var rating: Int?
     var postImage:UIImageView?
     var postTitle: UILabel?
     var postDirections: UILabel?
@@ -31,16 +32,18 @@ class PostViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupScrollView()
+        
         title = "\(post.title)"
         
+        let scrollView = UIScrollView(frame: view.frame)
+        view.addSubview(scrollView)
         
         profileImageView = UIImageView(frame: CGRect(x: 50, y: 150, width: 50, height: 50))
         profileImageView.layer.cornerRadius = 50 / 2
         profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.masksToBounds = true
         profileImageView.clipsToBounds = true
-        view.addSubview(profileImageView)
+        scrollView.addSubview(profileImageView)
         
         view.backgroundColor = .systemBackground
         postTitle=UILabel(frame: CGRect(x: 70+(profileImageView.width), y: 150, width: (self.view.frame.width-100), height: 50))
@@ -73,7 +76,7 @@ class PostViewController: UIViewController {
         postDirections!.numberOfLines = 0
 
         postDirections?.sizeToFit()
-        view.addSubview(postDirections!)
+        scrollView.addSubview(postDirections!)
         
         let y = (200+(self.view.frame.width-100)+postDirections!.height)
         postIngredients=UILabel(frame: CGRect(x: 50, y: y, width: self.view.frame.width-100, height: 50))
@@ -87,15 +90,15 @@ class PostViewController: UIViewController {
                 self.postIngredients!.text!+=("\n\(value) \(key)")
             }
         }
-        
+
 
         postIngredients?.sizeToFit()
-        view.addSubview(postIngredients!)
-        
+        scrollView.addSubview(postIngredients!)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: self.view.frame.origin.y + self.view.frame.height+postDirections!.height+postIngredients!.height)
         
         postImage!.backgroundColor = .white
         postImage!.layer.borderColor = UIColor.white.cgColor
-        view.addSubview(postTitle!)
+        scrollView.addSubview(postTitle!)
         let url=post.postURLs[0]
         let ref = Storage.storage().reference(forURL: url)
         ref.getData(maxSize: (1 * 4028 * 4028)) { (data, error) in
@@ -108,7 +111,8 @@ class PostViewController: UIViewController {
                 }
             }
         }
-        view.addSubview(postImage!)
+        ratingSystem()
+        scrollView.addSubview(postImage!)
         postImage!.isUserInteractionEnabled = true
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.getSwipeAction(_:)))
         self.postImage!.addGestureRecognizer(swipeGesture)
@@ -155,23 +159,33 @@ class PostViewController: UIViewController {
                 }
         }
     }
-    func setupScrollView(){
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(scrollView)
-            scrollView.addSubview(contentView)
+    func ratingSystem(){
+        var arrStars=[UIImageView]()
+        for i in 1...5{
+            if i < 3{
+                let star = UIImageView(frame: CGRect(x: (Int(self.view.frame.width)/2)-(50*i), y: 200, width: 25, height: 25))
+                star.image=UIImage(systemName: "star.fill")
+                arrStars.append(star)
+                //star.image=Image
+                view.addSubview(star)
+            }
+            else if i==3{
+                let star = UIImageView(frame: CGRect(x: (self.view.frame.width/2), y: 200, width: 25, height: 25))
+                arrStars.append(star)
+                star.image=UIImage(systemName: "star.fill")
+                view.addSubview(star)
+            }
+            else{
+                let star = UIImageView(frame: CGRect(x: Int(self.view.frame.width/2)+(50*i), y: 200, width: 25, height: 25))
+                arrStars.append(star)
+                star.image=UIImage(systemName: "star.fill")
+                view.addSubview(star)
+            }
             
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-            
-            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
+    }
 
+    
 
     
     
