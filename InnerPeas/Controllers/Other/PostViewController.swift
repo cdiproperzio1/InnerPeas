@@ -11,13 +11,15 @@ import FirebaseDatabase
 
 class PostViewController: UIViewController {
     var rating: Int?
+    var myRating: UILabel?
     var postImage:UIImageView?
     var postTitle: UILabel?
     var postDirections: UILabel?
     var postIngredients: UILabel?
-    let scrollView = UIScrollView()
+    var scrollView = UIScrollView()
     let contentView = UIView()
     var profileImageView = UIImageView()
+    var arrStars=[UIImageView]()
 
     
     let post: Post
@@ -30,12 +32,13 @@ class PostViewController: UIViewController {
     required init?(coder: NSCoder){
         fatalError()
     }
+    let ref = Database.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "\(post.title)"
         
-        let scrollView = UIScrollView(frame: view.frame)
+        scrollView = UIScrollView(frame: view.frame)
         view.addSubview(scrollView)
         
         profileImageView = UIImageView(frame: CGRect(x: 50, y: 150, width: 50, height: 50))
@@ -44,8 +47,12 @@ class PostViewController: UIViewController {
         profileImageView.layer.masksToBounds = true
         profileImageView.clipsToBounds = true
         scrollView.addSubview(profileImageView)
-        
+        myRating=UILabel(frame: CGRect(x: (self.view.width/2)-50, y: 50, width: 100, height: 50))
+        myRating!.text="Not Rated"
+        myRating!.textAlignment = .center
+        myRating?.textColor = .systemGray
         view.backgroundColor = .systemBackground
+        scrollView.addSubview(myRating!)
         postTitle=UILabel(frame: CGRect(x: 70+(profileImageView.width), y: 150, width: (self.view.frame.width-100), height: 50))
         postImage = UIImageView(frame: CGRect(x: 50, y: 200, width: self.view.frame.width-100, height: self.view.frame.width-100))
         postTitle?.textColor = .systemGray;
@@ -66,7 +73,7 @@ class PostViewController: UIViewController {
                 
             }
         }
-        
+        preLoadRating();
         postTitle!.text="\(username[0])"
         postTitle!.font = UIFont.boldSystemFont(ofSize: 16.0)
         postDirections=UILabel(frame: CGRect(x: 50, y: 200+(self.view.frame.width-100), width: self.view.frame.width-100, height: 50))
@@ -160,31 +167,85 @@ class PostViewController: UIViewController {
         }
     }
     func ratingSystem(){
-        var arrStars=[UIImageView]()
         for i in 1...5{
-            if i < 3{
-                let star = UIImageView(frame: CGRect(x: (Int(self.view.frame.width)/2)-(50*i), y: 200, width: 25, height: 25))
+            if i == 1{
+                let star = UIImageView(frame: CGRect(x: (Int(self.view.frame.width)/2)-50-10, y: 100, width: 20, height: 20))
                 star.image=UIImage(systemName: "star.fill")
+                let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+                star.addGestureRecognizer(tapGR)
+                star.isUserInteractionEnabled = true
+                star.tintColor = .systemGray
+                star.tag=i
                 arrStars.append(star)
-                //star.image=Image
-                view.addSubview(star)
+                scrollView.addSubview(star)
+            }
+            else if i == 2 {
+                let star = UIImageView(frame: CGRect(x: (Int(self.view.frame.width)/2)-25-10, y: 100, width: 20, height: 20))
+                star.image=UIImage(systemName: "star.fill")
+                star.tag=i
+                star.tintColor = .systemGray
+                let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+                star.addGestureRecognizer(tapGR)
+                star.isUserInteractionEnabled = true
+                arrStars.append(star)
+                scrollView.addSubview(star)
             }
             else if i==3{
-                let star = UIImageView(frame: CGRect(x: (self.view.frame.width/2), y: 200, width: 25, height: 25))
-                arrStars.append(star)
+                let star = UIImageView(frame: CGRect(x: (self.view.frame.width/2-10), y: 100, width: 20, height: 20))
                 star.image=UIImage(systemName: "star.fill")
-                view.addSubview(star)
+                star.tintColor = .systemGray
+                star.tag=i
+                let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+                star.addGestureRecognizer(tapGR)
+                star.isUserInteractionEnabled = true
+                arrStars.append(star)
+                scrollView.addSubview(star)
             }
             else{
-                let star = UIImageView(frame: CGRect(x: Int(self.view.frame.width/2)+(50*i), y: 200, width: 25, height: 25))
-                arrStars.append(star)
+                let star = UIImageView(frame: CGRect(x: Int(self.view.frame.width/2)+(25*(i-3)-10), y: 100, width: 20, height: 20))
+                star.tintColor = .systemGray
                 star.image=UIImage(systemName: "star.fill")
-                view.addSubview(star)
+                star.tag=i
+                let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+                star.addGestureRecognizer(tapGR)
+                star.isUserInteractionEnabled = true
+                arrStars.append(star)
+                scrollView.addSubview(star)
             }
             
         }
     }
-
+    @objc func imageTapped(sender: UITapGestureRecognizer) {
+        let index=sender.view?.tag
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            return
+        }
+        for i in 0..<index!{
+            arrStars[i].tintColor=(.yellow)
+        }
+        for i in index!..<5{
+            arrStars[i].tintColor=(.systemGray)
+        }
+       self.ref.child("Ratings").child(username).child(post.id).setValue(["Rating": index])
+    }
+    func preLoadRating(){
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            return
+        }
+        
+        ref.child("Ratings").child(username).child(post.id).child("Rating").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let userRating = snapshot.value as? Int else { return};
+            if userRating>0{
+                self.myRating?.text="My Rating"
+            }
+            for i in 0..<userRating{
+                self.arrStars[i].tintColor=(.yellow)
+            }
+                for i in userRating..<5{
+                    self.arrStars[i].tintColor=(.systemGray)
+            }
+            })
+    }
     
 
     

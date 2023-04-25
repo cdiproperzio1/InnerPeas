@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     
     private var isCurrentUser: Bool {
+        
         return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
     }
     
