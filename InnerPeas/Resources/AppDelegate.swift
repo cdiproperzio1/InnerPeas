@@ -17,7 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        let dateString = dateFormatter.string(from: Date())
+//        let id = NotificationManager.createID()
+//        let model = PeasNotification(
+//            identifier: id,
+//            notificationType: 1,
+//            profilePictureUrl: "https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__480.png",
+//            username: "jerry",
+//            isFollowing: false,
+//            postID: nil,
+//            postURL: nil,
+//            dateString: dateString
+//        )
+//        NotificationManager.shared.create(notification: model, for: "mj")
+        
         return true
     }
 

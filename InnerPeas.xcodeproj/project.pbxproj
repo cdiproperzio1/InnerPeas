@@ -13,6 +13,17 @@
 		AB38B35029AC59BF007A4F45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB38B35229AC59BF007A4F45 /* LaunchScreen.storyboard */; };
 		AB3A47A1299190A1003C1F99 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A47A0299190A1003C1F99 /* Extensions.swift */; };
 		AB4486AC29A2C334001345E8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4486AB29A2C334001345E8 /* PostViewController.swift */; };
+		AB4ADA9B29F97FD000C9D0E7 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADA9A29F97FD000C9D0E7 /* ProfileHeaderView.swift */; };
+		AB4ADA9D29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADA9C29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift */; };
+		AB4ADA9F29F9847100C9D0E7 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADA9E29F9847100C9D0E7 /* ProfileHeaderViewModel.swift */; };
+		AB4ADAA129F9B68600C9D0E7 /* ProfileHeaderViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAA029F9B68600C9D0E7 /* ProfileHeaderViewViewModel.swift */; };
+		AB4ADAA529F9EC9A00C9D0E7 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAA429F9EC9A00C9D0E7 /* NotificationViewController.swift */; };
+		AB4ADAA829F9EF4D00C9D0E7 /* FollowNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAA729F9EF4D00C9D0E7 /* FollowNotificationTableViewCell.swift */; };
+		AB4ADAAA29F9EFD500C9D0E7 /* CommentNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAA929F9EFD500C9D0E7 /* CommentNotificationTableViewCell.swift */; };
+		AB4ADAAC29F9F29100C9D0E7 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAAB29F9F29100C9D0E7 /* NotificationManager.swift */; };
+		AB4ADAAE29FA059500C9D0E7 /* NotificationCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAAD29FA059500C9D0E7 /* NotificationCellType.swift */; };
+		AB4ADAB029FA060100C9D0E7 /* NotificationCellViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAAF29FA060100C9D0E7 /* NotificationCellViewModels.swift */; };
+		AB4ADAB229FA1EAA00C9D0E7 /* PeasNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADAB129FA1EAA00C9D0E7 /* PeasNotification.swift */; };
 		AB4E366B29B6CF54007FCA8D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */; };
 		AB4E366D29B6DC64007FCA8D /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */; };
 		AB52964929DCADA70039EE40 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB52964829DCADA70039EE40 /* AddPostViewController.swift */; };
@@ -85,6 +96,17 @@
 		AB38B35129AC59BF007A4F45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB3A47A0299190A1003C1F99 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AB4486AB29A2C334001345E8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		AB4ADA9A29F97FD000C9D0E7 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		AB4ADA9C29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		AB4ADA9E29F9847100C9D0E7 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		AB4ADAA029F9B68600C9D0E7 /* ProfileHeaderViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewViewModel.swift; sourceTree = "<group>"; };
+		AB4ADAA429F9EC9A00C9D0E7 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		AB4ADAA729F9EF4D00C9D0E7 /* FollowNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNotificationTableViewCell.swift; sourceTree = "<group>"; };
+		AB4ADAA929F9EFD500C9D0E7 /* CommentNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationTableViewCell.swift; sourceTree = "<group>"; };
+		AB4ADAAB29F9F29100C9D0E7 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		AB4ADAAD29FA059500C9D0E7 /* NotificationCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellType.swift; sourceTree = "<group>"; };
+		AB4ADAAF29FA060100C9D0E7 /* NotificationCellViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellViewModels.swift; sourceTree = "<group>"; };
+		AB4ADAB129FA1EAA00C9D0E7 /* PeasNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeasNotification.swift; sourceTree = "<group>"; };
 		AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
 		AB52964829DCADA70039EE40 /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
@@ -174,12 +196,24 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		AB4ADAA629F9EF1300C9D0E7 /* Notification Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AB4ADAA729F9EF4D00C9D0E7 /* FollowNotificationTableViewCell.swift */,
+				AB4ADAA929F9EFD500C9D0E7 /* CommentNotificationTableViewCell.swift */,
+				AB4ADAAD29FA059500C9D0E7 /* NotificationCellType.swift */,
+				AB4ADAAF29FA060100C9D0E7 /* NotificationCellViewModels.swift */,
+			);
+			path = "Notification Cells";
+			sourceTree = "<group>";
+		};
 		AB69965A299B34A60022345E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				AB699660299B36160022345E /* User.swift */,
 				AB699662299B361F0022345E /* Post.swift */,
 				ABE49A9A299C137A00B23DAE /* HomeFeedCellType.swift */,
+				AB4ADAB129FA1EAA00C9D0E7 /* PeasNotification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,10 +221,11 @@
 		AB69965D299B353F0022345E /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				AB52964829DCADA70039EE40 /* AddPostViewController.swift */,
 				AB69965E299B35B60022345E /* TabBarViewController.swift */,
 				ABC64B082998A0E700C1CE35 /* HomeViewController.swift */,
+				AB52964829DCADA70039EE40 /* AddPostViewController.swift */,
 				AB699656299B33170022345E /* SearchViewController.swift */,
+				AB4ADAA429F9EC9A00C9D0E7 /* NotificationViewController.swift */,
 				AB699658299B33410022345E /* ProfileViewController.swift */,
 			);
 			path = Tabs;
@@ -238,10 +273,11 @@
 		ABC64B062998A00600C1CE35 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AB4ADAA629F9EF1300C9D0E7 /* Notification Cells */,
 				ABE49A9E299C6B7400B23DAE /* Home Cells */,
 				AB38B35229AC59BF007A4F45 /* LaunchScreen.storyboard */,
-				AB16083B299B43BD00693DB8 /* TextField.swift */,
 				BE164D5329AD79550018044D /* Main.storyboard */,
+				AB16083B299B43BD00693DB8 /* TextField.swift */,
 				AB16083D299B47E300693DB8 /* LoginHeaderView.swift */,
 				ABE49A92299C05ED00B23DAE /* PosterCollectionViewCell.swift */,
 				ABE49A94299C066400B23DAE /* PostCollectionViewCell.swift */,
@@ -249,6 +285,9 @@
 				ABE49A98299C123200B23DAE /* PostRatingCollectionViewCell.swift */,
 				ABE49A9C299C145900B23DAE /* ThumbnailsCollectionViewCell.swift */,
 				AB5AADA829D29805002D4237 /* PhotoCollectionViewCell.swift */,
+				AB4ADA9A29F97FD000C9D0E7 /* ProfileHeaderView.swift */,
+				AB4ADA9C29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift */,
+				AB4ADA9E29F9847100C9D0E7 /* ProfileHeaderViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,6 +304,7 @@
 				AB69964D299B1AF60022345E /* AuthManager.swift */,
 				AB699652299B1EBB0022345E /* AnalyticsManager.swift */,
 				ABE9112B29CB7ED5006F7D9E /* DatabaseManager.swift */,
+				AB4ADAAB29F9F29100C9D0E7 /* NotificationManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -289,6 +329,7 @@
 				ABE49AA3299C6D2A00B23DAE /* PostDescriptionCollectionViewCellType.swift */,
 				ABE49AA5299C6D6300B23DAE /* PostRatingCollectionViewCelltype.swift */,
 				ABE49AA7299C6D9500B23DAE /* ThumbnailsCollectionViewCellType.swift */,
+				AB4ADAA029F9B68600C9D0E7 /* ProfileHeaderViewViewModel.swift */,
 			);
 			path = "Home Cells";
 			sourceTree = "<group>";
@@ -410,8 +451,12 @@
 				AB699661299B36160022345E /* User.swift in Sources */,
 				AB4E366B29B6CF54007FCA8D /* SettingsViewController.swift in Sources */,
 				AB69964E299B1AF60022345E /* AuthManager.swift in Sources */,
+				AB4ADAA529F9EC9A00C9D0E7 /* NotificationViewController.swift in Sources */,
 				AB160840299B575400693DB8 /* createAccountViewController.swift in Sources */,
+				AB4ADAAA29F9EFD500C9D0E7 /* CommentNotificationTableViewCell.swift in Sources */,
+				AB4ADA9F29F9847100C9D0E7 /* ProfileHeaderViewModel.swift in Sources */,
 				AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */,
+				AB4ADAA829F9EF4D00C9D0E7 /* FollowNotificationTableViewCell.swift in Sources */,
 				AB16083C299B43BD00693DB8 /* TextField.swift in Sources */,
 				AB52964929DCADA70039EE40 /* AddPostViewController.swift in Sources */,
 				BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */,
@@ -419,9 +464,13 @@
 				AB69964C299AE41E0022345E /* Storage.swift in Sources */,
 				AB699663299B361F0022345E /* Post.swift in Sources */,
 				ABE49A97299C06FC00B23DAE /* PostDescriptionCollectionViewCell.swift in Sources */,
+				AB4ADAB029FA060100C9D0E7 /* NotificationCellViewModels.swift in Sources */,
+				AB4ADAA129F9B68600C9D0E7 /* ProfileHeaderViewViewModel.swift in Sources */,
 				ABE49AA0299C6B9C00B23DAE /* PosterCollectionViewCellType.swift in Sources */,
 				AB16083E299B47E300693DB8 /* LoginHeaderView.swift in Sources */,
 				ABE49A95299C066400B23DAE /* PostCollectionViewCell.swift in Sources */,
+				AB4ADAAC29F9F29100C9D0E7 /* NotificationManager.swift in Sources */,
+				AB4ADAB229FA1EAA00C9D0E7 /* PeasNotification.swift in Sources */,
 				AB69965F299B35B60022345E /* TabBarViewController.swift in Sources */,
 				AB699659299B33410022345E /* ProfileViewController.swift in Sources */,
 				AB699653299B1EBB0022345E /* AnalyticsManager.swift in Sources */,
@@ -435,13 +484,16 @@
 				AB699657299B33170022345E /* SearchViewController.swift in Sources */,
 				AB3A47A1299190A1003C1F99 /* Extensions.swift in Sources */,
 				AB5AADA929D29805002D4237 /* PhotoCollectionViewCell.swift in Sources */,
+				AB4ADA9B29F97FD000C9D0E7 /* ProfileHeaderView.swift in Sources */,
 				ABE49A9B299C137A00B23DAE /* HomeFeedCellType.swift in Sources */,
 				ABF64FA029B038F3007B3CCF /* RecipeViewController.swift in Sources */,
 				BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */,
 				ABE49A93299C05ED00B23DAE /* PosterCollectionViewCell.swift in Sources */,
 				ABE49AA2299C6CE100B23DAE /* PostCollectionViewCellType.swift in Sources */,
+				AB4ADA9D29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				ABC64B092998A0E700C1CE35 /* HomeViewController.swift in Sources */,
 				AB70D181298B4F71000C79D6 /* SceneDelegate.swift in Sources */,
+				AB4ADAAE29FA059500C9D0E7 /* NotificationCellType.swift in Sources */,
 				ABE49A99299C123200B23DAE /* PostRatingCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

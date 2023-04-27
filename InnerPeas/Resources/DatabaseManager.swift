@@ -68,6 +68,27 @@ final class DatabaseManager {
         }
     }
     
+    public func findUser(username: String, completion: @escaping (User?) -> Void){
+        let ref = database.child("Users")
+        
+        ref.observeSingleEvent(of: .value) { snapshot in
+            guard let usersDict = snapshot.value as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            let users = usersDict.compactMap { (key, value) -> User? in
+                guard let userDict = value as? [String: Any] else {
+                    return nil
+                }
+                var user = User(with: userDict)
+                user?.username = key
+                return user
+            }
+            let user = users.first(where: {$0.username == username})
+            completion(user)
+        }
+    }
+    
     //RETRIEVE POST FOR FEED FUNC
     public func posts(for username: String, completion: @escaping (Result<[Post], Error>) -> Void) {
         let ref = Database.database().reference().child("Users").child(username).child("Posts")
@@ -127,59 +148,59 @@ final class DatabaseManager {
     
     //FUNC FOR SEARCH FEED
     public func explorePosts(completion: @escaping ([Post]) -> Void) {
-         let ref = Database.database().reference().child("Users")
-
-         ref.observeSingleEvent(of: .value) { snapshot in
-             guard let usersData = snapshot.value as? [String: [String: AnyObject]] else {
-                 completion([])
-                 return
-             }
-
-             let users = usersData.compactMap { (_, userData) -> User? in
-                 return User(with: userData)
-             }
-
-             let group = DispatchGroup()
-             var aggregatePosts = [Post]()
-
-             users.forEach { user in
-                 group.enter()
-                 //print("\n\n\n this is user \(user)")
-                 let username = user.username
-                 let postRef = Database.database().reference().child("Users/\(username)/Posts")
-                 print("\n\n\n post ref \(postRef)")
-
-                 postRef.observeSingleEvent(of: .value) { snapshot in
-                     defer {
-                         group.leave()
-                     }
-
-                     guard let postsData = snapshot.value as? [String: [String: AnyObject]] else {
-                         return
-                     }
-                     //print("\n\n\n This is the post data here: \(postsData)")
-                     
-
-                     let posts = postsData.compactMap { (_, postData) -> Post? in
-                         //print("\n\n\n This is the post \(String(describing: Post(with: postData)))")
-                         return Post(with: postData)
-                     }
-                     //print("\n\n\n this is the post with a s \(posts)")
-                     aggregatePosts.append(contentsOf: posts)
-                 }
-             }
-
-             group.notify(queue: .main) {
-                 completion(aggregatePosts)
-             }
-         }
-     }
-
-
-
-
-
-
+        let ref = Database.database().reference().child("Users")
+        
+        ref.observeSingleEvent(of: .value) { snapshot in
+            guard let usersData = snapshot.value as? [String: [String: AnyObject]] else {
+                completion([])
+                return
+            }
+            
+            let users = usersData.compactMap { (_, userData) -> User? in
+                return User(with: userData)
+            }
+            
+            let group = DispatchGroup()
+            var aggregatePosts = [Post]()
+            
+            users.forEach { user in
+                group.enter()
+                //print("\n\n\n this is user \(user)")
+                let username = user.username
+                let postRef = Database.database().reference().child("Users/\(username)/Posts")
+                print("\n\n\n post ref \(postRef)")
+                
+                postRef.observeSingleEvent(of: .value) { snapshot in
+                    defer {
+                        group.leave()
+                    }
+                    
+                    guard let postsData = snapshot.value as? [String: [String: AnyObject]] else {
+                        return
+                    }
+                    //print("\n\n\n This is the post data here: \(postsData)")
+                    
+                    
+                    let posts = postsData.compactMap { (_, postData) -> Post? in
+                        //print("\n\n\n This is the post \(String(describing: Post(with: postData)))")
+                        return Post(with: postData)
+                    }
+                    //print("\n\n\n this is the post with a s \(posts)")
+                    aggregatePosts.append(contentsOf: posts)
+                }
+            }
+            
+            group.notify(queue: .main) {
+                completion(aggregatePosts)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     public func createPost(newPost: Post, completion: @escaping (Bool) -> Void) {
         guard let username = UserDefaults.standard.string(forKey: "username") else {
@@ -197,5 +218,153 @@ final class DatabaseManager {
             completion(error == nil)
         }
     }
+    
+    public func getUserCounts(
+        username: String,
+        completion: @escaping ((followers: Int, following: Int, recipe: Int)) -> Void) {
+        
+        let ref = Database.database().reference().child("Users").child(username)
+        var followers = 0
+        var following = 0
+        var recipe = 0
+        
+        let group = DispatchGroup()
+        group.enter()
+        group.enter()
+        group.enter()
+        
+        // Get follower count
+        ref.child("Followers").observeSingleEvent(of: .value, with: { snapshot in
+            followers = Int(snapshot.childrenCount)
+            group.leave()
+        })
+        
+        // Get following count
+        ref.child("Following").observeSingleEvent(of: .value, with: { snapshot in
+            following = Int(snapshot.childrenCount)
+            group.leave()
+        })
+        
+        // Get recipe count
+        ref.child("Posts").observeSingleEvent(of: .value, with: { snapshot in
+            recipe = Int(snapshot.childrenCount)
+            group.leave()
+        })
+        
+        group.notify(queue: .global()) {
+            let result = (followers: followers,
+                          following: following,
+                          recipe: recipe
+                        )
+            completion(result)
+        }
+    }
 
+    public func isFollowing(
+        targetUsername: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else {
+            completion(false)
+            return
+        }
+        
+        let ref = Database.database().reference().child("Users")
+                  .child(targetUsername)
+                  .child("Followers")
+                  .child(currentUsername)
+        
+        ref.observeSingleEvent(of: .value) { snapshot in
+            guard snapshot.exists() else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
+    
+
+    public func getNotifications(completion: @escaping ([PeasNotification]) -> Void) {
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            completion([])
+            return
+        }
+        let ref = Database.database().reference().child("Users").child(username).child("Notifications")
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let notificationsDict = snapshot.value as? [String: AnyObject] else {
+                completion([])
+                return
+            }
+            
+            var notifications: [PeasNotification] = []
+            for (_, value) in notificationsDict {
+                if let notificationData = value as? [String: Any],
+                   let notification = PeasNotification(with: notificationData) {
+                    notifications.append(notification)
+                }
+            }
+            //print("\n\n\n These are the notification being retrieved \(notifications)")
+            completion(notifications)
+        }
+    }
+    
+    public func insertNotification(identifier: String, data: [String: Any], for username: String){
+        let ref = Database.database().reference().child("Users").child(username).child("Notifications").child(identifier)
+        
+        ref.setValue(data)
+        
+    }
+    
+
+    public func getPost(
+        with identifier: String,
+        from username: String,
+        completion: @escaping (Post?) -> Void)
+    {
+        let ref = Database.database().reference().child("Users").child(username).child("Posts").child(identifier)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let data = snapshot.value as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            completion(Post(with: data))
+        }
+    }
+    
+    enum RelationshipState: String {
+        case follow
+        case unfollow
+    }
+    
+    public func updateRelationship(
+        state: RelationshipState,
+        for targetUsername: String,
+        completion: @escaping (Bool) -> Void)
+    {
+        guard let requesterUsername = UserDefaults.standard.string(forKey: "username") else {
+            completion(false)
+            return
+        }
+        
+        
+        let currentFollowing = Database.database().reference().child("Users").child(requesterUsername).child("Following")
+        
+        let targetUserFollower = Database.database().reference().child("Users").child(targetUsername).child("Followers")
+        
+
+        switch state {
+        case .unfollow:
+            currentFollowing.child(targetUsername).removeValue()
+            targetUserFollower.child(requesterUsername).removeValue()
+            completion(true)
+        case .follow:
+            currentFollowing.child(targetUsername).setValue(["valid":"1"])
+            targetUserFollower.child(requesterUsername).setValue(["valid":"1"])
+            completion(true)
+            
+        }
+        
+    }
 }
