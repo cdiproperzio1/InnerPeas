@@ -14,9 +14,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let table = UITableView()
         table.register(UITableViewCell.self,
                        forCellReuseIdentifier: "cell")
+        
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings"
@@ -67,6 +68,21 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }))
         present(actionSheet, animated: true)
     }
+    //switch for light and dark mode - Anaya
+    @objc func onClickSwitch(sender:UISwitch!)
+    {
+        if #available(iOS 13.0, *){
+            let appDelegate = UIApplication.shared.windows.first
+            
+            if sender.isOn{
+                appDelegate?.overrideUserInterfaceStyle = .dark
+                return
+            }
+            
+            appDelegate?.overrideUserInterfaceStyle = .light
+            return
+        }
+    }
     
     private func createTableFooter(){
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: 50))
@@ -81,6 +97,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         button.addTarget(self, action: #selector(didTapSignOut), for: .touchUpInside)
         
         tableView.tableFooterView = footer
+        
+        //light or dark mode switch button- Anaya
+        let switchButton = UISwitch(frame: footer.bounds)
+        footer.addSubview(switchButton)
+        switchButton.addTarget(self, action: #selector(self.onClickSwitch), for: .valueChanged)
+        
+        
     }
     
     
