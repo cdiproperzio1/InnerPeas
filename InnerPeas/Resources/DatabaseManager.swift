@@ -367,4 +367,33 @@ final class DatabaseManager {
         }
         
     }
+    
+
+    public func getUserInfo(username: String, completion: @escaping (User?) -> Void) {
+        let ref = Database.database().reference().child("Users").child(username)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let data = snapshot.value as? [String: Any],
+                  let userInfo = User(with: data) else {
+                completion(nil)
+                return
+            }
+            completion(userInfo)
+        }
+    }
+    
+    public func updateUserInfo(userInfo: User, completion: @escaping (Bool) -> Void){
+        guard let username = UserDefaults.standard.string(forKey: "username"),
+        let data = userInfo.asDictionary()
+        else {
+            return
+        }
+        let ref = Database.database().reference().child("Users").child(username)
+        ref.setValue(data) { error, _ in
+            completion(error == nil)
+        }
+        
+    }
+
 }
+                                                                           

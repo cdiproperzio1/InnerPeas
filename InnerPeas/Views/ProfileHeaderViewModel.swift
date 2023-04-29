@@ -19,4 +19,5 @@ struct ProfileHeaderViewModel {
     let bio: String?
     let buttonType: ProfileButtonType
     let name: String?
+    let location: String?
 }

@@ -29,6 +29,14 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         return label
     }()
     
+    private let locationLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = " "
+        label.font = .systemFont(ofSize: 18)
+        return label
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +45,7 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         addSubview(countContainerView)
         addSubview(imageView)
         addSubview(bioLabel)
+        addSubview(locationLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -59,12 +68,23 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
             width: width-imageView.right-10
             , height: imageSize
         )
-        bioLabel.sizeToFit()
+        let bioSize = bioLabel.sizeThatFits(
+            bounds.size
+        )
         bioLabel.frame = CGRect(
             x: 5,
             y: imageView.bottom+10,
             width: width-10,
-            height: bioLabel.height)
+            height: bioSize.height)
+        
+        
+        locationLabel.sizeToFit()
+        locationLabel.frame = CGRect(
+            x: 5,
+            y: bioLabel.bottom+1,
+            width: width-10,
+            height: locationLabel.height)
+        
         
     }
         
@@ -72,18 +92,20 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         super.prepareForReuse()
         imageView.image = nil
         bioLabel.text = nil
+        locationLabel.text = nil
     }
     
     public func configure(with viewModel: ProfileHeaderViewModel){
         imageView.kf.setImage(with: viewModel.profilePictureUrl, completionHandler: nil)
-        var text = ""
+
         if let name = viewModel.name {
-            text = name + "\n"
+            bioLabel.text = "\(name)\n\(viewModel.bio ?? "This is my profile!")"
+        } else {
+            bioLabel.text = viewModel.bio ?? "This is my profile!"
         }
-        text += viewModel.bio ?? "This is my profile!"
-        
-        bioLabel.text = text
-        
+
+        locationLabel.text = viewModel.location ?? "This is my location"
+
         let containerViewModel = ProfileHeaderCountViewModel(
             followingCount: viewModel.followerCount,
             followerCount: viewModel.followingCount,

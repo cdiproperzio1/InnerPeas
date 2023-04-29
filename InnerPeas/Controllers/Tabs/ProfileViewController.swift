@@ -178,44 +178,44 @@ class ProfileViewController: UIViewController{
 //        view.addSubview(collectionView!)
         
         
-        
-        guard let username = UserDefaults.standard.string(forKey: "username") else {
-            return
-        }
-        
-        Database.database().reference().child("Users/\(username)").getData(completion:  { error, snapshot in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return;
-            }
-            guard let dictionary = snapshot!.value as? [String: Any] else {return}
-            
-            guard let bio = dictionary["bio"] else { return}
-            guard let fname = dictionary["firstName"] else {return}
-            guard let lname = dictionary["lastName"] else {return}
-            guard let location = dictionary["location"] else {return}
-            
-            self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)"
-        });
-        
-        Database.database().reference().child("Users/\(username)/Posts").getData(completion:  { error, snapshot in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return;
-            }
-            guard let dictionary = snapshot!.value as? [String: Any] else {return}
-            for (key, data) in dictionary {
-                if let data = data as? [String: Any] {
-                    var postData = data
-                    postData["id"] = key
-                    if let post = Post(with: postData) {
-                        self.posts.append(post)
-                    }
-                }
-            }
-            self.collectionView?.reloadData()
-            
-        });
+//
+//        guard let username = UserDefaults.standard.string(forKey: "username") else {
+//            return
+//        }
+//
+//        Database.database().reference().child("Users/\(username)").getData(completion:  { error, snapshot in
+//            guard error == nil else {
+//                print(error!.localizedDescription)
+//                return;
+//            }
+//            guard let dictionary = snapshot!.value as? [String: Any] else {return}
+//
+//            guard let bio = dictionary["bio"] else { return}
+//            guard let fname = dictionary["firstName"] else {return}
+//            guard let lname = dictionary["lastName"] else {return}
+//            guard let location = dictionary["location"] else {return}
+//
+//            self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)"
+//        });
+//
+//        Database.database().reference().child("Users/\(username)/Posts").getData(completion:  { error, snapshot in
+//            guard error == nil else {
+//                print(error!.localizedDescription)
+//                return;
+//            }
+//            guard let dictionary = snapshot!.value as? [String: Any] else {return}
+//            for (key, data) in dictionary {
+//                if let data = data as? [String: Any] {
+//                    var postData = data
+//                    postData["id"] = key
+//                    if let post = Post(with: postData) {
+//                        self.posts.append(post)
+//                    }
+//                }
+//            }
+//            self.collectionView?.reloadData()
+//
+//        });
         
 //        let pathReference = Storage.storage().reference(withPath: "\(username)/profile_picture.png")
 //        pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
@@ -242,13 +242,32 @@ class ProfileViewController: UIViewController{
     }
     
     private func fetchUserInfo() {
-
+        let group = DispatchGroup()
+        let username = user.username
+        
+        //get the post for the users profile
+        group.enter()
+        DatabaseManager.shared.posts(for: username) { [weak self] result in
+            defer {
+                group.leave()
+            }
+            switch result {
+            case .success(let posts):
+                self?.posts = posts
+            case .failure:
+                break
+            }
+        }
+        
+        //get the user info for that profile
         var profilePictureURL: URL?
         var buttonType: ProfileButtonType = .edit
-        let group = DispatchGroup()
         var followers = 0
         var following = 0
         var recipes = 0
+        var name: String?
+        var bio: String?
+        var location: String?
 
         //get counts of followers, following, recipe
         group.enter()
@@ -263,6 +282,24 @@ class ProfileViewController: UIViewController{
         }
         
         //get name, bio
+        DatabaseManager.shared.getUserInfo(username: user.username){ User in
+            var fname = User?.firstName
+            var lname = User?.lastName
+            bio = User?.bio
+            location = User?.location
+            
+            if let fname = User?.firstName, let lname = User?.lastName
+            {
+                name = "\(fname) \(lname)"
+            } else if let fname = User?.firstName {
+                name = fname
+            } else if let lname = User?.lastName {
+                name = lname
+            } else {
+                name = "Unknown"
+            }
+
+        }
         
         //get profile image
         group.enter()
@@ -277,6 +314,9 @@ class ProfileViewController: UIViewController{
         if !isCurrentUser {
             group.enter()
             DatabaseManager.shared.isFollowing(targetUsername: user.username) { isFollowing in
+                defer {
+                    group.leave()
+                }
                 buttonType = .follow(isFollowing: isFollowing)
             }
         }
@@ -287,9 +327,10 @@ class ProfileViewController: UIViewController{
                 followingCount: following,
                 followerCount: followers,
                 recipeCount: recipes,
-                bio: "This is my main page \n I love cooking Cali",
+                bio: bio,
                 buttonType: buttonType,
-                name: "Michael Jackson"
+                name: name,
+                location: location
             )
             self.collectionView?.reloadData()
         }
@@ -356,9 +397,7 @@ extension UIView {
 
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //recipesCount!.text="\(posts.count)"
         return posts.count
-        //return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -379,7 +418,6 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         for url in postUrls {
             cell.configure(with: URL(string: url))
         }
-        //cell.configure(with: UIImage(named: "food"))
         return cell
     }
     
@@ -415,7 +453,13 @@ extension ProfileViewController: ProfileHeaderViewDelegate{
     }
     
     func ProfileHeaderViewDelegateDidTapEditProfile(_ containerView: ProfileHeaderView) {
-        
+        let vc = EditProfileViewController()
+        vc.completion = { [weak self] in
+            self?.headerViewModel = nil
+            self?.fetchUserInfo()
+        }
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
     }
     
     func ProfileHeaderViewDelegateDidTapFollow(_ containerView: ProfileHeaderView) {

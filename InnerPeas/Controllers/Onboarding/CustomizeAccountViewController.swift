@@ -94,7 +94,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
     }
     
     @IBAction func `continue`(_ sender: Any) {
-        let UID = String((Auth.auth().currentUser?.uid)!)
+        //let UID = String((Auth.auth().currentUser?.uid)!)
         if(self.textView.text == "What food do you like to make? (150 Characters)"){
             self.textView.text=" "
         }
@@ -120,13 +120,13 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
                     UserDefaults.standard.setValue(user.email, forKey: "email")
                     UserDefaults.standard.setValue(user.location, forKey: "location")
                     
-
                     let vc = TabBarViewController()
                     vc.modalPresentationStyle = .fullScreen
                     self?.present(vc, animated: true)
                     self?.completion?()
+                    
                 case .failure(let error):
-                    print(error)
+                    print("Failed to create new user \(error)")
                 }
             }
             

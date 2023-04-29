@@ -13,6 +13,7 @@
 		AB38B35029AC59BF007A4F45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB38B35229AC59BF007A4F45 /* LaunchScreen.storyboard */; };
 		AB3A47A1299190A1003C1F99 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A47A0299190A1003C1F99 /* Extensions.swift */; };
 		AB4486AC29A2C334001345E8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4486AB29A2C334001345E8 /* PostViewController.swift */; };
+		AB48B2BC29FB14E000CD2F6E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB48B2BB29FB14E000CD2F6E /* EditProfileViewController.swift */; };
 		AB4ADA9B29F97FD000C9D0E7 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADA9A29F97FD000C9D0E7 /* ProfileHeaderView.swift */; };
 		AB4ADA9D29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADA9C29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift */; };
 		AB4ADA9F29F9847100C9D0E7 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4ADA9E29F9847100C9D0E7 /* ProfileHeaderViewModel.swift */; };
@@ -28,6 +29,7 @@
 		AB4E366D29B6DC64007FCA8D /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */; };
 		AB52964929DCADA70039EE40 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB52964829DCADA70039EE40 /* AddPostViewController.swift */; };
 		AB5AADA929D29805002D4237 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5AADA829D29805002D4237 /* PhotoCollectionViewCell.swift */; };
+		AB670E7029FD4A3000C532E2 /* EditableUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB670E6F29FD4A3000C532E2 /* EditableUserInfo.swift */; };
 		AB69964C299AE41E0022345E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB69964B299AE41E0022345E /* Storage.swift */; };
 		AB69964E299B1AF60022345E /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB69964D299B1AF60022345E /* AuthManager.swift */; };
 		AB699653299B1EBB0022345E /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB699652299B1EBB0022345E /* AnalyticsManager.swift */; };
@@ -96,6 +98,7 @@
 		AB38B35129AC59BF007A4F45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB3A47A0299190A1003C1F99 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AB4486AB29A2C334001345E8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		AB48B2BB29FB14E000CD2F6E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		AB4ADA9A29F97FD000C9D0E7 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		AB4ADA9C29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		AB4ADA9E29F9847100C9D0E7 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 		AB4E366C29B6DC64007FCA8D /* FirstTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
 		AB52964829DCADA70039EE40 /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		AB5AADA829D29805002D4237 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		AB670E6F29FD4A3000C532E2 /* EditableUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableUserInfo.swift; sourceTree = "<group>"; };
 		AB69964B299AE41E0022345E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		AB69964D299B1AF60022345E /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AB699652299B1EBB0022345E /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */,
 				AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */,
 				ABE9112929CB7C85006F7D9E /* SearchResultsViewController.swift */,
+				AB48B2BB29FB14E000CD2F6E /* EditProfileViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				AB699662299B361F0022345E /* Post.swift */,
 				ABE49A9A299C137A00B23DAE /* HomeFeedCellType.swift */,
 				AB4ADAB129FA1EAA00C9D0E7 /* PeasNotification.swift */,
+				AB670E6F29FD4A3000C532E2 /* EditableUserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -461,6 +467,7 @@
 				AB52964929DCADA70039EE40 /* AddPostViewController.swift in Sources */,
 				BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */,
 				ABE9112C29CB7ED5006F7D9E /* DatabaseManager.swift in Sources */,
+				AB670E7029FD4A3000C532E2 /* EditableUserInfo.swift in Sources */,
 				AB69964C299AE41E0022345E /* Storage.swift in Sources */,
 				AB699663299B361F0022345E /* Post.swift in Sources */,
 				ABE49A97299C06FC00B23DAE /* PostDescriptionCollectionViewCell.swift in Sources */,
@@ -488,6 +495,7 @@
 				ABE49A9B299C137A00B23DAE /* HomeFeedCellType.swift in Sources */,
 				ABF64FA029B038F3007B3CCF /* RecipeViewController.swift in Sources */,
 				BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */,
+				AB48B2BC29FB14E000CD2F6E /* EditProfileViewController.swift in Sources */,
 				ABE49A93299C05ED00B23DAE /* PosterCollectionViewCell.swift in Sources */,
 				ABE49AA2299C6CE100B23DAE /* PostCollectionViewCellType.swift in Sources */,
 				AB4ADA9D29F982E200C9D0E7 /* ProfileHeaderCollectionReusableView.swift in Sources */,

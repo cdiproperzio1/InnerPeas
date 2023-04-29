@@ -137,8 +137,8 @@ class ProfileHeaderView: UIView {
     }
     
     func configure(with viewModel: ProfileHeaderCountViewModel){
-        followersButton.setTitle("Followers\n\(viewModel.followerCount)", for: .normal)
-        followingButton.setTitle("Following\n\(viewModel.followingCount)", for: .normal)
+        followersButton.setTitle("Following\n\(viewModel.followerCount)", for: .normal)
+        followingButton.setTitle("Followers\n\(viewModel.followingCount)", for: .normal)
         recipeButton.setTitle("Recipes\n\(viewModel.recipeCount)", for: .normal)
         
         self.action = viewModel.actionType
