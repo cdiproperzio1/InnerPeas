@@ -383,16 +383,28 @@ final class DatabaseManager {
     }
     
     public func updateUserInfo(userInfo: User, completion: @escaping (Bool) -> Void){
-        guard let username = UserDefaults.standard.string(forKey: "username"),
-        let data = userInfo.asDictionary()
-        else {
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
             return
         }
-        let ref = Database.database().reference().child("Users").child(username)
-        ref.setValue(data) { error, _ in
-            completion(error == nil)
+        
+        var updates: [String: Any] = [:]
+        if let fname = userInfo.firstName {
+            updates["firstName"] = fname
+        }
+        if let lname = userInfo.lastName {
+            updates["lastName"] = lname
+        }
+        if let location = userInfo.location {
+            updates["location"] = location
+        }
+        if let bio = userInfo.bio {
+            updates["bio"] = bio
         }
         
+        let ref = Database.database().reference().child("Users").child(username)
+        ref.updateChildValues(updates) { error, _ in
+            completion(error == nil)
+        }
     }
 
 }

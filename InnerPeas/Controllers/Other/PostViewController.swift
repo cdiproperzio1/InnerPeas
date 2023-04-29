@@ -227,6 +227,7 @@ class PostViewController: UIViewController {
             arrStars[i].tintColor=(.systemGray)
         }
        self.ref.child("Ratings").child(username).child(post.id).setValue(["Rating": index])
+       myRating?.text="My Rating"
     }
     func preLoadRating(){
         guard let username = UserDefaults.standard.string(forKey: "username") else {
