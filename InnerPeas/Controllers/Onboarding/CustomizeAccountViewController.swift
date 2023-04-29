@@ -11,28 +11,23 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class CustomizeAccountViewController: UIViewController, UITextViewDelegate, ImagePickerDelegate{
-    var uname: String?
+    
     
     func didSelect(image: UIImage?) {
         guard let image = image else {
             return
         }
-        let uid = String((Auth.auth().currentUser?.uid)!)
-        guard let imageData = image.pngData() else {
-            return
-        }
-        storage.child("image/\(uid).png").putData(imageData) { error in
-            guard error != nil else {
-                print("failed to upload")
-                return
-            }
-            self.storage.child("images/\(self.uname!).png").downloadURL(completion: {url, error in
-                    guard let url = url, error == nil else {
-                        return
-                    }
-                    let urlString = url.absoluteString
-                })
-            }
+        //let uid = String((Auth.auth().currentUser?.uid)!)
+//        guard let imageData = image.pngData() else {
+//            return
+//        }
+//        storage.child("image/\(uid).png").putData(imageData) { error in
+//            guard error != nil else {
+//                print("failed to upload")
+//                return
+//            }
+
+            
         self.profileImage.image = image
     }
     
@@ -63,6 +58,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         profileImage.layer.borderWidth = 1.0
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderColor = UIColor.white.cgColor
+        profileImage.contentMode = .scaleAspectFill
         profileImage.clipsToBounds = true
         textView.text = "What food do you like to make? (150 Characters)"
         textView.textColor = UIColor.lightGray
@@ -94,7 +90,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
     }
     
     @IBAction func `continue`(_ sender: Any) {
-        let UID = String((Auth.auth().currentUser?.uid)!)
+        //let UID = String((Auth.auth().currentUser?.uid)!)
         if(self.textView.text == "What food do you like to make? (150 Characters)"){
             self.textView.text=" "
         }
@@ -119,6 +115,13 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
                     UserDefaults.standard.setValue(user.username, forKey: "bio")
                     UserDefaults.standard.setValue(user.email, forKey: "email")
                     UserDefaults.standard.setValue(user.location, forKey: "location")
+                    
+                    self?.storage.child("images/\(user.username).png").downloadURL(completion: {url, error in
+                            guard let url = url, error == nil else {
+                                return
+                            }
+                            let urlString = url.absoluteString
+                        })
                     
 
                     let vc = TabBarViewController()
