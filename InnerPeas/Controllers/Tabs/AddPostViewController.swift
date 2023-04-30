@@ -34,6 +34,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     lazy var okButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.tintColor
+        button.layer.cornerRadius = 15
         button.setTitle("Post!", for: .normal)
         button.addTarget(
             self,
@@ -80,16 +81,19 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         
         //POST NAME FIELD
         postName.placeholder = "Name"
+        postName.layer.cornerRadius = 15
         postName.font = .systemFont(ofSize: 22)
         postName.backgroundColor = .secondarySystemBackground
         self.view.addSubview(postName)
         
         //AMOUNTS FIELD
         amountTextField.placeholder = "Amount"
+        amountTextField.layer.cornerRadius = 15
         self.view.addSubview(amountTextField)
         
         let addPhoto = UIButton(frame: CGRect(x: 225, y: 400, width: 140, height: 40))
         addPhoto.backgroundColor = UIColor.tintColor
+        addPhoto.layer.cornerRadius = 15
         addPhoto.setTitle("Upload Photo", for: .normal)
         addPhoto.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         self.view.addSubview(addPhoto)
@@ -102,7 +106,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         self.view.addSubview(tableView)
         let addIngred = UIButton(frame: CGRect(x: 325, y: 450, width: 40, height: 40))
         addIngred.backgroundColor = UIColor.tintColor
-        addIngred.setTitle("Add", for: .normal)
+        addIngred.layer.cornerRadius = 15
+        addIngred.setTitle(" Add ", for: .normal)
         addIngred.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         self.view.addSubview(addIngred)
         //        ingredList.numberOfLines=2
@@ -134,6 +139,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     func textViewDidEndEditing(_ dirList : UITextView) {
         if dirList.text.isEmpty {
             dirList.text = "Directions"
+            dirList.layer.cornerRadius = 15
             dirList.textColor = .secondarySystemBackground
         }
         
@@ -141,7 +147,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     func textViewDidBeginEditing(_ dirList : UITextView ) {
         if dirList.text == "Directions" {
             dirList.text = ""
-            dirList.textColor = .systemCyan
+            dirList.layer.cornerRadius = 15
+            dirList.textColor = .secondarySystemBackground
         }
     }
     @objc func selectPhoto(_ sender: UIButton){
