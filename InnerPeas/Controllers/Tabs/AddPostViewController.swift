@@ -33,7 +33,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     
     lazy var okButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor.tintColor
         button.setTitle("Post!", for: .normal)
         button.addTarget(
             self,
@@ -89,7 +89,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         self.view.addSubview(amountTextField)
         
         let addPhoto = UIButton(frame: CGRect(x: 225, y: 400, width: 140, height: 40))
-        addPhoto.backgroundColor = .systemBlue
+        addPhoto.backgroundColor = UIColor.tintColor
         addPhoto.setTitle("Upload Photo", for: .normal)
         addPhoto.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         self.view.addSubview(addPhoto)
@@ -101,7 +101,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         tableView.dataSource=self
         self.view.addSubview(tableView)
         let addIngred = UIButton(frame: CGRect(x: 325, y: 450, width: 40, height: 40))
-        addIngred.backgroundColor = .systemBlue
+        addIngred.backgroundColor = UIColor.tintColor
         addIngred.setTitle("Add", for: .normal)
         addIngred.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         self.view.addSubview(addIngred)
