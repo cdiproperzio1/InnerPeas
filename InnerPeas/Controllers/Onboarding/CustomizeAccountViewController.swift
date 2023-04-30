@@ -54,6 +54,7 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         super.viewDidLoad()
         //profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         //profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
+        profileImage.frame(forAlignmentRect: CGRect(x: (self.view.frame.width/2)-30, y: 200, width: 60, height: 60))
         profileImage.layer.cornerRadius = 120 / 2
         profileImage.layer.borderWidth = 1.0
         profileImage.layer.masksToBounds = true

@@ -226,6 +226,26 @@ class PostViewController: UIViewController {
         for i in index!..<5{
             arrStars[i].tintColor=(.systemGray)
         }
+        
+
+        ref.child("Ratings").child(post.id).observeSingleEvent(of: .value, with: { [self] (snapshot) in
+            let rating = snapshot.childSnapshot(forPath: "Average").value as? Float ?? 0
+            var number = snapshot.childSnapshot(forPath: "Raters").value as? Float ?? 0
+            let newRating = Float((rating * number) + Float(index ?? 0))/(number+1)
+            print(newRating)
+            
+            if(self.myRating!.text != "My Rating"){
+                number=number+1
+            }
+         
+            self.ref.child("Ratings").child(self.post.id).setValue(["Raters": number, "Average": newRating])
+  
+        })
+            
+    
+        
+    
+
        self.ref.child("Ratings").child(username).child(post.id).setValue(["Rating": index])
        myRating?.text="My Rating"
     }
@@ -239,6 +259,8 @@ class PostViewController: UIViewController {
             if userRating>0{
                 self.myRating?.text="My Rating"
             }
+            
+            
             for i in 0..<userRating{
                 self.arrStars[i].tintColor=(.yellow)
             }
