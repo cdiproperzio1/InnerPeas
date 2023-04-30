@@ -19,7 +19,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
     
     var tableView = UITableView()
     
-    let postName=UITextField(frame: CGRect(x: 50, y: 100, width: 325, height: 40))
+    var postName=UITextField()
     let amountTextField=UITextField(frame: CGRect(x: 225, y: 450, width: 100, height: 40))
     let ingredTextField=UITextField(frame: CGRect(x: 50, y: 450, width: 125, height: 40))
     var ingredients = [[String:String]]()
@@ -51,7 +51,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         
         view.backgroundColor = .systemBackground
         dirList=UITextView(frame: CGRect(x: 50, y: 150, width: self.view.frame.width - 100, height: 200))
-        
+        postName=UITextField(frame: CGRect(x: 50, y: 100, width: self.view.frame.width - 100, height: 40))
         okButton.frame = CGRect(
             x: (view.width/2)-50,
             y: 720,
