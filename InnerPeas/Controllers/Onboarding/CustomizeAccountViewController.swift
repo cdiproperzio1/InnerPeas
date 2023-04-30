@@ -64,9 +64,13 @@ class CustomizeAccountViewController: UIViewController, UITextViewDelegate, Imag
         textView.textColor = UIColor.lightGray
         textView.delegate=self
         
+        //dismiss keyboard on tap
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
         
     }
 
+   
     
     public var completion: (() -> Void)?
     
