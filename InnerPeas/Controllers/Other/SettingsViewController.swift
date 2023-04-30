@@ -75,13 +75,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let appDelegate = UIApplication.shared.windows.first
             
             if sender.isOn{
-                appDelegate?.overrideUserInterfaceStyle = .dark
+                appDelegate?.overrideUserInterfaceStyle = .light
                 return
             }
             
-            appDelegate?.overrideUserInterfaceStyle = .light
+            appDelegate?.overrideUserInterfaceStyle = .dark
             return
         }
+        
     }
     
     private func createTableFooter(){
