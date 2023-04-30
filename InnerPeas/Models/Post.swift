@@ -15,6 +15,7 @@ struct Post: Codable {
     let postURLString: String
     let postURLs: [String]
     let ingredients: [[String:String]]
+    let date: String
     
     var storageReference: String? {
         guard let username = UserDefaults.standard.string(forKey: "username") else { return nil}
@@ -22,12 +23,13 @@ struct Post: Codable {
  
     }
     
-    init(id: String, title: String, directions: String, postURLString: String, postURLs: [String] = [], ingredients: [[String:String]]) {
+    init(id: String, title: String, directions: String, date: String, postURLString: String, postURLs: [String] = [], ingredients: [[String:String]]) {
         self.id = id
         self.title = title
         self.directions = directions
         self.postURLString = postURLString
         self.postURLs = postURLs
         self.ingredients = ingredients
+        self.date = date
     }
 }

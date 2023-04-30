@@ -200,6 +200,10 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         //var imageIDs = [String]()
         var imageUrls: [String] = []
 
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let currentDate = Date()
+
         let group = DispatchGroup()
 
         for i in 0..<images.count {
@@ -225,12 +229,14 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
                 imageUrls.append(url.absoluteString)
             }
         }
-
+        
+        //let dateString = dateFormatter.string(from: currentDate)
         group.notify(queue: .main) { [self] in
             let newPost = Post(
                 id: newPostID,
                 title: postName.text ?? "Recipe Name",
                 directions: dirList.text ?? "Recipe Directions",
+                date: Date().toString(),
                 postURLString: "", 
                 postURLs: imageUrls,
                 ingredients: ingredients
@@ -242,10 +248,12 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
                 DispatchQueue.main.async {
                     self?.navigationController?.popToRootViewController(animated: false)
                     self?.tabBarController?.selectedIndex = 0
+                    NotificationCenter.default.post(name: .didPostNotification, object: nil)
                 }
             }
             
             self.images=[UIImage]()
+            postName.text=nil
             image1frame.image=nil
             image2frame.image=nil
             image3frame.image=nil
@@ -257,6 +265,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
 
 
     }
+    
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -58,10 +58,10 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private let actionButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
+    private let actionButton = PeasFollowButton()
+    
+    private var isFollowing = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(followingButton)
@@ -96,13 +96,15 @@ class ProfileHeaderView: UIView {
         switch action {
         case .edit:
             delegate?.ProfileHeaderViewDelegateDidTapEditProfile(self)
-        case .follow(let isFollowing):
-            if isFollowing {
+        case .follow:
+            if self.isFollowing {
                 delegate?.ProfileHeaderViewDelegateDidTapUnFollow(self)
             }
             else{
                 delegate?.ProfileHeaderViewDelegateDidTapFollow(self)
             }
+            self.isFollowing = !isFollowing
+            actionButton.configure(for: isFollowing ? .unfollow : .follow)
         }
     }
 
@@ -137,8 +139,8 @@ class ProfileHeaderView: UIView {
     }
     
     func configure(with viewModel: ProfileHeaderCountViewModel){
-        followersButton.setTitle("Following\n\(viewModel.followerCount)", for: .normal)
-        followingButton.setTitle("Followers\n\(viewModel.followingCount)", for: .normal)
+        followersButton.setTitle("Followers\n\(viewModel.followingCount)", for: .normal)
+        followingButton.setTitle("Following\n\(viewModel.followerCount)", for: .normal)
         recipeButton.setTitle("Recipes\n\(viewModel.recipeCount)", for: .normal)
         
         self.action = viewModel.actionType
@@ -152,18 +154,9 @@ class ProfileHeaderView: UIView {
             actionButton.layer.borderWidth = 0.5
             
         case .follow(let isFollowing):
-            actionButton.backgroundColor = isFollowing ? .systemBackground: .systemGreen
-            actionButton.setTitle(isFollowing ? "Unfollow" : "Follow", for: .normal)
-            actionButton.setTitleColor(isFollowing ? .label : .white, for: .normal)
-            
-            if isFollowing {
-                actionButton.layer.borderWidth = 0.5
-                actionButton.layer.borderColor = UIColor.tertiaryLabel.cgColor
-            }
-            else{
-                actionButton.layer.borderWidth = 0
-            }
+            self.isFollowing = isFollowing
+            actionButton.configure(for: isFollowing ? .unfollow : .follow)
         }
-
     }
+
 }

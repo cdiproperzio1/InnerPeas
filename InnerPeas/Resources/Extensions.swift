@@ -16,6 +16,18 @@ extension String {
     }
 }
 
+extension Date {
+    func toString(format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension Notification.Name{
+    static let didPostNotification = Notification.Name("didPostNotification")
+}
+
 extension UIView{
     public var width: CGFloat{
         return frame.size.width

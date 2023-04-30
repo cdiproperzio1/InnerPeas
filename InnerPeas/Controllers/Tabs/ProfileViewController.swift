@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController{
     var firstView:Int=300
     var posts = [Post]()
     var recipesCount:UILabel?
+    private var observer: NSObjectProtocol?
     
     
     
@@ -41,103 +42,8 @@ class ProfileViewController: UIViewController{
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-    
-    //private let containerView = ProfileHeaderView()
-    
-    //declare lazy when adding things to something. Doesn't render until called.
-//    lazy var containerView: UIView = {
-//        let view = UIView()
-//        //view.backgroundColor = .systemBackground
-//        userInfo.font = UIFont.systemFont(ofSize: 16)
-//        //userInfo.textColor = .secondaryLabel
-//        view.addSubview(userInfo)
-//
-//        self.recipesCount=UILabel(frame: CGRect(x: self.view.frame.width-100, y: 100, width: 40, height: 40))
-//        self.recipesCount!.font = UIFont.systemFont(ofSize: 14.0)
-//        //self.recipesCount!.textColor = .blue
-//        view.addSubview(self.recipesCount!)
-//
-//        configure()
-//
-//        let buttonWidth: CGFloat = (view.width-10)/3
-//        view.addSubview(friendsButton)
-//        friendsButton.anchor(right: view.rightAnchor, paddingRight: 170, width: 70, height: 200)
-//        //friendsButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: view.height/2)
-//
-//        //view.addSubview(followButton)
-//        //followButton.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 5, width: 150, height: 100)
-//
-//        view.addSubview(followersButton)
-//        followersButton.anchor(right: view.rightAnchor, paddingRight: 100, width: 70, height: 200)
-//
-//        view.addSubview(recipesLabel)
-//        recipesLabel.anchor(right: view.rightAnchor, paddingRight: 30, width: 70, height: 200)
-//
-//
-//        view.addSubview(profileImageView)
-//        profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//        profileImageView.anchor(left: view.leftAnchor, paddingLeft: 32, width: 120, height: 120)
-//        profileImageView.layer.cornerRadius = 120 / 2
-//        profileImageView.layer.borderWidth = 1.0
-//        profileImageView.layer.masksToBounds = true
-//
-//        profileImageView.layer.borderColor = UIColor.white.cgColor
-//        profileImageView.clipsToBounds = true
-//        return view
-//    }()
-    
-//    let profileImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.clipsToBounds = true
-//        imageView.layer.masksToBounds = true
-//        imageView.contentMode = .scaleAspectFill
-//        return imageView
-//    }()
-//
-//    let friendsButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitleColor(.label, for: .normal)
-//        button.setTitle("Friends", for: .normal)
-//        button.titleLabel?.numberOfLines = 2
-//        button.layer.cornerRadius = 4
-//        button.layer.borderWidth = 0.5
-//        //button.layer.borderColor = UIColor.tertiaryLabel.cgColor
-//        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
-//        return button
-//    }()
-//
-//    let followersButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Followers", for: .normal)
-//        button.setTitleColor(.label, for: .normal)
-//        button.titleLabel?.numberOfLines = 2
-//        button.layer.cornerRadius = 4
-//        button.layer.borderWidth = 0.5
-//        //ffrttgv button.layer.borderColor = UIColor.tertiaryLabel.cgColor
-//        button.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
-//        return button
-//    }()
-//
-//    let recipesLabel: UILabel = {
-//        let label = UILabel()
-//        label.font = UIFont.systemFont(ofSize: 14.0)
-//        label.text = "Recipes"
-//        label.tintColor = .label
-//        return label
-//    }()
-//
-//    //follow button
-//    let followButton: UIButton = {
-//        let button = UIButton()
-//        button.backgroundColor = .systemBlue
-//        button.setTitle("Follow", for: .normal)
-//        button.setTitleColor(.white, for: .normal)
-//        return button
-//    }()
-    
-   
-    
+       
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = user.username.uppercased()
@@ -151,88 +57,12 @@ class ProfileViewController: UIViewController{
         userInfo.numberOfLines = 0
         view.backgroundColor = .systemBackground
         
-        
-//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-//        layout.itemSize = CGSize(width: 110, height: 110)
-//        print(firstView)
-//
-//
-//        let frame = CGRect(x:10, y: firstView + 10, width: Int(self.view.frame.width)-20, height: Int(self.view.frame.height)-firstView)
-//
-//
-//        self.collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
-//
-//        collectionView?.register(
-//            ProfileHeaderCollectionReusableView.self,
-//            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-//            withReuseIdentifier: ProfileHeaderCollectionReusableView.identifier)
-//
-//        collectionView!.backgroundColor = .systemBackground
-//        collectionView?.register(PhotoCollectionViewCell.self,
-//                                 forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
-//        collectionView?.dataSource = self
-//        collectionView?.delegate = self
-//        collectionView?.alwaysBounceVertical = true
-//        collectionView?.bounces = true
-//        view.addSubview(collectionView!)
-        
-        
-//
-//        guard let username = UserDefaults.standard.string(forKey: "username") else {
-//            return
-//        }
-//
-//        Database.database().reference().child("Users/\(username)").getData(completion:  { error, snapshot in
-//            guard error == nil else {
-//                print(error!.localizedDescription)
-//                return;
-//            }
-//            guard let dictionary = snapshot!.value as? [String: Any] else {return}
-//
-//            guard let bio = dictionary["bio"] else { return}
-//            guard let fname = dictionary["firstName"] else {return}
-//            guard let lname = dictionary["lastName"] else {return}
-//            guard let location = dictionary["location"] else {return}
-//
-//            self.userInfo.text="\(fname) \(lname) \n\(bio) \nLocation: \(location)"
-//        });
-//
-//        Database.database().reference().child("Users/\(username)/Posts").getData(completion:  { error, snapshot in
-//            guard error == nil else {
-//                print(error!.localizedDescription)
-//                return;
-//            }
-//            guard let dictionary = snapshot!.value as? [String: Any] else {return}
-//            for (key, data) in dictionary {
-//                if let data = data as? [String: Any] {
-//                    var postData = data
-//                    postData["id"] = key
-//                    if let post = Post(with: postData) {
-//                        self.posts.append(post)
-//                    }
-//                }
-//            }
-//            self.collectionView?.reloadData()
-//
-//        });
-        
-//        let pathReference = Storage.storage().reference(withPath: "\(username)/profile_picture.png")
-//        pathReference.getData(maxSize: 1 * 2048 * 2048) { data, error in
-//            if let error = error {
-//                print(error)
-//                // Uh-oh, an error occurred!
-//            } else {
-//                // Data for "images/island.jpg" is returned
-//                let myImage = UIImage(data: data!)
-//                self.profileImageView.image=myImage
-//
-//            }
-//        }
-//        view.addSubview(containerView)
-//        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
-        
-        
+        if isCurrentUser {
+            observer = NotificationCenter.default.addObserver(forName: .didPostNotification, object: nil, queue: .main, using: { [weak self] _ in
+                self?.posts.removeAll()
+                self?.fetchUserInfo()
+            })
+        }
         
     }
     
@@ -434,6 +264,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             headerView.configure(with: viewModel)
             headerView.countContainerView.delegate = self
         }
+        headerView.delegate = self
         return headerView
     }
     
@@ -441,15 +272,21 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 }
 extension ProfileViewController: ProfileHeaderViewDelegate{
     func ProfileHeaderViewDelegateDidTapFollowers(_ containerView: ProfileHeaderView) {
-        
+        let vc = ListViewController(type: .followers(user: user))
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func ProfileHeaderViewDelegateDidTapFollowing(_ containerView: ProfileHeaderView) {
-            
+        let vc = ListViewController(type: .following(user: user))
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func ProfileHeaderViewDelegateDidTapRecipe(_ containerView: ProfileHeaderView) {
-        
+        guard posts.count >= 18 else{
+            return
+        }
+        collectionView?.setContentOffset(CGPoint(x: 0, y: view.width * 0.4),
+                                         animated: true)
     }
     
     func ProfileHeaderViewDelegateDidTapEditProfile(_ containerView: ProfileHeaderView) {
@@ -463,16 +300,90 @@ extension ProfileViewController: ProfileHeaderViewDelegate{
     }
     
     func ProfileHeaderViewDelegateDidTapFollow(_ containerView: ProfileHeaderView) {
-        
+        DatabaseManager.shared.updateRelationship(state: .follow, for: user.username) { [weak self] success in
+            if !success {
+                print("Failed to follow")
+                DispatchQueue.main.async {
+                    self?.collectionView?.reloadData()
+                }
+            }
+        }
     }
     
     func ProfileHeaderViewDelegateDidTapUnFollow(_ containerView: ProfileHeaderView) {
-        
+        DatabaseManager.shared.updateRelationship(state: .unfollow, for: user.username) { [weak self] success in
+            if !success {
+                print("Failed to un follow")
+                DispatchQueue.main.async {
+                    self?.collectionView?.reloadData()
+                }
+            }
+        }
+
     }
     
     
     
 }
+
+extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate{
+    func profileHeaderCollectionReusableViewDidTapProfilePic(_header: ProfileHeaderCollectionReusableView) {
+        
+        guard isCurrentUser else {
+            return
+        }
+        
+        print("Tapped profile pic")
+        
+        let sheet = UIAlertController(
+            title: "Change Picture",
+            message: "Update your photo",
+            preferredStyle: .actionSheet
+        )
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        sheet.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: {[weak self] _ in
+            DispatchQueue.main.async {
+                let picker = UIImagePickerController()
+                picker.sourceType = .camera
+                picker.allowsEditing = true
+                picker.delegate = self
+                self?.present(picker, animated: true)
+            }
+        }))
+        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .default, handler: {[weak self] _ in
+            DispatchQueue.main.async {
+                let picker = UIImagePickerController()
+                picker.allowsEditing = true
+                picker.sourceType = .photoLibrary
+                picker.delegate = self
+                self?.present(picker, animated: true)
+            }
+        }))
+        present(sheet, animated: true)
+    }
+    
+    
+}
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        StorageManager.shared.uploadProfilePicture(username: user.username, data: image.pngData()) { [weak self] success in
+            if success {
+                self?.headerViewModel = nil
+                self?.posts = []
+                self?.fetchUserInfo()
+            }
+        }
+    }
+}
+
 extension ProfileViewController{
     //  COLLECTION VIEW FUNC
     func configureCollectionView(){

@@ -7,7 +7,6 @@
 
 import Foundation
 import Firebase
-import FirebaseFirestore
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
@@ -275,7 +274,7 @@ final class DatabaseManager {
                   .child(currentUsername)
         
         ref.observeSingleEvent(of: .value) { snapshot in
-            guard snapshot.exists() else {
+            guard snapshot.exists(), snapshot.value != nil else {
                 completion(false)
                 return
             }
@@ -366,6 +365,42 @@ final class DatabaseManager {
             
         }
         
+    }
+    
+    public func followers(for username: String, completion: @escaping ([String]) -> Void){
+        let ref = Database.database().reference().child("Users").child(username).child("Followers")
+
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            guard snapshot.exists(), let value = snapshot.value as? [String: AnyObject] else {
+                completion([])
+                return
+            }
+            let usernames = Array(value.keys)
+            completion(usernames)
+        }) { error in
+            print(error.localizedDescription)
+            completion([])
+        }
+
+
+    }
+    
+    public func following(for username: String, completion: @escaping ([String]) -> Void){
+        let ref = Database.database().reference().child("Users").child(username).child("Following")
+
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            guard snapshot.exists(), let value = snapshot.value as? [String: AnyObject] else {
+                completion([])
+                return
+            }
+            let usernames = Array(value.keys)
+            completion(usernames)
+        }) { error in
+            print(error.localizedDescription)
+            completion([])
+        }
+
+
     }
     
 
