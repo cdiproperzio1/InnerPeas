@@ -77,17 +77,39 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         let fullText = "\(username): \(text)"
         comments.append(fullText)
         self.textField.text=""
-        ref.child("Comments").child(self.post.id).setValue(["Comment": text, "User": username])
+        let currentDateTime = Date()
+        let commentId="\(username)\(currentDateTime)"
+        ref.child("Comments").child(self.post.id).child(commentId).setValue(["Comment": text, "User": username])
         tableView.reloadData()
     }
     func loadData(){
         ref.child("Comments").child(post.id).observeSingleEvent(of: .value, with: { [self] (snapshot) in
-            let comment = snapshot.childSnapshot(forPath: "Comment").value as? String ?? " "
-            let user = snapshot.childSnapshot(forPath: "User").value as? String ?? " "
-            let text = "\(user): \(comment)"
-            print(text)
-            self.comments.append(text)
+            
+            let dict = snapshot.value as? [String : Any] ?? ["No": "Comment"]
+            
+            
+            for (_, value) in dict {
+                let smallDic = value as? [String : Any] ?? ["No": "Comment"]
+                let comment = smallDic["Comment"] as? String ?? ""
+                let user = smallDic["User"] as? String ?? ""
+                let text = "\(user): \(comment)"
+                self.comments.append(text)
+
+            }
+                
+//
+//            let comment = snapshot.childSnapshot(forPath: "Comment").value as? String ?? " "
+//            let user = snapshot.childSnapshot(forPath: "User").value as? String ?? " "
+//            let text = "\(user): \(comment)"
+//            print(text)
+//            self.comments.append(text)
             self.tableView.reloadData()
         })
     }
+    func findDic(dict: [String: String]) {
+        for (key, value) in dict {
+            print("\(key) : \(value)")
+        }
+    }
+
 }
