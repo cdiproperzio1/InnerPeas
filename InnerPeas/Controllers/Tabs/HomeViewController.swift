@@ -65,7 +65,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                             allPosts.append(contentsOf: posts.compactMap({
                                 (post: $0, owner: current)
                             }))
-
+                            self.posts.append(contentsOf: posts)
                         case .failure(let error):
                             break
                             
@@ -362,6 +362,7 @@ extension HomeViewController: ThumbnailsCollectionViewCellTypeDelegate{
 
 }
 extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
+
     func PostDesciptionCollectionViewCellTypeDidTapRecipeName(_cell: PostDescriptionCollectionViewCellType) {
         let vc = RecipeViewController()
         vc.title = "TEST"
@@ -378,10 +379,15 @@ extension HomeViewController: PostDescriptionCollectionViewCellTypeDelegate{
     }
     
     func PostDescriptionCollectionViewCellTypeDidTapComment(_cell: PostDescriptionCollectionViewCellType) {
-//        let vc = PostViewController(post: Post)
-//        vc.title = "Comments"
-//        navigationController?.pushViewController(vc, animated: true)
+        
+        let vc = CommentViewController(post: posts[0])
+        vc.title = "Comments"
+        navigationController?.pushViewController(vc, animated: true)
         }
+    
+    func loadData(){
+        
+    }
         
     }
 
