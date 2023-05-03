@@ -91,6 +91,7 @@
 		ABE9112C29CB7ED5006F7D9E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE9112B29CB7ED5006F7D9E /* DatabaseManager.swift */; };
 		ABF64FA029B038F3007B3CCF /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */; };
 		BE164D5429AD79550018044D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE164D5329AD79550018044D /* Main.storyboard */; };
+		BE309A7129FF221D00D9D90D /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE309A7029FF221D00D9D90D /* CommentViewController.swift */; };
 		BE86636829AD7F6200D6BEFA /* CustomizeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */; };
 		BE86636A29AD801600D6BEFA /* ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -154,6 +155,7 @@
 		ABE9112B29CB7ED5006F7D9E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		BE164D5329AD79550018044D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BE309A7029FF221D00D9D90D /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		BE86636729AD7F6200D6BEFA /* CustomizeAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeAccountViewController.swift; sourceTree = "<group>"; };
 		BE86636929AD801600D6BEFA /* ImagePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				AB4486AB29A2C334001345E8 /* PostViewController.swift */,
+				BE309A7029FF221D00D9D90D /* CommentViewController.swift */,
 				ABF64F9F29B038F3007B3CCF /* RecipeViewController.swift */,
 				AB4E366A29B6CF54007FCA8D /* SettingsViewController.swift */,
 				ABE9112929CB7C85006F7D9E /* SearchResultsViewController.swift */,
@@ -475,6 +478,7 @@
 				AB4ADAAA29F9EFD500C9D0E7 /* CommentNotificationTableViewCell.swift in Sources */,
 				AB4ADA9F29F9847100C9D0E7 /* ProfileHeaderViewModel.swift in Sources */,
 				AB6F72132990A6B9000A3F6C /* LoginViewController.swift in Sources */,
+				BE309A7129FF221D00D9D90D /* CommentViewController.swift in Sources */,
 				AB4ADAA829F9EF4D00C9D0E7 /* FollowNotificationTableViewCell.swift in Sources */,
 				AB16083C299B43BD00693DB8 /* TextField.swift in Sources */,
 				AB52964929DCADA70039EE40 /* AddPostViewController.swift in Sources */,
