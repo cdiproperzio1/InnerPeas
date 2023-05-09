@@ -62,7 +62,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         
         //DIRECTIONS FIELD
         dirList.textAlignment = NSTextAlignment.left
-        dirList.textColor = .systemGray
+        dirList.textColor = .systemGreen
         dirList.text = "Directions"
         dirList.backgroundColor = .secondarySystemBackground
         dirList.font = .systemFont(ofSize: 22)
@@ -81,6 +81,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         
         //POST NAME FIELD
         postName.placeholder = "Name"
+        postName.textColor = .systemGreen
         postName.layer.cornerRadius = 15
         postName.font = .systemFont(ofSize: 22)
         postName.backgroundColor = .secondarySystemBackground
@@ -148,7 +149,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         if dirList.text == "Directions" {
             dirList.text = ""
             dirList.layer.cornerRadius = 15
-            dirList.textColor = .secondarySystemBackground
+            dirList.textColor = .systemGreen
         }
     }
     @objc func selectPhoto(_ sender: UIButton){
