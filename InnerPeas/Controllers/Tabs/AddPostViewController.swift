@@ -141,7 +141,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate, UITableViewDe
         if dirList.text.isEmpty {
             dirList.text = "Directions"
             dirList.layer.cornerRadius = 15
-            dirList.textColor = .secondarySystemBackground
+            
         }
         
     }
